@@ -31,6 +31,13 @@ struct Filter
   complex_t *freq;
 };
 
+struct FilterCompact {
+    complex_t *time;
+    int sizet;
+    complex_t *freq;
+    int sizef;
+};
+
 /*
   Create a window function such that:
       the main lobe has width 2 * n * filterfrac
