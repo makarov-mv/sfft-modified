@@ -155,7 +155,7 @@ struct sfft_v3_data
 
 struct sfft_multidim_data {
     int iter_num;
-    Filter* filters;
+    FilterCompact* filters;
 };
 
 struct sfft_plan_multidim {

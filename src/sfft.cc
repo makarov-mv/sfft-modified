@@ -644,10 +644,11 @@ sfft_plan_multidim* sfft_make_plan_multidim(int n, int d, int k, int iters) {
   plan->d = d;
   plan->k = k;
   plan->data.iter_num = iters;
-  plan->data.filters = (Filter*) malloc(sizeof(Filter) * iters);
+  int k_root = int(ceil(pow(k, 1.0 / d)));
+  plan->data.filters = (FilterCompact*) malloc(sizeof(*plan->data.filters) * iters);
   double Bcst = 10;
   for (int i = 0; i < iters; ++i) {
-    plan->data.filters[i] = make_gaussian_filter(n, Bcst, k);
+    plan->data.filters[i] = make_gaussian_filter(n, Bcst, k_root);
     Bcst /= 2;
   }
 

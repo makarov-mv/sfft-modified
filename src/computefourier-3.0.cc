@@ -1080,23 +1080,84 @@ alternate_fft(sfft_v3_data * data, sfft_output * out, complex_t * origx,
   return;
 }
 
+struct Key {
+    Key(int n, int d): n(n), d(d) {
+      indices = (int*) calloc(d, sizeof(*indices));
+    }
+
+    ~Key() {
+      free(indices);
+    }
+
+    int& at(int i) {
+      return indices[i];
+    }
+
+    const int& at(int i) const {
+      return indices[i];
+    }
+
+    // should agree with set_from_flat()
+    int flatten() const {
+      int res = 0;
+      for (int i = d - 1; i >= 0; --i) {
+        res = res * n + indices[i];
+      }
+      return res;
+    }
+
+    void set_from_flat(int flat) {
+      for (int i = 0; i < d; ++i) {
+        indices[i] = flat % n;
+        flat /= n;
+      }
+    }
+
+    void set_zero() {
+      for (int i = 0; i < d; ++i){
+        indices[i] = 0;
+      }
+    }
+
+    int n;
+    int d;
+    int* indices;
+};
+
 void multidim_sfft_inner(sfft_plan_multidim* plan, complex_t* in, sfft_output& out, const FilterCompact& filter) {
-//  int a = 0;
-//  int n = plan->n;
-//  while (gcd(a, n) != 1)
-//  {
-//    a = int (random() % n);
-//  }
-//  int ai = mod_inverse(a, n);
-//  int b = int (random() % n);
-//  int shift = ((ai * b) % n + n) % n;
-//
-//  complex_t* u; // call HashToBins
-//  complex_t* u1; // call HashToBins
-//
-//  for (int j = 0; j < filter.B_g; ++j) {
-//
-//  }
+  int n = plan->n;
+  int d = plan->d;
+  Key a(n, d);
+  Key ai(n, d);
+  Key b(n, d);
+  for (int i = 0; i < d; ++i) {
+    int buf = 0;
+    while (gcd(buf, n) != 1) {
+      buf = int(random() % n);
+    }
+    a.at(i) = buf;
+    ai.at(i) = mod_inverse(buf, n);
+    b.at(i) = int(random() % n);
+//    int shift = ((ai * b) % n + n) % n;
+  }
+
+  complex_t** u; // call HashToBins
+
+  int Btotal = 1;
+  for (int i = 0; i < d; ++i) {
+    Btotal *= filter.B_g;
+  }
+  Key i(n, d);
+  for (int j = 0; j < Btotal; ++j) {
+    if (cabs2(u[0][j]) > 1e-6) {
+      i.set_zero();
+      for (int h = 0; h < d; ++h) {
+        complex_t alpha = u[h + 1][j] / u[0][j]; // ???
+        i.at(h) = (ai.at(h) * lround(carg(alpha) * n / (2 * M_PI))) % n;
+      }
+      out.insert({i.flatten(), u[0][j]});
+    }
+  }
 }
 
 void multidim_sfft(sfft_plan_multidim* plan, complex_t* in, sfft_output& out) {
