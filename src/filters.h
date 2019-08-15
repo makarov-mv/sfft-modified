@@ -36,6 +36,7 @@ struct FilterCompact {
     int sizet;
     complex_t *freq;
     int sizef;
+    int B_g;
 };
 
 /*

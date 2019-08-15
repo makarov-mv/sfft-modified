@@ -155,9 +155,7 @@ struct sfft_v3_data
 
 struct sfft_multidim_data {
     int iter_num;
-    int* B_g;
     Filter* filters;
-    int* freq_width;
 };
 
 struct sfft_plan_multidim {

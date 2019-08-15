@@ -41,4 +41,6 @@ alternate_fft(sfft_v3_data * data, sfft_output * ans, complex_t * origx,
               int B2, int Wind2, int Gauss_loops2, complex_t * filtert2,
               complex_t * filterf2);
 
+void multidim_sfft(sfft_plan_multidim* plan, complex_t* in, sfft_output& out);
+
 #endif

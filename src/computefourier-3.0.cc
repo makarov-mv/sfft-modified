@@ -1079,3 +1079,28 @@ alternate_fft(sfft_v3_data * data, sfft_output * out, complex_t * origx,
 
   return;
 }
+
+void multidim_sfft_inner(sfft_plan_multidim* plan, complex_t* in, sfft_output& out, const FilterCompact& filter) {
+//  int a = 0;
+//  int n = plan->n;
+//  while (gcd(a, n) != 1)
+//  {
+//    a = int (random() % n);
+//  }
+//  int ai = mod_inverse(a, n);
+//  int b = int (random() % n);
+//  int shift = ((ai * b) % n + n) % n;
+//
+//  complex_t* u; // call HashToBins
+//  complex_t* u1; // call HashToBins
+//
+//  for (int j = 0; j < filter.B_g; ++j) {
+//
+//  }
+}
+
+void multidim_sfft(sfft_plan_multidim* plan, complex_t* in, sfft_output& out) {
+  for (int i = 0; i < plan->data.iter_num; ++i) {
+    multidim_sfft_inner(plan, in, out, plan->data.filters[i]);
+  }
+}

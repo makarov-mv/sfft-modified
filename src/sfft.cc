@@ -22,6 +22,7 @@
 #include <cstdlib>
 #include <cassert>
 #include <cmath>
+#include "cstring"
 
 #include <omp.h>
 
@@ -142,29 +143,6 @@ sfft_exec_many(sfft_plan * plan, int num, complex_t ** in, sfft_output * out)
     }
 }
 
-sfft_plan_multidim* sfft_make_plan_multidim(int n, int d, int k, int iters) {
-    sfft_plan_multidim *plan = (sfft_plan_multidim *) malloc(sizeof(sfft_plan_multidim));
-    plan->n = n;
-    plan->d = d;
-    plan->k = k;
-    plan->data.iter_num = iters;
-    plan->data.B_g = (int*) malloc(sizeof(int) * iters);
-    plan->data.filters = (Filter*) malloc(sizeof(Filter) * iters);
-    plan->data.freq_width = (int*) malloc(sizeof(int) * iters);
-}
-
-void sfft_free_plan_multidim(sfft_plan_multidim* plan) {
-    if (plan == nullptr) {
-        return;
-    }
-    free(plan->data.B_g);
-    free(plan->data.filters);
-    free(plan->data.freq_width);
-
-    free(plan);
-}
-
-void sfft_exec_multidim(sfft_plan_multidim* plan, complex_t * in, sfft_output * out);
 
 /** Static Functions **********************************************************/
 
@@ -631,4 +609,65 @@ sfft_v3(unsigned int n, unsigned int k, sfft_v3_data * data,
                 data->filtert1, data->filterf1, data->B_g2, data->w_g2,
                 data->Gauss_loops, data->filtert2, data->filterf2);
 
+}
+
+FilterCompact make_gaussian_filter(int n, double Bcst, int k) {
+  real_t BB = (unsigned)(Bcst * ((double)k));
+  FilterCompact filter;
+  filter.B_g = floor_to_pow2(BB);
+
+  const double tolerance_g = 1e-8;
+  double lobefrac_g = 0.5 / (BB);
+
+  int b_g1 = int (1.00 * ((double)n / filter.B_g));
+
+  filter.time =
+      make_dolphchebyshev_t(lobefrac_g, tolerance_g, filter.sizet);
+  complex_t* freq =
+      make_multiple_t(filter.time, filter.sizet, n, b_g1).freq;
+  int pos = 0;
+  while (cabs2(freq[pos]) > tolerance_g) {
+    ++pos;
+  }
+  assert(pos > 0);
+  filter.sizef = 2 * pos - 1;
+  filter.freq = (complex_t*) sfft_malloc(filter.sizef * sizeof(complex_t));
+  memcpy(filter.freq, freq + n - pos - 1, (pos - 1) * sizeof(*freq));
+  memcpy(filter.freq + pos - 1, freq, pos * sizeof(*freq));
+  sfft_free(freq);
+  return filter;
+}
+
+sfft_plan_multidim* sfft_make_plan_multidim(int n, int d, int k, int iters) {
+  sfft_plan_multidim *plan = (sfft_plan_multidim *) malloc(sizeof(sfft_plan_multidim));
+  plan->n = n;
+  plan->d = d;
+  plan->k = k;
+  plan->data.iter_num = iters;
+  plan->data.filters = (Filter*) malloc(sizeof(Filter) * iters);
+  double Bcst = 10;
+  for (int i = 0; i < iters; ++i) {
+    plan->data.filters[i] = make_gaussian_filter(n, Bcst, k);
+    Bcst /= 2;
+  }
+
+  return plan;
+}
+
+void
+sfft_free_plan_multidim(sfft_plan_multidim* plan) {
+  if (plan == nullptr) {
+    return;
+  }
+  for (int i = 0; i < plan->data.iter_num; ++i) {
+    free(plan->data.filters[i].freq);
+    free(plan->data.filters[i].time);
+  }
+  free(plan->data.filters);
+
+  free(plan);
+}
+
+void sfft_exec_multidim(sfft_plan_multidim* plan, complex_t* in, sfft_output* out) {
+  multidim_sfft(plan, in, *out);
 }
