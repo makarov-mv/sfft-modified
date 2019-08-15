@@ -1,0 +1,3660 @@
+Waf: Entering directory `/home/bixind/projects/disFFT/sfft-0.1.0/build'
+[ 2/32] cxx: src/computefourier-1.0-2.0.cc -> build/src/computefourier-1.0-2.0.cc.1.o
+[ 3/32] cxx: src/computefourier-3.0.cc -> build/src/computefourier-3.0.cc.1.o
+[ 4/32] cxx: src/fftw.cc -> build/src/fftw.cc.1.o
+[ 5/32] cxx: src/filters.cc -> build/src/filters.cc.1.o
+[ 7/32] cxx: src/sfft.cc -> build/src/sfft.cc.1.o
+[ 8/32] cxx: src/simulation.cc -> build/src/simulation.cc.1.o
+[11/32] cxx: src/utils.cc -> build/src/utils.cc.1.o
+[12/32] cxx: src/computefourier-1.0-2.0.cc -> build/src/computefourier-1.0-2.0.cc.2.o
+In file included from ../src/utils.cc:22:0:
+../src/fft.h:43:24: error: expected initializer before ‘complex_t’
+ typedef double complex complex_t;
+                        ^~~~~~~~~
+../src/utils.cc:28:12: error: variable or field ‘shift’ declared void
+ void shift(complex_t * x, int n, int r)
+            ^~~~~~~~~
+../src/utils.cc:28:12: error: ‘complex_t’ was not declared in this scope
+../src/utils.cc:28:12: note: suggested alternative: ‘_Complex_I’
+ void shift(complex_t * x, int n, int r)
+            ^~~~~~~~~
+            _Complex_I
+../src/utils.cc:28:24: error: ‘x’ was not declared in this scope
+ void shift(complex_t * x, int n, int r)
+                        ^
+../src/utils.cc:28:27: error: expected primary-expression before ‘int’
+ void shift(complex_t * x, int n, int r)
+                           ^~~
+../src/utils.cc:28:34: error: expected primary-expression before ‘int’
+ void shift(complex_t * x, int n, int r)
+                                  ^~~
+../src/utils.cc:48:14: error: ‘complex_t’ was not declared in this scope
+ double phase(complex_t x)
+              ^~~~~~~~~
+../src/utils.cc:48:14: note: suggested alternative: ‘_Complex_I’
+ double phase(complex_t x)
+              ^~~~~~~~~
+              _Complex_I
+../src/utils.cc:199:51: error: ‘complex_t’ has not been declared
+ radix_filt(int byte, int size, int *A, int *TEMP, complex_t * Filter,
+                                                   ^~~~~~~~~
+../src/utils.cc:200:12: error: ‘complex_t’ has not been declared
+            complex_t * TMP_F)
+            ^~~~~~~~~
+../src/utils.cc:222:30: error: ‘complex_t’ has not been declared
+ void radix_sort_filt(int *A, complex_t * Filter, int size)
+                              ^~~~~~~~~
+../src/utils.cc: In function ‘void radix_sort_filt(int*, int*, int)’:
+../src/utils.cc:227:3: error: ‘complex_t’ was not declared in this scope
+   complex_t *TMP_F = (complex_t *) malloc(size * sizeof(*TMP_F));
+   ^~~~~~~~~
+../src/utils.cc:227:3: note: suggested alternative: ‘_Complex_I’
+   complex_t *TMP_F = (complex_t *) malloc(size * sizeof(*TMP_F));
+   ^~~~~~~~~
+   _Complex_I
+../src/utils.cc:227:14: error: ‘TMP_F’ was not declared in this scope
+   complex_t *TMP_F = (complex_t *) malloc(size * sizeof(*TMP_F));
+              ^~~~~
+../src/utils.cc:227:34: error: expected primary-expression before ‘)’ token
+   complex_t *TMP_F = (complex_t *) malloc(size * sizeof(*TMP_F));
+                                  ^
+../src/utils.cc: At global scope:
+../src/utils.cc:250:13: error: ‘complex_t’ was not declared in this scope
+ double AWGN(complex_t * x, int n, double std_noise)
+             ^~~~~~~~~
+../src/utils.cc:250:13: note: suggested alternative: ‘_Complex_I’
+ double AWGN(complex_t * x, int n, double std_noise)
+             ^~~~~~~~~
+             _Complex_I
+../src/utils.cc:250:25: error: ‘x’ was not declared in this scope
+ double AWGN(complex_t * x, int n, double std_noise)
+                         ^
+../src/utils.cc:250:28: error: expected primary-expression before ‘int’
+ double AWGN(complex_t * x, int n, double std_noise)
+                            ^~~
+../src/utils.cc:250:35: error: expected primary-expression before ‘double’
+ double AWGN(complex_t * x, int n, double std_noise)
+                                   ^~~~~~
+../src/utils.cc:250:51: error: expression list treated as compound expression in initializer [-fpermissive]
+ double AWGN(complex_t * x, int n, double std_noise)
+                                                   ^
+In file included from ../src/filters.h:25:0,
+                 from ../src/filters.cc:22:
+../src/fft.h:43:24: error: expected initializer before ‘complex_t’
+ typedef double complex complex_t;
+                        ^~~~~~~~~
+In file included from ../src/filters.cc:22:0:
+../src/filters.h:29:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *time;
+   ^~~~~~~~~
+   _Complex_I
+../src/filters.h:31:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *freq;
+   ^~~~~~~~~
+   _Complex_I
+../src/filters.h:41:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_dolphchebyshev_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:43:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_gaussian_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:45:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_kaiserbessel_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:54:24: error: ‘complex_t’ was not declared in this scope
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                        ^~~~~~~~~
+../src/filters.h:54:24: note: suggested alternative: ‘_Complex_I’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                        ^~~~~~~~~
+                        _Complex_I
+../src/filters.h:54:36: error: ‘x’ was not declared in this scope
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                    ^
+../src/filters.h:54:39: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                       ^~~
+../src/filters.h:54:46: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                              ^~~
+../src/filters.h:54:53: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                                     ^~~
+In file included from ../src/filters.cc:23:0:
+../src/utils.h:57:56: error: ‘complex_t’ has not been declared
+ void radix_filt(int byte, int size, int *A, int *TEMP, complex_t * Filter,
+                                                        ^~~~~~~~~
+../src/utils.h:58:17: error: ‘complex_t’ has not been declared
+                 complex_t * TMP_F);
+                 ^~~~~~~~~
+../src/utils.h:60:30: error: ‘complex_t’ has not been declared
+ void radix_sort_filt(int *A, complex_t * Filter, int size);
+                              ^~~~~~~~~
+../src/utils.h:65:12: error: variable or field ‘shift’ declared void
+ void shift(complex_t * x, int n, int r);
+            ^~~~~~~~~
+../src/utils.h:65:12: error: ‘complex_t’ was not declared in this scope
+../src/utils.h:65:12: note: suggested alternative: ‘_Complex_I’
+ void shift(complex_t * x, int n, int r);
+            ^~~~~~~~~
+            _Complex_I
+../src/utils.h:65:24: error: ‘x’ was not declared in this scope
+ void shift(complex_t * x, int n, int r);
+                        ^
+../src/utils.h:65:27: error: expected primary-expression before ‘int’
+ void shift(complex_t * x, int n, int r);
+                           ^~~
+../src/utils.h:65:34: error: expected primary-expression before ‘int’
+ void shift(complex_t * x, int n, int r);
+                                  ^~~
+../src/utils.h:67:14: error: ‘complex_t’ was not declared in this scope
+ double phase(complex_t x);
+              ^~~~~~~~~
+../src/utils.h:67:14: note: suggested alternative: ‘_Complex_I’
+ double phase(complex_t x);
+              ^~~~~~~~~
+              _Complex_I
+../src/utils.h:69:13: error: ‘complex_t’ was not declared in this scope
+ double AWGN(complex_t * x, int n, double std_noise);
+             ^~~~~~~~~
+../src/utils.h:69:13: note: suggested alternative: ‘_Complex_I’
+ double AWGN(complex_t * x, int n, double std_noise);
+             ^~~~~~~~~
+             _Complex_I
+../src/utils.h:69:25: error: ‘x’ was not declared in this scope
+ double AWGN(complex_t * x, int n, double std_noise);
+                         ^
+../src/utils.h:69:28: error: expected primary-expression before ‘int’
+ double AWGN(complex_t * x, int n, double std_noise);
+                            ^~~
+../src/utils.h:69:35: error: expected primary-expression before ‘double’
+ double AWGN(complex_t * x, int n, double std_noise);
+                                   ^~~~~~
+../src/utils.h:69:51: error: expression list treated as compound expression in initializer [-fpermissive]
+ double AWGN(complex_t * x, int n, double std_noise);
+                                                   ^
+../src/utils.h:71:21: warning: inline variables are only available with -std=c++1z or -std=gnu++1z
+ inline double cabs2(complex_t x)
+                     ^~~~~~~~~
+../src/utils.h:71:21: error: ‘complex_t’ was not declared in this scope
+../src/utils.h:71:21: note: suggested alternative: ‘_Complex_I’
+ inline double cabs2(complex_t x)
+                     ^~~~~~~~~
+                     _Complex_I
+In file included from ../src/filters.cc:29:0:
+../src/fftw.h:39:14: error: ‘complex_t’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+              ^~~~~~~~~
+../src/fftw.h:39:14: note: suggested alternative: ‘_Complex_I’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+              ^~~~~~~~~
+              _Complex_I
+../src/fftw.h:39:26: error: ‘out’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                          ^~~
+../src/fftw.h:39:26: note: suggested alternative: ‘putw’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                          ^~~
+                          putw
+../src/fftw.h:39:31: error: expected primary-expression before ‘int’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                               ^~~
+../src/fftw.h:39:38: error: ‘complex_t’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                      ^~~~~~~~~
+../src/fftw.h:39:38: note: suggested alternative: ‘_Complex_I’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                      ^~~~~~~~~
+                                      _Complex_I
+../src/fftw.h:39:50: error: ‘x’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                  ^
+../src/fftw.h:39:53: error: expected primary-expression before ‘int’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                     ^~~
+../src/fftw.h:39:70: error: expression list treated as compound expression in initializer [-fpermissive]
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                                      ^
+In file included from ../src/filters.cc:31:0:
+../src/sfft.h:35:32: error: ‘complex_t’ was not declared in this scope
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                ^~~~~~~~~
+../src/sfft.h:35:32: note: suggested alternative: ‘_Complex_I’
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                ^~~~~~~~~
+                                _Complex_I
+../src/sfft.h:35:66: error: template argument 2 is invalid
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                                                  ^
+../src/sfft.h:35:66: error: template argument 5 is invalid
+../src/sfft.h:57:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *x_samp;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:62:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *inner_loop_locate_x_sampt;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:70:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *comb_filt_x_sampt;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:114:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *gauss_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:115:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *gauss_perm_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:116:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *man_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:118:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *est_values;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:119:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *perm_x;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:141:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filtert1;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:142:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filterf1;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:143:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filtert2;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:144:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filterf2;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:164:34: error: ‘complex_t’ has not been declared
+ void sfft_exec(sfft_plan * plan, complex_t * in, sfft_output * out);
+                                  ^~~~~~~~~
+../src/sfft.h:166:43: error: ‘complex_t’ has not been declared
+ sfft_exec_many(sfft_plan * plan, int num, complex_t ** in, sfft_output * out);
+                                           ^~~~~~~~~
+../src/filters.cc:49:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_kaiserbessel_t(double lobefrac, double tolerance, int &w)
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.cc:70:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_dolphchebyshev_t(double lobefrac, double tolerance, int &w)
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.cc:88:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_gaussian_t(double lobefrac, double tolerance, int &w)
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.cc:109:24: error: redefinition of ‘Filter make_multiple_t’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b)
+                        ^~~~~~~~~
+In file included from ../src/filters.cc:22:0:
+../src/filters.h:54:8: note: ‘Filter make_multiple_t’ previously declared here
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+        ^~~~~~~~~~~~~~~
+../src/filters.cc:109:24: error: ‘complex_t’ was not declared in this scope
+ Filter make_multiple_t(complex_t * x, int w, int n, int b)
+                        ^~~~~~~~~
+../src/filters.cc:109:24: note: suggested alternative: ‘_Complex_I’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b)
+                        ^~~~~~~~~
+                        _Complex_I
+../src/filters.cc:109:36: error: ‘x’ was not declared in this scope
+ Filter make_multiple_t(complex_t * x, int w, int n, int b)
+                                    ^
+../src/filters.cc:109:39: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b)
+                                       ^~~
+../src/filters.cc:109:46: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b)
+                                              ^~~
+../src/filters.cc:109:53: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b)
+                                                     ^~~
+In file included from ../src/sfft.h:29:0,
+                 from ../src/simulation.cc:27:
+../src/fft.h:43:24: error: expected initializer before ‘complex_t’
+ typedef double complex complex_t;
+                        ^~~~~~~~~
+In file included from ../src/sfft.h:30:0,
+                 from ../src/simulation.cc:27:
+../src/filters.h:29:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *time;
+   ^~~~~~~~~
+   _Complex_I
+../src/filters.h:31:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *freq;
+   ^~~~~~~~~
+   _Complex_I
+../src/filters.h:41:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_dolphchebyshev_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:43:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_gaussian_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:45:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_kaiserbessel_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:54:24: error: ‘complex_t’ was not declared in this scope
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                        ^~~~~~~~~
+../src/filters.h:54:24: note: suggested alternative: ‘_Complex_I’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                        ^~~~~~~~~
+                        _Complex_I
+../src/filters.h:54:36: error: ‘x’ was not declared in this scope
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                    ^
+../src/filters.h:54:39: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                       ^~~
+../src/filters.h:54:46: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                              ^~~
+../src/filters.h:54:53: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                                     ^~~
+In file included from ../src/simulation.cc:27:0:
+../src/sfft.h:35:32: error: ‘complex_t’ was not declared in this scope
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                ^~~~~~~~~
+../src/sfft.h:35:32: note: suggested alternative: ‘_Complex_I’
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                ^~~~~~~~~
+                                _Complex_I
+../src/sfft.h:35:66: error: template argument 2 is invalid
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                                                  ^
+../src/sfft.h:35:66: error: template argument 5 is invalid
+../src/sfft.h:57:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *x_samp;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:62:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *inner_loop_locate_x_sampt;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:70:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *comb_filt_x_sampt;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:114:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *gauss_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:115:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *gauss_perm_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:116:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *man_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:118:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *est_values;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:119:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *perm_x;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:141:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filtert1;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:142:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filterf1;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:143:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filtert2;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:144:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filterf2;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:164:34: error: ‘complex_t’ has not been declared
+ void sfft_exec(sfft_plan * plan, complex_t * in, sfft_output * out);
+                                  ^~~~~~~~~
+../src/sfft.h:166:43: error: ‘complex_t’ has not been declared
+ sfft_exec_many(sfft_plan * plan, int num, complex_t ** in, sfft_output * out);
+                                           ^~~~~~~~~
+In file included from ../src/simulation.cc:29:0:
+../src/fftw.h:39:14: error: ‘complex_t’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+              ^~~~~~~~~
+../src/fftw.h:39:14: note: suggested alternative: ‘_Complex_I’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+              ^~~~~~~~~
+              _Complex_I
+../src/fftw.h:39:26: error: ‘out’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                          ^~~
+../src/fftw.h:39:31: error: expected primary-expression before ‘int’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                               ^~~
+../src/fftw.h:39:38: error: ‘complex_t’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                      ^~~~~~~~~
+../src/fftw.h:39:38: note: suggested alternative: ‘_Complex_I’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                      ^~~~~~~~~
+                                      _Complex_I
+../src/fftw.h:39:50: error: ‘x’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                  ^
+../src/fftw.h:39:53: error: expected primary-expression before ‘int’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                     ^~~
+../src/fftw.h:39:70: error: expression list treated as compound expression in initializer [-fpermissive]
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                                      ^
+In file included from ../src/simulation.cc:30:0:
+../src/simulation.h:39:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *x;
+   ^~~~~~~~~
+   _Complex_I
+../src/simulation.h:40:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *x_f;
+   ^~~~~~~~~
+   _Complex_I
+../src/simulation.h:50:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *frequencies();
+   ^~~~~~~~~
+   _Complex_I
+../src/simulation.cc: In member function ‘void simulation::generate_input()’:
+../src/simulation.cc:98:3: error: ‘x’ was not declared in this scope
+   x = (complex_t *) sfft_malloc(n * sizeof(*x));
+   ^
+../src/simulation.cc:98:8: error: ‘complex_t’ was not declared in this scope
+   x = (complex_t *) sfft_malloc(n * sizeof(*x));
+        ^~~~~~~~~
+../src/simulation.cc:98:8: note: suggested alternative: ‘_Complex_I’
+   x = (complex_t *) sfft_malloc(n * sizeof(*x));
+        ^~~~~~~~~
+        _Complex_I
+../src/simulation.cc:98:19: error: expected primary-expression before ‘)’ token
+   x = (complex_t *) sfft_malloc(n * sizeof(*x));
+                   ^
+../src/simulation.cc:104:3: error: ‘x_f’ was not declared in this scope
+   x_f = (complex_t *) calloc(n, sizeof(*x_f));
+   ^~~
+../src/simulation.cc:104:21: error: expected primary-expression before ‘)’ token
+   x_f = (complex_t *) calloc(n, sizeof(*x_f));
+                     ^
+../src/simulation.cc:111:24: error: ‘fftw_dft’ cannot be used as a function
+   fftw_dft(x, n, x_f, 1);
+                        ^
+../src/simulation.cc: In member function ‘sfft_output simulation::run()’:
+../src/simulation.cc:118:33: error: ‘class simulation’ has no member named ‘x’
+     sfft_exec(this->plan, this->x, &result);
+                                 ^
+../src/simulation.cc: At global scope:
+../src/simulation.cc:123:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *simulation::frequencies()
+ ^~~~~~~~~
+ _Complex_I
+In file included from ../src/sfft.h:29:0,
+                 from ../src/computefourier-1.0-2.0.h:25,
+                 from ../src/computefourier-1.0-2.0.cc:32:
+../src/fft.h:43:24: error: expected initializer before ‘complex_t’
+ typedef double complex complex_t;
+                        ^~~~~~~~~
+In file included from ../src/sfft.h:30:0,
+                 from ../src/computefourier-1.0-2.0.h:25,
+                 from ../src/computefourier-1.0-2.0.cc:32:
+../src/filters.h:29:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *time;
+   ^~~~~~~~~
+   _Complex_I
+../src/filters.h:31:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *freq;
+   ^~~~~~~~~
+   _Complex_I
+../src/filters.h:41:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_dolphchebyshev_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:43:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_gaussian_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:45:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_kaiserbessel_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:54:24: error: ‘complex_t’ was not declared in this scope
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                        ^~~~~~~~~
+../src/filters.h:54:24: note: suggested alternative: ‘_Complex_I’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                        ^~~~~~~~~
+                        _Complex_I
+../src/filters.h:54:36: error: ‘x’ was not declared in this scope
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                    ^
+../src/filters.h:54:39: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                       ^~~
+../src/filters.h:54:46: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                              ^~~
+../src/filters.h:54:53: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                                     ^~~
+In file included from ../src/computefourier-1.0-2.0.h:25:0,
+                 from ../src/computefourier-1.0-2.0.cc:32:
+../src/sfft.h:35:32: error: ‘complex_t’ was not declared in this scope
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                ^~~~~~~~~
+../src/sfft.h:35:32: note: suggested alternative: ‘_Complex_I’
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                ^~~~~~~~~
+                                _Complex_I
+../src/sfft.h:35:66: error: template argument 2 is invalid
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                                                  ^
+../src/sfft.h:35:66: error: template argument 5 is invalid
+../src/sfft.h:57:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *x_samp;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:62:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *inner_loop_locate_x_sampt;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:70:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *comb_filt_x_sampt;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:114:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *gauss_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:115:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *gauss_perm_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:116:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *man_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:118:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *est_values;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:119:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *perm_x;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:141:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filtert1;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:142:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filterf1;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:143:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filtert2;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:144:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filterf2;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:164:34: error: ‘complex_t’ has not been declared
+ void sfft_exec(sfft_plan * plan, complex_t * in, sfft_output * out);
+                                  ^~~~~~~~~
+../src/sfft.h:166:43: error: ‘complex_t’ has not been declared
+ sfft_exec_many(sfft_plan * plan, int num, complex_t ** in, sfft_output * out);
+                                           ^~~~~~~~~
+In file included from ../src/computefourier-1.0-2.0.h:30:0,
+                 from ../src/computefourier-1.0-2.0.cc:32:
+../src/fftw.h:39:14: error: ‘complex_t’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+              ^~~~~~~~~
+../src/fftw.h:39:14: note: suggested alternative: ‘_Complex_I’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+              ^~~~~~~~~
+              _Complex_I
+../src/fftw.h:39:26: error: ‘out’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                          ^~~
+../src/fftw.h:39:26: note: suggested alternative: ‘putw’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                          ^~~
+                          putw
+../src/fftw.h:39:31: error: expected primary-expression before ‘int’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                               ^~~
+../src/fftw.h:39:38: error: ‘complex_t’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                      ^~~~~~~~~
+../src/fftw.h:39:38: note: suggested alternative: ‘_Complex_I’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                      ^~~~~~~~~
+                                      _Complex_I
+../src/fftw.h:39:50: error: ‘x’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                  ^
+../src/fftw.h:39:53: error: expected primary-expression before ‘int’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                     ^~~
+../src/fftw.h:39:70: error: expression list treated as compound expression in initializer [-fpermissive]
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                                      ^
+In file included from ../src/computefourier-1.0-2.0.cc:32:0:
+../src/computefourier-1.0-2.0.h:37:35: error: ‘complex_t’ has not been declared
+ outer_loop(sfft_v1v2_data * data, complex_t * origx, int n,
+                                   ^~~~~~~~~
+In file included from ../src/computefourier-1.0-2.0.cc:34:0:
+../src/utils.h:57:56: error: ‘complex_t’ has not been declared
+ void radix_filt(int byte, int size, int *A, int *TEMP, complex_t * Filter,
+                                                        ^~~~~~~~~
+../src/utils.h:58:17: error: ‘complex_t’ has not been declared
+                 complex_t * TMP_F);
+                 ^~~~~~~~~
+../src/utils.h:60:30: error: ‘complex_t’ has not been declared
+ void radix_sort_filt(int *A, complex_t * Filter, int size);
+                              ^~~~~~~~~
+../src/utils.h:65:12: error: variable or field ‘shift’ declared void
+ void shift(complex_t * x, int n, int r);
+            ^~~~~~~~~
+../src/utils.h:65:12: error: ‘complex_t’ was not declared in this scope
+../src/utils.h:65:12: note: suggested alternative: ‘_Complex_I’
+ void shift(complex_t * x, int n, int r);
+            ^~~~~~~~~
+            _Complex_I
+../src/utils.h:65:24: error: ‘x’ was not declared in this scope
+ void shift(complex_t * x, int n, int r);
+                        ^
+../src/utils.h:65:27: error: expected primary-expression before ‘int’
+ void shift(complex_t * x, int n, int r);
+                           ^~~
+../src/utils.h:65:34: error: expected primary-expression before ‘int’
+ void shift(complex_t * x, int n, int r);
+                                  ^~~
+../src/utils.h:67:14: error: ‘complex_t’ was not declared in this scope
+ double phase(complex_t x);
+              ^~~~~~~~~
+../src/utils.h:67:14: note: suggested alternative: ‘_Complex_I’
+ double phase(complex_t x);
+              ^~~~~~~~~
+              _Complex_I
+../src/utils.h:69:13: error: ‘complex_t’ was not declared in this scope
+ double AWGN(complex_t * x, int n, double std_noise);
+             ^~~~~~~~~
+../src/utils.h:69:13: note: suggested alternative: ‘_Complex_I’
+ double AWGN(complex_t * x, int n, double std_noise);
+             ^~~~~~~~~
+             _Complex_I
+../src/utils.h:69:25: error: ‘x’ was not declared in this scope
+ double AWGN(complex_t * x, int n, double std_noise);
+                         ^
+../src/utils.h:69:28: error: expected primary-expression before ‘int’
+ double AWGN(complex_t * x, int n, double std_noise);
+                            ^~~
+../src/utils.h:69:35: error: expected primary-expression before ‘double’
+ double AWGN(complex_t * x, int n, double std_noise);
+                                   ^~~~~~
+../src/utils.h:69:51: error: expression list treated as compound expression in initializer [-fpermissive]
+ double AWGN(complex_t * x, int n, double std_noise);
+                                                   ^
+../src/utils.h:71:21: warning: inline variables are only available with -std=c++1z or -std=gnu++1z
+ inline double cabs2(complex_t x)
+                     ^~~~~~~~~
+../src/utils.h:71:21: error: ‘complex_t’ was not declared in this scope
+../src/utils.h:71:21: note: suggested alternative: ‘_Complex_I’
+ inline double cabs2(complex_t x)
+                     ^~~~~~~~~
+                     _Complex_I
+../src/computefourier-1.0-2.0.cc:49:34: error: ‘complex_t’ has not been declared
+ Comb_Filt(sfft_v1v2_data * data, complex_t * origx, int n, int num,
+                                  ^~~~~~~~~
+../src/computefourier-1.0-2.0.cc: In function ‘int Comb_Filt(sfft_v1v2_data*, int*, int, int, int, int*)’:
+../src/computefourier-1.0-2.0.cc:58:3: error: ‘complex_t’ was not declared in this scope
+   complex_t *x_sampt = tldata->comb_filt_x_sampt;
+   ^~~~~~~~~
+../src/computefourier-1.0-2.0.cc:58:3: note: suggested alternative: ‘_Complex_I’
+   complex_t *x_sampt = tldata->comb_filt_x_sampt;
+   ^~~~~~~~~
+   _Complex_I
+../src/computefourier-1.0-2.0.cc:58:14: error: ‘x_sampt’ was not declared in this scope
+   complex_t *x_sampt = tldata->comb_filt_x_sampt;
+              ^~~~~~~
+../src/computefourier-1.0-2.0.cc:58:32: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘comb_filt_x_sampt’; did you mean ‘comb_filt_samples’?
+   complex_t *x_sampt = tldata->comb_filt_x_sampt;
+                                ^~~~~~~~~~~~~~~~~
+                                comb_filt_samples
+../src/computefourier-1.0-2.0.cc:74:36: error: ‘cabs2’ cannot be used as a function
+       samples[i] = cabs2(x_sampt[i]);
+                                    ^
+../src/computefourier-1.0-2.0.cc: At global scope:
+../src/computefourier-1.0-2.0.cc:196:42: error: ‘complex_t’ has not been declared
+ inner_loop_locate(sfft_v1v2_data * data, complex_t * origx, int n,
+                                          ^~~~~~~~~
+../src/computefourier-1.0-2.0.cc:199:31: error: ‘complex_t’ has not been declared
+                   int *b_vec, complex_t * x_samp, int *J, int loops,
+                               ^~~~~~~~~
+../src/computefourier-1.0-2.0.cc: In function ‘int inner_loop_locate(sfft_v1v2_data*, int*, int, const Filter&, const Filter&, int, int, int, int*, int*, int*, int*, int*, int, int, int, int*, int*, int&, int*, int, int)’:
+../src/computefourier-1.0-2.0.cc:207:3: error: ‘complex_t’ was not declared in this scope
+   complex_t *x_sampt = tldata->inner_loop_locate_x_sampt;
+   ^~~~~~~~~
+../src/computefourier-1.0-2.0.cc:207:3: note: suggested alternative: ‘_Complex_I’
+   complex_t *x_sampt = tldata->inner_loop_locate_x_sampt;
+   ^~~~~~~~~
+   _Complex_I
+../src/computefourier-1.0-2.0.cc:207:14: error: ‘x_sampt’ was not declared in this scope
+   complex_t *x_sampt = tldata->inner_loop_locate_x_sampt;
+              ^~~~~~~
+../src/computefourier-1.0-2.0.cc:207:14: note: suggested alternative: ‘x_samp’
+   complex_t *x_sampt = tldata->inner_loop_locate_x_sampt;
+              ^~~~~~~
+              x_samp
+../src/computefourier-1.0-2.0.cc:207:32: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘inner_loop_locate_x_sampt’; did you mean ‘inner_loop_locate_samples’?
+   complex_t *x_sampt = tldata->inner_loop_locate_x_sampt;
+                                ^~~~~~~~~~~~~~~~~~~~~~~~~
+                                inner_loop_locate_samples
+../src/computefourier-1.0-2.0.cc:232:43: error: ‘struct Filter’ has no member named ‘time’
+       double *d_filter = (double *)filter.time;
+                                           ^~~~
+../src/computefourier-1.0-2.0.cc: At global scope:
+../src/computefourier-1.0-2.0.cc:342:40: error: ‘complex_t’ has not been declared
+                 const int &hits_found, complex_t * x_samp,
+                                        ^~~~~~~~~
+../src/computefourier-1.0-2.0.cc: In function ‘sfft_output estimate_values(sfft_v1v2_data*, const int*, const int&, int*, const int&, int, const int*, int, int, const Filter&, const Filter&, int)’:
+../src/computefourier-1.0-2.0.cc:381:56: error: ‘const struct Filter’ has no member named ‘freq’
+           double *d_filter_freq = (double *)cur_filter.freq;
+                                                        ^~~~
+../src/computefourier-1.0-2.0.cc:414:18: error: invalid types ‘sfft_output {aka int}[const int]’ for array subscript
+       ans[hits[i]] = realv + I * imagv;
+                  ^
+../src/computefourier-1.0-2.0.cc: At global scope:
+../src/computefourier-1.0-2.0.cc:439:35: error: ‘complex_t’ has not been declared
+ outer_loop(sfft_v1v2_data * data, complex_t * origx, int n,
+                                   ^~~~~~~~~
+../src/computefourier-1.0-2.0.cc: In function ‘sfft_output outer_loop(sfft_v1v2_data*, int*, int, const Filter&, const Filter&, int, int, int, int, int, int, int, int)’:
+../src/computefourier-1.0-2.0.cc:454:3: error: ‘complex_t’ was not declared in this scope
+   complex_t *x_samp = tldata->x_samp;
+   ^~~~~~~~~
+../src/computefourier-1.0-2.0.cc:454:3: note: suggested alternative: ‘_Complex_I’
+   complex_t *x_samp = tldata->x_samp;
+   ^~~~~~~~~
+   _Complex_I
+../src/computefourier-1.0-2.0.cc:454:14: error: ‘x_samp’ was not declared in this scope
+   complex_t *x_samp = tldata->x_samp;
+              ^~~~~~
+../src/computefourier-1.0-2.0.cc:454:14: note: suggested alternative: ‘wcscmp’
+   complex_t *x_samp = tldata->x_samp;
+              ^~~~~~
+              wcscmp
+../src/computefourier-1.0-2.0.cc:454:31: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘x_samp’
+   complex_t *x_samp = tldata->x_samp;
+                               ^~~~~~
+In file included from ../src/sfft.h:29:0,
+                 from ../src/computefourier-1.0-2.0.h:25,
+                 from ../src/computefourier-1.0-2.0.cc:32:
+../src/fft.h:43:24: error: expected initializer before ‘complex_t’
+ typedef double complex complex_t;
+                        ^~~~~~~~~
+In file included from ../src/sfft.h:30:0,
+                 from ../src/computefourier-1.0-2.0.h:25,
+                 from ../src/computefourier-1.0-2.0.cc:32:
+../src/filters.h:29:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *time;
+   ^~~~~~~~~
+   _Complex_I
+../src/filters.h:31:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *freq;
+   ^~~~~~~~~
+   _Complex_I
+../src/filters.h:41:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_dolphchebyshev_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:43:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_gaussian_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:45:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_kaiserbessel_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:54:24: error: ‘complex_t’ was not declared in this scope
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                        ^~~~~~~~~
+../src/filters.h:54:24: note: suggested alternative: ‘_Complex_I’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                        ^~~~~~~~~
+                        _Complex_I
+../src/filters.h:54:36: error: ‘x’ was not declared in this scope
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                    ^
+../src/filters.h:54:39: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                       ^~~
+../src/filters.h:54:46: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                              ^~~
+../src/filters.h:54:53: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                                     ^~~
+In file included from ../src/computefourier-1.0-2.0.h:25:0,
+                 from ../src/computefourier-1.0-2.0.cc:32:
+../src/sfft.h:35:32: error: ‘complex_t’ was not declared in this scope
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                ^~~~~~~~~
+../src/sfft.h:35:32: note: suggested alternative: ‘_Complex_I’
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                ^~~~~~~~~
+                                _Complex_I
+../src/sfft.h:35:66: error: template argument 2 is invalid
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                                                  ^
+../src/sfft.h:35:66: error: template argument 5 is invalid
+../src/sfft.h:57:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *x_samp;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:62:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *inner_loop_locate_x_sampt;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:70:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *comb_filt_x_sampt;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:114:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *gauss_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:115:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *gauss_perm_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:116:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *man_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:118:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *est_values;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:119:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *perm_x;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:141:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filtert1;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:142:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filterf1;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:143:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filtert2;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:144:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filterf2;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:164:34: error: ‘complex_t’ has not been declared
+ void sfft_exec(sfft_plan * plan, complex_t * in, sfft_output * out);
+                                  ^~~~~~~~~
+../src/sfft.h:166:43: error: ‘complex_t’ has not been declared
+ sfft_exec_many(sfft_plan * plan, int num, complex_t ** in, sfft_output * out);
+                                           ^~~~~~~~~
+In file included from ../src/computefourier-1.0-2.0.h:30:0,
+                 from ../src/computefourier-1.0-2.0.cc:32:
+../src/fftw.h:39:14: error: ‘complex_t’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+              ^~~~~~~~~
+../src/fftw.h:39:14: note: suggested alternative: ‘_Complex_I’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+              ^~~~~~~~~
+              _Complex_I
+../src/fftw.h:39:26: error: ‘out’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                          ^~~
+../src/fftw.h:39:26: note: suggested alternative: ‘putw’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                          ^~~
+                          putw
+../src/fftw.h:39:31: error: expected primary-expression before ‘int’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                               ^~~
+../src/fftw.h:39:38: error: ‘complex_t’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                      ^~~~~~~~~
+../src/fftw.h:39:38: note: suggested alternative: ‘_Complex_I’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                      ^~~~~~~~~
+                                      _Complex_I
+../src/fftw.h:39:50: error: ‘x’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                  ^
+../src/fftw.h:39:53: error: expected primary-expression before ‘int’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                     ^~~
+../src/fftw.h:39:70: error: expression list treated as compound expression in initializer [-fpermissive]
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                                      ^
+In file included from ../src/computefourier-1.0-2.0.cc:32:0:
+../src/computefourier-1.0-2.0.h:37:35: error: ‘complex_t’ has not been declared
+ outer_loop(sfft_v1v2_data * data, complex_t * origx, int n,
+                                   ^~~~~~~~~
+In file included from ../src/computefourier-1.0-2.0.cc:34:0:
+../src/utils.h:57:56: error: ‘complex_t’ has not been declared
+ void radix_filt(int byte, int size, int *A, int *TEMP, complex_t * Filter,
+                                                        ^~~~~~~~~
+../src/utils.h:58:17: error: ‘complex_t’ has not been declared
+                 complex_t * TMP_F);
+                 ^~~~~~~~~
+../src/utils.h:60:30: error: ‘complex_t’ has not been declared
+ void radix_sort_filt(int *A, complex_t * Filter, int size);
+                              ^~~~~~~~~
+../src/utils.h:65:12: error: variable or field ‘shift’ declared void
+ void shift(complex_t * x, int n, int r);
+            ^~~~~~~~~
+../src/utils.h:65:12: error: ‘complex_t’ was not declared in this scope
+../src/utils.h:65:12: note: suggested alternative: ‘_Complex_I’
+ void shift(complex_t * x, int n, int r);
+            ^~~~~~~~~
+            _Complex_I
+../src/utils.h:65:24: error: ‘x’ was not declared in this scope
+ void shift(complex_t * x, int n, int r);
+                        ^
+../src/utils.h:65:27: error: expected primary-expression before ‘int’
+ void shift(complex_t * x, int n, int r);
+                           ^~~
+../src/utils.h:65:34: error: expected primary-expression before ‘int’
+ void shift(complex_t * x, int n, int r);
+                                  ^~~
+../src/utils.h:67:14: error: ‘complex_t’ was not declared in this scope
+ double phase(complex_t x);
+              ^~~~~~~~~
+../src/utils.h:67:14: note: suggested alternative: ‘_Complex_I’
+ double phase(complex_t x);
+              ^~~~~~~~~
+              _Complex_I
+../src/utils.h:69:13: error: ‘complex_t’ was not declared in this scope
+ double AWGN(complex_t * x, int n, double std_noise);
+             ^~~~~~~~~
+../src/utils.h:69:13: note: suggested alternative: ‘_Complex_I’
+ double AWGN(complex_t * x, int n, double std_noise);
+             ^~~~~~~~~
+             _Complex_I
+../src/utils.h:69:25: error: ‘x’ was not declared in this scope
+ double AWGN(complex_t * x, int n, double std_noise);
+                         ^
+../src/utils.h:69:28: error: expected primary-expression before ‘int’
+ double AWGN(complex_t * x, int n, double std_noise);
+                            ^~~
+../src/utils.h:69:35: error: expected primary-expression before ‘double’
+ double AWGN(complex_t * x, int n, double std_noise);
+                                   ^~~~~~
+../src/utils.h:69:51: error: expression list treated as compound expression in initializer [-fpermissive]
+ double AWGN(complex_t * x, int n, double std_noise);
+                                                   ^
+../src/utils.h:71:21: warning: inline variables are only available with -std=c++1z or -std=gnu++1z
+ inline double cabs2(complex_t x)
+                     ^~~~~~~~~
+../src/utils.h:71:21: error: ‘complex_t’ was not declared in this scope
+../src/utils.h:71:21: note: suggested alternative: ‘_Complex_I’
+ inline double cabs2(complex_t x)
+                     ^~~~~~~~~
+                     _Complex_I
+../src/computefourier-1.0-2.0.cc:49:34: error: ‘complex_t’ has not been declared
+ Comb_Filt(sfft_v1v2_data * data, complex_t * origx, int n, int num,
+                                  ^~~~~~~~~
+../src/computefourier-1.0-2.0.cc: In function ‘int Comb_Filt(sfft_v1v2_data*, int*, int, int, int, int*)’:
+../src/computefourier-1.0-2.0.cc:58:3: error: ‘complex_t’ was not declared in this scope
+   complex_t *x_sampt = tldata->comb_filt_x_sampt;
+   ^~~~~~~~~
+../src/computefourier-1.0-2.0.cc:58:3: note: suggested alternative: ‘_Complex_I’
+   complex_t *x_sampt = tldata->comb_filt_x_sampt;
+   ^~~~~~~~~
+   _Complex_I
+../src/computefourier-1.0-2.0.cc:58:14: error: ‘x_sampt’ was not declared in this scope
+   complex_t *x_sampt = tldata->comb_filt_x_sampt;
+              ^~~~~~~
+../src/computefourier-1.0-2.0.cc:58:32: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘comb_filt_x_sampt’; did you mean ‘comb_filt_samples’?
+   complex_t *x_sampt = tldata->comb_filt_x_sampt;
+                                ^~~~~~~~~~~~~~~~~
+                                comb_filt_samples
+../src/computefourier-1.0-2.0.cc:74:36: error: ‘cabs2’ cannot be used as a function
+       samples[i] = cabs2(x_sampt[i]);
+                                    ^
+../src/computefourier-1.0-2.0.cc: At global scope:
+../src/computefourier-1.0-2.0.cc:196:42: error: ‘complex_t’ has not been declared
+ inner_loop_locate(sfft_v1v2_data * data, complex_t * origx, int n,
+                                          ^~~~~~~~~
+../src/computefourier-1.0-2.0.cc:199:31: error: ‘complex_t’ has not been declared
+                   int *b_vec, complex_t * x_samp, int *J, int loops,
+                               ^~~~~~~~~
+../src/computefourier-1.0-2.0.cc: In function ‘int inner_loop_locate(sfft_v1v2_data*, int*, int, const Filter&, const Filter&, int, int, int, int*, int*, int*, int*, int*, int, int, int, int*, int*, int&, int*, int, int)’:
+../src/computefourier-1.0-2.0.cc:207:3: error: ‘complex_t’ was not declared in this scope
+   complex_t *x_sampt = tldata->inner_loop_locate_x_sampt;
+   ^~~~~~~~~
+../src/computefourier-1.0-2.0.cc:207:3: note: suggested alternative: ‘_Complex_I’
+   complex_t *x_sampt = tldata->inner_loop_locate_x_sampt;
+   ^~~~~~~~~
+   _Complex_I
+../src/computefourier-1.0-2.0.cc:207:14: error: ‘x_sampt’ was not declared in this scope
+   complex_t *x_sampt = tldata->inner_loop_locate_x_sampt;
+              ^~~~~~~
+../src/computefourier-1.0-2.0.cc:207:14: note: suggested alternative: ‘x_samp’
+   complex_t *x_sampt = tldata->inner_loop_locate_x_sampt;
+              ^~~~~~~
+              x_samp
+../src/computefourier-1.0-2.0.cc:207:32: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘inner_loop_locate_x_sampt’; did you mean ‘inner_loop_locate_samples’?
+   complex_t *x_sampt = tldata->inner_loop_locate_x_sampt;
+                                ^~~~~~~~~~~~~~~~~~~~~~~~~
+                                inner_loop_locate_samples
+../src/computefourier-1.0-2.0.cc:232:43: error: ‘struct Filter’ has no member named ‘time’
+       double *d_filter = (double *)filter.time;
+                                           ^~~~
+../src/computefourier-1.0-2.0.cc: At global scope:
+../src/computefourier-1.0-2.0.cc:342:40: error: ‘complex_t’ has not been declared
+                 const int &hits_found, complex_t * x_samp,
+                                        ^~~~~~~~~
+../src/computefourier-1.0-2.0.cc: In function ‘sfft_output estimate_values(sfft_v1v2_data*, const int*, const int&, int*, const int&, int, const int*, int, int, const Filter&, const Filter&, int)’:
+../src/computefourier-1.0-2.0.cc:381:56: error: ‘const struct Filter’ has no member named ‘freq’
+           double *d_filter_freq = (double *)cur_filter.freq;
+                                                        ^~~~
+../src/computefourier-1.0-2.0.cc:414:18: error: invalid types ‘sfft_output {aka int}[const int]’ for array subscript
+       ans[hits[i]] = realv + I * imagv;
+                  ^
+../src/computefourier-1.0-2.0.cc: At global scope:
+../src/computefourier-1.0-2.0.cc:439:35: error: ‘complex_t’ has not been declared
+ outer_loop(sfft_v1v2_data * data, complex_t * origx, int n,
+                                   ^~~~~~~~~
+../src/computefourier-1.0-2.0.cc: In function ‘sfft_output outer_loop(sfft_v1v2_data*, int*, int, const Filter&, const Filter&, int, int, int, int, int, int, int, int)’:
+../src/computefourier-1.0-2.0.cc:454:3: error: ‘complex_t’ was not declared in this scope
+   complex_t *x_samp = tldata->x_samp;
+   ^~~~~~~~~
+../src/computefourier-1.0-2.0.cc:454:3: note: suggested alternative: ‘_Complex_I’
+   complex_t *x_samp = tldata->x_samp;
+   ^~~~~~~~~
+   _Complex_I
+../src/computefourier-1.0-2.0.cc:454:14: error: ‘x_samp’ was not declared in this scope
+   complex_t *x_samp = tldata->x_samp;
+              ^~~~~~
+../src/computefourier-1.0-2.0.cc:454:14: note: suggested alternative: ‘wcscmp’
+   complex_t *x_samp = tldata->x_samp;
+              ^~~~~~
+              wcscmp
+../src/computefourier-1.0-2.0.cc:454:31: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘x_samp’
+   complex_t *x_samp = tldata->x_samp;
+                               ^~~~~~
+../src/computefourier-3.0.cc:54:2: warning: #warning "Compiling without Intel Performance Primitives - resulting code will be slower!" [-Wcpp]
+ #warning "Compiling without Intel Performance Primitives - resulting code will be slower!"
+  ^~~~~~~
+In file included from ../src/sfft.h:29:0,
+                 from ../src/computefourier-3.0.h:25,
+                 from ../src/computefourier-3.0.cc:36:
+../src/fft.h:43:24: error: expected initializer before ‘complex_t’
+ typedef double complex complex_t;
+                        ^~~~~~~~~
+In file included from ../src/sfft.h:30:0,
+                 from ../src/computefourier-3.0.h:25,
+                 from ../src/computefourier-3.0.cc:36:
+../src/filters.h:29:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *time;
+   ^~~~~~~~~
+   _Complex_I
+../src/filters.h:31:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *freq;
+   ^~~~~~~~~
+   _Complex_I
+../src/filters.h:41:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_dolphchebyshev_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:43:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_gaussian_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:45:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_kaiserbessel_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:54:24: error: ‘complex_t’ was not declared in this scope
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                        ^~~~~~~~~
+../src/filters.h:54:24: note: suggested alternative: ‘_Complex_I’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                        ^~~~~~~~~
+                        _Complex_I
+../src/filters.h:54:36: error: ‘x’ was not declared in this scope
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                    ^
+../src/filters.h:54:39: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                       ^~~
+../src/filters.h:54:46: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                              ^~~
+../src/filters.h:54:53: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                                     ^~~
+In file included from ../src/computefourier-3.0.h:25:0,
+                 from ../src/computefourier-3.0.cc:36:
+../src/sfft.h:35:32: error: ‘complex_t’ was not declared in this scope
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                ^~~~~~~~~
+../src/sfft.h:35:32: note: suggested alternative: ‘_Complex_I’
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                ^~~~~~~~~
+                                _Complex_I
+../src/sfft.h:35:66: error: template argument 2 is invalid
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                                                  ^
+../src/sfft.h:35:66: error: template argument 5 is invalid
+../src/sfft.h:57:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *x_samp;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:62:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *inner_loop_locate_x_sampt;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:70:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *comb_filt_x_sampt;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:114:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *gauss_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:115:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *gauss_perm_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:116:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *man_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:118:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *est_values;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:119:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *perm_x;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:141:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filtert1;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:142:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filterf1;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:143:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filtert2;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:144:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filterf2;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:164:34: error: ‘complex_t’ has not been declared
+ void sfft_exec(sfft_plan * plan, complex_t * in, sfft_output * out);
+                                  ^~~~~~~~~
+../src/sfft.h:166:43: error: ‘complex_t’ has not been declared
+ sfft_exec_many(sfft_plan * plan, int num, complex_t ** in, sfft_output * out);
+                                           ^~~~~~~~~
+In file included from ../src/computefourier-3.0.h:31:0,
+                 from ../src/computefourier-3.0.cc:36:
+../src/fftw.h:39:14: error: ‘complex_t’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+              ^~~~~~~~~
+../src/fftw.h:39:14: note: suggested alternative: ‘_Complex_I’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+              ^~~~~~~~~
+              _Complex_I
+../src/fftw.h:39:26: error: ‘out’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                          ^~~
+../src/fftw.h:39:26: note: suggested alternative: ‘putw’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                          ^~~
+                          putw
+../src/fftw.h:39:31: error: expected primary-expression before ‘int’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                               ^~~
+../src/fftw.h:39:38: error: ‘complex_t’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                      ^~~~~~~~~
+../src/fftw.h:39:38: note: suggested alternative: ‘_Complex_I’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                      ^~~~~~~~~
+                                      _Complex_I
+../src/fftw.h:39:50: error: ‘x’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                  ^
+../src/fftw.h:39:53: error: expected primary-expression before ‘int’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                     ^~~
+../src/fftw.h:39:70: error: expression list treated as compound expression in initializer [-fpermissive]
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                                      ^
+In file included from ../src/computefourier-3.0.cc:36:0:
+../src/computefourier-3.0.h:38:55: error: ‘complex_t’ has not been declared
+ alternate_fft(sfft_v3_data * data, sfft_output * ans, complex_t * origx,
+                                                       ^~~~~~~~~
+../src/computefourier-3.0.h:40:33: error: ‘complex_t’ has not been declared
+               int Gauss_loops1, complex_t * filtert1, complex_t * filterf1,
+                                 ^~~~~~~~~
+../src/computefourier-3.0.h:40:55: error: ‘complex_t’ has not been declared
+               int Gauss_loops1, complex_t * filtert1, complex_t * filterf1,
+                                                       ^~~~~~~~~
+../src/computefourier-3.0.h:41:52: error: ‘complex_t’ has not been declared
+               int B2, int Wind2, int Gauss_loops2, complex_t * filtert2,
+                                                    ^~~~~~~~~
+../src/computefourier-3.0.h:42:15: error: ‘complex_t’ has not been declared
+               complex_t * filterf2);
+               ^~~~~~~~~
+In file included from ../src/computefourier-3.0.cc:38:0:
+../src/utils.h:57:56: error: ‘complex_t’ has not been declared
+ void radix_filt(int byte, int size, int *A, int *TEMP, complex_t * Filter,
+                                                        ^~~~~~~~~
+../src/utils.h:58:17: error: ‘complex_t’ has not been declared
+                 complex_t * TMP_F);
+                 ^~~~~~~~~
+../src/utils.h:60:30: error: ‘complex_t’ has not been declared
+ void radix_sort_filt(int *A, complex_t * Filter, int size);
+                              ^~~~~~~~~
+../src/utils.h:65:12: error: variable or field ‘shift’ declared void
+ void shift(complex_t * x, int n, int r);
+            ^~~~~~~~~
+../src/utils.h:65:12: error: ‘complex_t’ was not declared in this scope
+../src/utils.h:65:12: note: suggested alternative: ‘_Complex_I’
+ void shift(complex_t * x, int n, int r);
+            ^~~~~~~~~
+            _Complex_I
+../src/utils.h:65:24: error: ‘x’ was not declared in this scope
+ void shift(complex_t * x, int n, int r);
+                        ^
+../src/utils.h:65:27: error: expected primary-expression before ‘int’
+ void shift(complex_t * x, int n, int r);
+                           ^~~
+../src/utils.h:65:34: error: expected primary-expression before ‘int’
+ void shift(complex_t * x, int n, int r);
+                                  ^~~
+../src/utils.h:67:14: error: ‘complex_t’ was not declared in this scope
+ double phase(complex_t x);
+              ^~~~~~~~~
+../src/utils.h:67:14: note: suggested alternative: ‘_Complex_I’
+ double phase(complex_t x);
+              ^~~~~~~~~
+              _Complex_I
+../src/utils.h:69:13: error: ‘complex_t’ was not declared in this scope
+ double AWGN(complex_t * x, int n, double std_noise);
+             ^~~~~~~~~
+../src/utils.h:69:13: note: suggested alternative: ‘_Complex_I’
+ double AWGN(complex_t * x, int n, double std_noise);
+             ^~~~~~~~~
+             _Complex_I
+../src/utils.h:69:25: error: ‘x’ was not declared in this scope
+ double AWGN(complex_t * x, int n, double std_noise);
+                         ^
+../src/utils.h:69:28: error: expected primary-expression before ‘int’
+ double AWGN(complex_t * x, int n, double std_noise);
+                            ^~~
+../src/utils.h:69:35: error: expected primary-expression before ‘double’
+ double AWGN(complex_t * x, int n, double std_noise);
+                                   ^~~~~~
+../src/utils.h:69:51: error: expression list treated as compound expression in initializer [-fpermissive]
+ double AWGN(complex_t * x, int n, double std_noise);
+                                                   ^
+../src/utils.h:71:21: warning: inline variables are only available with -std=c++1z or -std=gnu++1z
+ inline double cabs2(complex_t x)
+                     ^~~~~~~~~
+../src/utils.h:71:21: error: ‘complex_t’ was not declared in this scope
+../src/utils.h:71:21: note: suggested alternative: ‘_Complex_I’
+ inline double cabs2(complex_t x)
+                     ^~~~~~~~~
+                     _Complex_I
+../src/computefourier-3.0.cc:67:17: error: ‘complex_t’ was not declared in this scope
+ permute_fourier(complex_t * dest, int w, complex_t * src, int n,
+                 ^~~~~~~~~
+../src/computefourier-3.0.cc:67:17: note: suggested alternative: ‘_Complex_I’
+ permute_fourier(complex_t * dest, int w, complex_t * src, int n,
+                 ^~~~~~~~~
+                 _Complex_I
+../src/computefourier-3.0.cc:67:29: error: ‘dest’ was not declared in this scope
+ permute_fourier(complex_t * dest, int w, complex_t * src, int n,
+                             ^~~~
+../src/computefourier-3.0.cc:67:29: note: suggested alternative: ‘dev_t’
+ permute_fourier(complex_t * dest, int w, complex_t * src, int n,
+                             ^~~~
+                             dev_t
+../src/computefourier-3.0.cc:67:35: error: expected primary-expression before ‘int’
+ permute_fourier(complex_t * dest, int w, complex_t * src, int n,
+                                   ^~~
+../src/computefourier-3.0.cc:67:42: error: ‘complex_t’ was not declared in this scope
+ permute_fourier(complex_t * dest, int w, complex_t * src, int n,
+                                          ^~~~~~~~~
+../src/computefourier-3.0.cc:67:42: note: suggested alternative: ‘_Complex_I’
+ permute_fourier(complex_t * dest, int w, complex_t * src, int n,
+                                          ^~~~~~~~~
+                                          _Complex_I
+../src/computefourier-3.0.cc:67:54: error: ‘src’ was not declared in this scope
+ permute_fourier(complex_t * dest, int w, complex_t * src, int n,
+                                                      ^~~
+../src/computefourier-3.0.cc:67:54: note: suggested alternative: ‘sqrt’
+ permute_fourier(complex_t * dest, int w, complex_t * src, int n,
+                                                      ^~~
+                                                      sqrt
+../src/computefourier-3.0.cc:67:59: error: expected primary-expression before ‘int’
+ permute_fourier(complex_t * dest, int w, complex_t * src, int n,
+                                                           ^~~
+../src/computefourier-3.0.cc:68:17: error: expected primary-expression before ‘int’
+                 int offset, int ai, int b)
+                 ^~~
+../src/computefourier-3.0.cc:68:29: error: expected primary-expression before ‘int’
+                 int offset, int ai, int b)
+                             ^~~
+../src/computefourier-3.0.cc:68:37: error: expected primary-expression before ‘int’
+                 int offset, int ai, int b)
+                                     ^~~
+../src/computefourier-3.0.cc:68:42: error: expression list treated as compound expression in initializer [-fpermissive]
+                 int offset, int ai, int b)
+                                          ^
+../src/computefourier-3.0.cc:97:42: error: ‘complex_t’ has not been declared
+ Mansour_Filt_loops2(sfft_v3_data * data, complex_t * origx, int n,
+                                          ^~~~~~~~~
+../src/computefourier-3.0.cc:98:49: error: ‘complex_t’ has not been declared
+                     int W_Man, int init_offset, complex_t * x_man)
+                                                 ^~~~~~~~~
+../src/computefourier-3.0.cc: In function ‘int Mansour_Filt_loops2(sfft_v3_data*, int*, int, int, int, int*)’:
+../src/computefourier-3.0.cc:109:3: error: ‘complex_t’ was not declared in this scope
+   complex_t *x_sampt = tl_data->man_samples;
+   ^~~~~~~~~
+../src/computefourier-3.0.cc:109:3: note: suggested alternative: ‘_Complex_I’
+   complex_t *x_sampt = tl_data->man_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/computefourier-3.0.cc:109:14: error: ‘x_sampt’ was not declared in this scope
+   complex_t *x_sampt = tl_data->man_samples;
+              ^~~~~~~
+../src/computefourier-3.0.cc:109:33: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘man_samples’
+   complex_t *x_sampt = tl_data->man_samples;
+                                 ^~~~~~~~~~~
+../src/computefourier-3.0.cc: At global scope:
+../src/computefourier-3.0.cc:131:40: error: ‘complex_t’ has not been declared
+ Gauss_Filt_loops2(sfft_v3_data * data, complex_t * origx, int n,
+                                        ^~~~~~~~~
+../src/computefourier-3.0.cc:132:19: error: ‘complex_t’ has not been declared
+                   complex_t * filter, int w, int B, complex_t * x_gauss,
+                   ^~~~~~~~~
+../src/computefourier-3.0.cc:132:53: error: ‘complex_t’ has not been declared
+                   complex_t * filter, int w, int B, complex_t * x_gauss,
+                                                     ^~~~~~~~~
+../src/computefourier-3.0.cc: In function ‘int Gauss_Filt_loops2(sfft_v3_data*, int*, int, int*, int, int, int*, int)’:
+../src/computefourier-3.0.cc:142:3: error: ‘complex_t’ was not declared in this scope
+   complex_t *x_sampt = tl_data->gauss_samples;
+   ^~~~~~~~~
+../src/computefourier-3.0.cc:142:3: note: suggested alternative: ‘_Complex_I’
+   complex_t *x_sampt = tl_data->gauss_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/computefourier-3.0.cc:142:14: error: ‘x_sampt’ was not declared in this scope
+   complex_t *x_sampt = tl_data->gauss_samples;
+              ^~~~~~~
+../src/computefourier-3.0.cc:142:33: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘gauss_samples’
+   complex_t *x_sampt = tl_data->gauss_samples;
+                                 ^~~~~~~~~~~~~
+../src/computefourier-3.0.cc: At global scope:
+../src/computefourier-3.0.cc:216:45: error: ‘complex_t’ has not been declared
+ Gauss_Filt_Perm_loops2(sfft_v3_data * data, complex_t * origx, int n,
+                                             ^~~~~~~~~
+../src/computefourier-3.0.cc:217:24: error: ‘complex_t’ has not been declared
+                        complex_t * filter, int w, int B,
+                        ^~~~~~~~~
+../src/computefourier-3.0.cc:218:24: error: ‘complex_t’ has not been declared
+                        complex_t * x_gauss, int init_G_offset, int ai, int b0)
+                        ^~~~~~~~~
+../src/computefourier-3.0.cc: In function ‘int Gauss_Filt_Perm_loops2(sfft_v3_data*, int*, int, int*, int, int, int*, int, int, int)’:
+../src/computefourier-3.0.cc:227:3: error: ‘complex_t’ was not declared in this scope
+   complex_t *x_sampt = tl_data->gauss_perm_samples;
+   ^~~~~~~~~
+../src/computefourier-3.0.cc:227:3: note: suggested alternative: ‘_Complex_I’
+   complex_t *x_sampt = tl_data->gauss_perm_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/computefourier-3.0.cc:227:14: error: ‘x_sampt’ was not declared in this scope
+   complex_t *x_sampt = tl_data->gauss_perm_samples;
+              ^~~~~~~
+../src/computefourier-3.0.cc:227:33: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘gauss_perm_samples’
+   complex_t *x_sampt = tl_data->gauss_perm_samples;
+                                 ^~~~~~~~~~~~~~~~~~
+../src/computefourier-3.0.cc:228:14: error: ‘Perm_X’ was not declared in this scope
+   complex_t *Perm_X = tl_data->perm_x;
+              ^~~~~~
+../src/computefourier-3.0.cc:228:32: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘perm_x’
+   complex_t *Perm_X = tl_data->perm_x;
+                                ^~~~~~
+../src/computefourier-3.0.cc:236:40: error: ‘permute_fourier’ cannot be used as a function
+                   init_G_offset, ai, b0);
+                                        ^
+../src/computefourier-3.0.cc: At global scope:
+../src/computefourier-3.0.cc:301:32: error: ‘complex_t’ has not been declared
+ update_mansour_loops2(int key, complex_t value, complex_t * SAMP, int n,
+                                ^~~~~~~~~
+../src/computefourier-3.0.cc:301:49: error: ‘complex_t’ has not been declared
+ update_mansour_loops2(int key, complex_t value, complex_t * SAMP, int n,
+                                                 ^~~~~~~~~
+../src/computefourier-3.0.cc:355:33: error: ‘complex_t’ has not been declared
+ update_gaussian_loops2(int key, complex_t value, complex_t * GAUSS_SAMP,
+                                 ^~~~~~~~~
+../src/computefourier-3.0.cc:355:50: error: ‘complex_t’ has not been declared
+ update_gaussian_loops2(int key, complex_t value, complex_t * GAUSS_SAMP,
+                                                  ^~~~~~~~~
+../src/computefourier-3.0.cc:356:24: error: ‘complex_t’ has not been declared
+                        complex_t * filterf, int n, int B,
+                        ^~~~~~~~~
+../src/computefourier-3.0.cc: In function ‘void update_gaussian_loops2(int, int, int*, int*, int, int, int, int)’:
+../src/computefourier-3.0.cc:372:35: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+   double a1 = ((double *)&value)[0];
+                                   ^
+../src/computefourier-3.0.cc: At global scope:
+../src/computefourier-3.0.cc:466:22: error: ‘complex_t’ has not been declared
+ UPDATE_ALL(int freq, complex_t median_value, int n, int init_offset,
+                      ^~~~~~~~~
+../src/computefourier-3.0.cc:467:38: error: ‘complex_t’ has not been declared
+            int W_Man, int Man_loops, complex_t * MAN_SAMP,
+                                      ^~~~~~~~~
+../src/computefourier-3.0.cc:468:49: error: ‘complex_t’ has not been declared
+            int init_G_offset, int jump, int B1, complex_t * filterf1,
+                                                 ^~~~~~~~~
+../src/computefourier-3.0.cc:469:12: error: ‘complex_t’ has not been declared
+            complex_t * GAUSS_SAMP, int Gauss_loops1, int a, int ai,
+            ^~~~~~~~~
+../src/computefourier-3.0.cc:470:31: error: ‘complex_t’ has not been declared
+            int shift, int B2, complex_t * filterf2,
+                               ^~~~~~~~~
+../src/computefourier-3.0.cc:471:12: error: ‘complex_t’ has not been declared
+            complex_t * GAUSS_SAMP_PERM, int Gauss_loops2)
+            ^~~~~~~~~
+../src/computefourier-3.0.cc:486:41: error: ‘complex_t’ has not been declared
+                            int BUCKETS, complex_t * SAMP, int init_offset,
+                                         ^~~~~~~~~
+../src/computefourier-3.0.cc:488:28: error: ‘complex_t’ has not been declared
+                            complex_t * filterf, int *EST_FREQS,
+                            ^~~~~~~~~
+../src/computefourier-3.0.cc:489:28: error: ‘complex_t’ has not been declared
+                            complex_t * EST_VALUES)
+                            ^~~~~~~~~
+../src/computefourier-3.0.cc: In function ‘int estimate_freq_gauss_loops2(sfft_v3_data*, int, int, int*, int, int, int, int, int, int, int*, int*, int*)’:
+../src/computefourier-3.0.cc:506:3: error: ‘complex_t’ was not declared in this scope
+   complex_t median_value;
+   ^~~~~~~~~
+../src/computefourier-3.0.cc:506:3: note: suggested alternative: ‘_Complex_I’
+   complex_t median_value;
+   ^~~~~~~~~
+   _Complex_I
+../src/computefourier-3.0.cc:564:25: error: expected ‘;’ before ‘filter_value’
+               complex_t filter_value;
+                         ^~~~~~~~~~~~
+../src/computefourier-3.0.cc:605:23: error: ‘median_value’ was not declared in this scope
+                       median_value =
+                       ^~~~~~~~~~~~
+../src/computefourier-3.0.cc:605:23: note: suggested alternative: ‘median_phase’
+                       median_value =
+                       ^~~~~~~~~~~~
+                       median_phase
+../src/computefourier-3.0.cc:616:23: error: ‘filter_value’ was not declared in this scope
+                       filter_value = filterf[dist];
+                       ^~~~~~~~~~~~
+../src/computefourier-3.0.cc:616:23: note: suggested alternative: ‘filterf’
+                       filter_value = filterf[dist];
+                       ^~~~~~~~~~~~
+                       filterf
+../src/computefourier-3.0.cc: At global scope:
+../src/computefourier-3.0.cc:644:30: error: ‘complex_t’ has not been declared
+                              complex_t * SAMP, int init_offset, int LOOPS,
+                              ^~~~~~~~~
+../src/computefourier-3.0.cc:646:30: error: ‘complex_t’ has not been declared
+                              complex_t * filterf, int *EST_FREQS,
+                              ^~~~~~~~~
+../src/computefourier-3.0.cc:647:30: error: ‘complex_t’ has not been declared
+                              complex_t * EST_VALUES)
+                              ^~~~~~~~~
+../src/computefourier-3.0.cc:785:55: error: ‘complex_t’ has not been declared
+ alternate_fft(sfft_v3_data * data, sfft_output * out, complex_t * origx,
+                                                       ^~~~~~~~~
+../src/computefourier-3.0.cc:787:33: error: ‘complex_t’ has not been declared
+               int Gauss_loops1, complex_t * filtert1, complex_t * filterf1,
+                                 ^~~~~~~~~
+../src/computefourier-3.0.cc:787:55: error: ‘complex_t’ has not been declared
+               int Gauss_loops1, complex_t * filtert1, complex_t * filterf1,
+                                                       ^~~~~~~~~
+../src/computefourier-3.0.cc:788:52: error: ‘complex_t’ has not been declared
+               int B2, int Wind2, int Gauss_loops2, complex_t * filtert2,
+                                                    ^~~~~~~~~
+../src/computefourier-3.0.cc:789:15: error: ‘complex_t’ has not been declared
+               complex_t * filterf2)
+               ^~~~~~~~~
+../src/computefourier-3.0.cc: In function ‘void alternate_fft(sfft_v3_data*, sfft_output*, int*, int, int, int, int, int, int, int, int*, int*, int, int, int, int*, int*)’:
+../src/computefourier-3.0.cc:794:3: error: ‘complex_t’ was not declared in this scope
+   complex_t *MAN_SAMP = tl_data->man_samples;
+   ^~~~~~~~~
+../src/computefourier-3.0.cc:794:3: note: suggested alternative: ‘_Complex_I’
+   complex_t *MAN_SAMP = tl_data->man_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/computefourier-3.0.cc:794:14: error: ‘MAN_SAMP’ was not declared in this scope
+   complex_t *MAN_SAMP = tl_data->man_samples;
+              ^~~~~~~~
+../src/computefourier-3.0.cc:794:34: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘man_samples’
+   complex_t *MAN_SAMP = tl_data->man_samples;
+                                  ^~~~~~~~~~~
+../src/computefourier-3.0.cc:795:14: error: ‘GAUSS_SAMP’ was not declared in this scope
+   complex_t *GAUSS_SAMP = tl_data->gauss_samples;
+              ^~~~~~~~~~
+../src/computefourier-3.0.cc:795:36: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘gauss_samples’
+   complex_t *GAUSS_SAMP = tl_data->gauss_samples;
+                                    ^~~~~~~~~~~~~
+../src/computefourier-3.0.cc:796:14: error: ‘GAUSS_SAMP_PERM’ was not declared in this scope
+   complex_t *GAUSS_SAMP_PERM = tl_data->gauss_perm_samples;
+              ^~~~~~~~~~~~~~~
+../src/computefourier-3.0.cc:796:41: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘gauss_perm_samples’
+   complex_t *GAUSS_SAMP_PERM = tl_data->gauss_perm_samples;
+                                         ^~~~~~~~~~~~~~~~~~
+../src/computefourier-3.0.cc:838:14: error: ‘EST_VALUES’ was not declared in this scope
+   complex_t *EST_VALUES = tl_data->est_values;
+              ^~~~~~~~~~
+../src/computefourier-3.0.cc:838:14: note: suggested alternative: ‘ESTALE’
+   complex_t *EST_VALUES = tl_data->est_values;
+              ^~~~~~~~~~
+              ESTALE
+../src/computefourier-3.0.cc:838:36: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘est_values’; did you mean ‘est_freqs’?
+   complex_t *EST_VALUES = tl_data->est_values;
+                                    ^~~~~~~~~~
+                                    est_freqs
+../src/computefourier-3.0.cc:850:23: error: invalid types ‘sfft_output {aka int}[int]’ for array subscript
+       ans[EST_FREQS[i]] = EST_VALUES[i];
+                       ^
+../src/computefourier-3.0.cc:877:13: error: expected ‘;’ before ‘value’
+   complex_t value;
+             ^~~~~
+../src/computefourier-3.0.cc:881:21: error: request for member ‘begin’ in ‘ans’, which is of non-class type ‘sfft_output {aka int}’
+   for (__typeof(ans.begin())it = ans.begin(); it != ans.end(); it++)
+                     ^~~~~
+../src/computefourier-3.0.cc:881:38: error: request for member ‘begin’ in ‘ans’, which is of non-class type ‘sfft_output {aka int}’
+   for (__typeof(ans.begin())it = ans.begin(); it != ans.end(); it++)
+                                      ^~~~~
+../src/computefourier-3.0.cc:881:57: error: request for member ‘end’ in ‘ans’, which is of non-class type ‘sfft_output {aka int}’
+   for (__typeof(ans.begin())it = ans.begin(); it != ans.end(); it++)
+                                                         ^~~
+../src/computefourier-3.0.cc:883:15: error: base operand of ‘->’ is not a pointer
+       key = it->first;
+               ^~
+../src/computefourier-3.0.cc:884:7: error: ‘value’ was not declared in this scope
+       value = it->second;
+       ^~~~~
+../src/computefourier-3.0.cc:884:7: note: suggested alternative: ‘valloc’
+       value = it->second;
+       ^~~~~
+       valloc
+../src/computefourier-3.0.cc:884:17: error: base operand of ‘->’ is not a pointer
+       value = it->second;
+                 ^~
+../src/computefourier-3.0.cc:909:33: error: invalid types ‘sfft_output {aka int}[int]’ for array subscript
+       if (cabs2(ans[EST_FREQS[i]]) == 0)
+                                 ^
+../src/computefourier-3.0.cc:909:34: error: ‘cabs2’ cannot be used as a function
+       if (cabs2(ans[EST_FREQS[i]]) == 0)
+                                  ^
+../src/computefourier-3.0.cc:913:23: error: invalid types ‘sfft_output {aka int}[int]’ for array subscript
+       ans[EST_FREQS[i]] = ans[EST_FREQS[i]] + EST_VALUES[i];
+                       ^
+../src/computefourier-3.0.cc:913:43: error: invalid types ‘sfft_output {aka int}[int]’ for array subscript
+       ans[EST_FREQS[i]] = ans[EST_FREQS[i]] + EST_VALUES[i];
+                                           ^
+../src/computefourier-3.0.cc:940:21: error: request for member ‘begin’ in ‘ans’, which is of non-class type ‘sfft_output {aka int}’
+   for (__typeof(ans.begin())it = ans.begin(); it != ans.end(); it++)
+                     ^~~~~
+../src/computefourier-3.0.cc:940:38: error: request for member ‘begin’ in ‘ans’, which is of non-class type ‘sfft_output {aka int}’
+   for (__typeof(ans.begin())it = ans.begin(); it != ans.end(); it++)
+                                      ^~~~~
+../src/computefourier-3.0.cc:940:57: error: request for member ‘end’ in ‘ans’, which is of non-class type ‘sfft_output {aka int}’
+   for (__typeof(ans.begin())it = ans.begin(); it != ans.end(); it++)
+                                                         ^~~
+../src/computefourier-3.0.cc:942:15: error: base operand of ‘->’ is not a pointer
+       key = it->first;
+               ^~
+../src/computefourier-3.0.cc:943:7: error: ‘value’ was not declared in this scope
+       value = it->second;
+       ^~~~~
+../src/computefourier-3.0.cc:943:7: note: suggested alternative: ‘valloc’
+       value = it->second;
+       ^~~~~
+       valloc
+../src/computefourier-3.0.cc:943:17: error: base operand of ‘->’ is not a pointer
+       value = it->second;
+                 ^~
+../src/computefourier-3.0.cc:969:33: error: invalid types ‘sfft_output {aka int}[int]’ for array subscript
+       if (cabs2(ans[EST_FREQS[i]]) == 0)
+                                 ^
+../src/computefourier-3.0.cc:969:34: error: ‘cabs2’ cannot be used as a function
+       if (cabs2(ans[EST_FREQS[i]]) == 0)
+                                  ^
+../src/computefourier-3.0.cc:973:23: error: invalid types ‘sfft_output {aka int}[int]’ for array subscript
+       ans[EST_FREQS[i]] = ans[EST_FREQS[i]] + EST_VALUES[i];
+                       ^
+../src/computefourier-3.0.cc:973:43: error: invalid types ‘sfft_output {aka int}[int]’ for array subscript
+       ans[EST_FREQS[i]] = ans[EST_FREQS[i]] + EST_VALUES[i];
+                                           ^
+../src/computefourier-3.0.cc:1025:37: error: invalid types ‘sfft_output {aka int}[int]’ for array subscript
+           if (cabs2(ans[EST_FREQS[i]]) == 0)
+                                     ^
+../src/computefourier-3.0.cc:1025:38: error: ‘cabs2’ cannot be used as a function
+           if (cabs2(ans[EST_FREQS[i]]) == 0)
+                                      ^
+../src/computefourier-3.0.cc:1029:27: error: invalid types ‘sfft_output {aka int}[int]’ for array subscript
+           ans[EST_FREQS[i]] = ans[EST_FREQS[i]] + EST_VALUES[i];
+                           ^
+../src/computefourier-3.0.cc:1029:47: error: invalid types ‘sfft_output {aka int}[int]’ for array subscript
+           ans[EST_FREQS[i]] = ans[EST_FREQS[i]] + EST_VALUES[i];
+                                               ^
+../src/computefourier-3.0.cc:1049:38: error: ‘cabs2’ cannot be used as a function
+               if (cabs2(GAUSS_SAMP[j]) > 1e-6)
+                                      ^
+../src/computefourier-3.0.cc:1055:43: error: ‘cabs2’ cannot be used as a function
+               if (cabs2(GAUSS_SAMP_PERM[j]) > 1e-6)
+                                           ^
+../src/computefourier-3.0.cc:1061:48: error: ‘cabs2’ cannot be used as a function
+               if (cabs2(MAN_SAMP[2 * j] / W_Man) > 1e-6)
+                                                ^
+../src/computefourier-3.0.cc: At global scope:
+../src/computefourier-3.0.cc:643:1: warning: ‘int estimate_freq_mansour_loops2(sfft_v3_data*, int, int*, int, int, int, int, int, int, int*, int*, int*)’ defined but not used [-Wunused-function]
+ estimate_freq_mansour_loops2(sfft_v3_data * data, int BUCKETS,
+ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../src/computefourier-3.0.cc:485:1: warning: ‘int estimate_freq_gauss_loops2(sfft_v3_data*, int, int, int*, int, int, int, int, int, int, int*, int*, int*)’ defined but not used [-Wunused-function]
+ estimate_freq_gauss_loops2(sfft_v3_data * data, int WHICH_FILTER,
+ ^~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from ../src/fftw.h:25:0,
+                 from ../src/fftw.cc:22:
+../src/fft.h:43:24: error: expected initializer before ‘complex_t’
+ typedef double complex complex_t;
+                        ^~~~~~~~~
+In file included from ../src/fftw.cc:22:0:
+../src/fftw.h:39:14: error: ‘complex_t’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+              ^~~~~~~~~
+../src/fftw.h:39:14: note: suggested alternative: ‘_Complex_I’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+              ^~~~~~~~~
+              _Complex_I
+../src/fftw.h:39:26: error: ‘out’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                          ^~~
+../src/fftw.h:39:26: note: suggested alternative: ‘putw’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                          ^~~
+                          putw
+../src/fftw.h:39:31: error: expected primary-expression before ‘int’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                               ^~~
+../src/fftw.h:39:38: error: ‘complex_t’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                      ^~~~~~~~~
+../src/fftw.h:39:38: note: suggested alternative: ‘_Complex_I’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                      ^~~~~~~~~
+                                      _Complex_I
+../src/fftw.h:39:50: error: ‘x’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                  ^
+../src/fftw.h:39:53: error: expected primary-expression before ‘int’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                     ^~~
+../src/fftw.h:39:70: error: expression list treated as compound expression in initializer [-fpermissive]
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                                      ^
+../src/fftw.cc:29:14: error: redefinition of ‘int fftw_dft’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards)
+              ^~~~~~~~~
+In file included from ../src/fftw.cc:22:0:
+../src/fftw.h:39:5: note: ‘int fftw_dft’ previously defined here
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+     ^~~~~~~~
+../src/fftw.cc:29:14: error: ‘complex_t’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards)
+              ^~~~~~~~~
+../src/fftw.cc:29:14: note: suggested alternative: ‘_Complex_I’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards)
+              ^~~~~~~~~
+              _Complex_I
+../src/fftw.cc:29:26: error: ‘out’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards)
+                          ^~~
+../src/fftw.cc:29:26: note: suggested alternative: ‘putw’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards)
+                          ^~~
+                          putw
+../src/fftw.cc:29:31: error: expected primary-expression before ‘int’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards)
+                               ^~~
+../src/fftw.cc:29:38: error: ‘complex_t’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards)
+                                      ^~~~~~~~~
+../src/fftw.cc:29:38: note: suggested alternative: ‘_Complex_I’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards)
+                                      ^~~~~~~~~
+                                      _Complex_I
+../src/fftw.cc:29:50: error: ‘x’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards)
+                                                  ^
+../src/fftw.cc:29:53: error: expected primary-expression before ‘int’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards)
+                                                     ^~~
+In file included from ../src/sfft.h:29:0,
+                 from ../src/sfft.cc:29:
+../src/fft.h:43:24: error: expected initializer before ‘complex_t’
+ typedef double complex complex_t;
+                        ^~~~~~~~~
+In file included from ../src/sfft.h:30:0,
+                 from ../src/sfft.cc:29:
+../src/filters.h:29:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *time;
+   ^~~~~~~~~
+   _Complex_I
+../src/filters.h:31:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *freq;
+   ^~~~~~~~~
+   _Complex_I
+../src/filters.h:41:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_dolphchebyshev_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:43:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_gaussian_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:45:1: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+ complex_t *make_kaiserbessel_t(double lobefrac, double tolerance, int &w);
+ ^~~~~~~~~
+ _Complex_I
+../src/filters.h:54:24: error: ‘complex_t’ was not declared in this scope
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                        ^~~~~~~~~
+../src/filters.h:54:24: note: suggested alternative: ‘_Complex_I’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                        ^~~~~~~~~
+                        _Complex_I
+../src/filters.h:54:36: error: ‘x’ was not declared in this scope
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                    ^
+../src/filters.h:54:39: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                       ^~~
+../src/filters.h:54:46: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                              ^~~
+../src/filters.h:54:53: error: expected primary-expression before ‘int’
+ Filter make_multiple_t(complex_t * x, int w, int n, int b);
+                                                     ^~~
+In file included from ../src/sfft.cc:29:0:
+../src/sfft.h:35:32: error: ‘complex_t’ was not declared in this scope
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                ^~~~~~~~~
+../src/sfft.h:35:32: note: suggested alternative: ‘_Complex_I’
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                ^~~~~~~~~
+                                _Complex_I
+../src/sfft.h:35:66: error: template argument 2 is invalid
+ std::tr1::unordered_map < int, complex_t, std::tr1::hash < int > > sfft_output;
+                                                                  ^
+../src/sfft.h:35:66: error: template argument 5 is invalid
+../src/sfft.h:57:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *x_samp;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:62:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *inner_loop_locate_x_sampt;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:70:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *comb_filt_x_sampt;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:114:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *gauss_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:115:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *gauss_perm_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:116:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *man_samples;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:118:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *est_values;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:119:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *perm_x;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:141:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filtert1;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:142:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filterf1;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:143:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filtert2;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:144:3: error: ‘complex_t’ does not name a type; did you mean ‘_Complex_I’?
+   complex_t *filterf2;
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.h:164:34: error: ‘complex_t’ has not been declared
+ void sfft_exec(sfft_plan * plan, complex_t * in, sfft_output * out);
+                                  ^~~~~~~~~
+../src/sfft.h:166:43: error: ‘complex_t’ has not been declared
+ sfft_exec_many(sfft_plan * plan, int num, complex_t ** in, sfft_output * out);
+                                           ^~~~~~~~~
+In file included from ../src/sfft.cc:31:0:
+../src/utils.h:57:56: error: ‘complex_t’ has not been declared
+ void radix_filt(int byte, int size, int *A, int *TEMP, complex_t * Filter,
+                                                        ^~~~~~~~~
+../src/utils.h:58:17: error: ‘complex_t’ has not been declared
+                 complex_t * TMP_F);
+                 ^~~~~~~~~
+../src/utils.h:60:30: error: ‘complex_t’ has not been declared
+ void radix_sort_filt(int *A, complex_t * Filter, int size);
+                              ^~~~~~~~~
+../src/utils.h:65:12: error: variable or field ‘shift’ declared void
+ void shift(complex_t * x, int n, int r);
+            ^~~~~~~~~
+../src/utils.h:65:12: error: ‘complex_t’ was not declared in this scope
+../src/utils.h:65:12: note: suggested alternative: ‘_Complex_I’
+ void shift(complex_t * x, int n, int r);
+            ^~~~~~~~~
+            _Complex_I
+../src/utils.h:65:24: error: ‘x’ was not declared in this scope
+ void shift(complex_t * x, int n, int r);
+                        ^
+../src/utils.h:65:27: error: expected primary-expression before ‘int’
+ void shift(complex_t * x, int n, int r);
+                           ^~~
+../src/utils.h:65:34: error: expected primary-expression before ‘int’
+ void shift(complex_t * x, int n, int r);
+                                  ^~~
+../src/utils.h:67:14: error: ‘complex_t’ was not declared in this scope
+ double phase(complex_t x);
+              ^~~~~~~~~
+../src/utils.h:67:14: note: suggested alternative: ‘_Complex_I’
+ double phase(complex_t x);
+              ^~~~~~~~~
+              _Complex_I
+../src/utils.h:69:13: error: ‘complex_t’ was not declared in this scope
+ double AWGN(complex_t * x, int n, double std_noise);
+             ^~~~~~~~~
+../src/utils.h:69:13: note: suggested alternative: ‘_Complex_I’
+ double AWGN(complex_t * x, int n, double std_noise);
+             ^~~~~~~~~
+             _Complex_I
+../src/utils.h:69:25: error: ‘x’ was not declared in this scope
+ double AWGN(complex_t * x, int n, double std_noise);
+                         ^
+../src/utils.h:69:28: error: expected primary-expression before ‘int’
+ double AWGN(complex_t * x, int n, double std_noise);
+                            ^~~
+../src/utils.h:69:35: error: expected primary-expression before ‘double’
+ double AWGN(complex_t * x, int n, double std_noise);
+                                   ^~~~~~
+../src/utils.h:69:51: error: expression list treated as compound expression in initializer [-fpermissive]
+ double AWGN(complex_t * x, int n, double std_noise);
+                                                   ^
+../src/utils.h:71:21: warning: inline variables are only available with -std=c++1z or -std=gnu++1z
+ inline double cabs2(complex_t x)
+                     ^~~~~~~~~
+../src/utils.h:71:21: error: ‘complex_t’ was not declared in this scope
+../src/utils.h:71:21: note: suggested alternative: ‘_Complex_I’
+ inline double cabs2(complex_t x)
+                     ^~~~~~~~~
+                     _Complex_I
+In file included from ../src/computefourier-1.0-2.0.h:30:0,
+                 from ../src/sfft.cc:33:
+../src/fftw.h:39:14: error: ‘complex_t’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+              ^~~~~~~~~
+../src/fftw.h:39:14: note: suggested alternative: ‘_Complex_I’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+              ^~~~~~~~~
+              _Complex_I
+../src/fftw.h:39:26: error: ‘out’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                          ^~~
+../src/fftw.h:39:26: note: suggested alternative: ‘putw’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                          ^~~
+                          putw
+../src/fftw.h:39:31: error: expected primary-expression before ‘int’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                               ^~~
+../src/fftw.h:39:38: error: ‘complex_t’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                      ^~~~~~~~~
+../src/fftw.h:39:38: note: suggested alternative: ‘_Complex_I’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                      ^~~~~~~~~
+                                      _Complex_I
+../src/fftw.h:39:50: error: ‘x’ was not declared in this scope
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                  ^
+../src/fftw.h:39:53: error: expected primary-expression before ‘int’
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                     ^~~
+../src/fftw.h:39:70: error: expression list treated as compound expression in initializer [-fpermissive]
+ int fftw_dft(complex_t * out, int n, complex_t * x, int backwards = 0);
+                                                                      ^
+In file included from ../src/sfft.cc:33:0:
+../src/computefourier-1.0-2.0.h:37:35: error: ‘complex_t’ has not been declared
+ outer_loop(sfft_v1v2_data * data, complex_t * origx, int n,
+                                   ^~~~~~~~~
+In file included from ../src/sfft.cc:34:0:
+../src/computefourier-3.0.h:38:55: error: ‘complex_t’ has not been declared
+ alternate_fft(sfft_v3_data * data, sfft_output * ans, complex_t * origx,
+                                                       ^~~~~~~~~
+../src/computefourier-3.0.h:40:33: error: ‘complex_t’ has not been declared
+               int Gauss_loops1, complex_t * filtert1, complex_t * filterf1,
+                                 ^~~~~~~~~
+../src/computefourier-3.0.h:40:55: error: ‘complex_t’ has not been declared
+               int Gauss_loops1, complex_t * filtert1, complex_t * filterf1,
+                                                       ^~~~~~~~~
+../src/computefourier-3.0.h:41:52: error: ‘complex_t’ has not been declared
+               int B2, int Wind2, int Gauss_loops2, complex_t * filtert2,
+                                                    ^~~~~~~~~
+../src/computefourier-3.0.h:42:15: error: ‘complex_t’ has not been declared
+               complex_t * filterf2);
+               ^~~~~~~~~
+../src/sfft.cc:52:21: error: ‘complex_t’ has not been declared
+                     complex_t * in, sfft_output * out);
+                     ^~~~~~~~~
+../src/sfft.cc:54:21: error: ‘complex_t’ has not been declared
+                     complex_t * in, sfft_output * out);
+                     ^~~~~~~~~
+../src/sfft.cc:56:21: error: ‘complex_t’ has not been declared
+                     complex_t * in, sfft_output * out);
+                     ^~~~~~~~~
+../src/sfft.cc:119:34: error: ‘complex_t’ has not been declared
+ void sfft_exec(sfft_plan * plan, complex_t * in, sfft_output * out)
+                                  ^~~~~~~~~
+../src/sfft.cc:136:43: error: ‘complex_t’ has not been declared
+ sfft_exec_many(sfft_plan * plan, int num, complex_t ** in, sfft_output * out)
+                                           ^~~~~~~~~
+../src/sfft.cc: In function ‘void sfft_v1_free_plan(sfft_v1_data*)’:
+../src/sfft.cc:154:17: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘x_samp’
+   sfft_free(tl->x_samp);
+                 ^~~~~~
+../src/sfft.cc:159:17: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘inner_loop_locate_x_sampt’; did you mean ‘inner_loop_locate_samples’?
+   sfft_free(tl->inner_loop_locate_x_sampt);
+                 ^~~~~~~~~~~~~~~~~~~~~~~~~
+                 inner_loop_locate_samples
+../src/sfft.cc: In function ‘void sfft_v2_free_plan(sfft_v2_data*)’:
+../src/sfft.cc:174:17: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘comb_filt_x_sampt’; did you mean ‘comb_filt_samples’?
+   sfft_free(tl->comb_filt_x_sampt);
+                 ^~~~~~~~~~~~~~~~~
+                 comb_filt_samples
+../src/sfft.cc: In function ‘void sfft_v3_free_plan(sfft_v3_data*)’:
+../src/sfft.cc:183:19: error: ‘struct sfft_v3_data’ has no member named ‘filtert1’
+   sfft_free(data->filtert1);
+                   ^~~~~~~~
+../src/sfft.cc:184:19: error: ‘struct sfft_v3_data’ has no member named ‘filterf1’
+   sfft_free(data->filterf1);
+                   ^~~~~~~~
+../src/sfft.cc:185:19: error: ‘struct sfft_v3_data’ has no member named ‘filtert2’
+   sfft_free(data->filtert2);
+                   ^~~~~~~~
+../src/sfft.cc:186:19: error: ‘struct sfft_v3_data’ has no member named ‘filterf2’
+   sfft_free(data->filterf2);
+                   ^~~~~~~~
+../src/sfft.cc:192:17: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘gauss_samples’
+   sfft_free(tl->gauss_samples);
+                 ^~~~~~~~~~~~~
+../src/sfft.cc:193:17: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘gauss_perm_samples’
+   sfft_free(tl->gauss_perm_samples);
+                 ^~~~~~~~~~~~~~~~~~
+../src/sfft.cc:194:17: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘man_samples’
+   sfft_free(tl->man_samples);
+                 ^~~~~~~~~~~
+../src/sfft.cc:196:17: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘est_values’; did you mean ‘est_freqs’?
+   sfft_free(tl->est_values);
+                 ^~~~~~~~~~
+                 est_freqs
+../src/sfft.cc: In function ‘void sfft_v1v2_create_threadlocal_data(unsigned int, unsigned int, sfft_v1v2_data*, sfft_v1v2_threadlocal_data*)’:
+../src/sfft.cc:213:11: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘x_samp’
+   tldata->x_samp =
+           ^~~~~~
+../src/sfft.cc:214:6: error: ‘complex_t’ was not declared in this scope
+     (complex_t *) sfft_malloc(data->x_samp_size * sizeof(complex_t));
+      ^~~~~~~~~
+../src/sfft.cc:214:6: note: suggested alternative: ‘_Complex_I’
+     (complex_t *) sfft_malloc(data->x_samp_size * sizeof(complex_t));
+      ^~~~~~~~~
+      _Complex_I
+../src/sfft.cc:214:17: error: expected primary-expression before ‘)’ token
+     (complex_t *) sfft_malloc(data->x_samp_size * sizeof(complex_t));
+                 ^
+../src/sfft.cc:220:11: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘inner_loop_locate_x_sampt’; did you mean ‘inner_loop_locate_samples’?
+   tldata->inner_loop_locate_x_sampt =
+           ^~~~~~~~~~~~~~~~~~~~~~~~~
+           inner_loop_locate_samples
+../src/sfft.cc:221:17: error: expected primary-expression before ‘)’ token
+     (complex_t *) sfft_malloc(data->x_samp_size * sizeof(complex_t));
+                 ^
+../src/sfft.cc:234:15: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘comb_filt_x_sampt’; did you mean ‘comb_filt_samples’?
+       tldata->comb_filt_x_sampt =
+               ^~~~~~~~~~~~~~~~~
+               comb_filt_samples
+../src/sfft.cc:235:21: error: expected primary-expression before ‘)’ token
+         (complex_t *) sfft_malloc(data->W_Comb * sizeof(complex_t));
+                     ^
+../src/sfft.cc: In function ‘void sfft_v1v2_plan_ffts(unsigned int, unsigned int, sfft_v1v2_data*, sfft_v1v2_threadlocal_data*)’:
+../src/sfft.cc:264:42: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘comb_filt_x_sampt’; did you mean ‘comb_filt_samples’?
+                            tldata_vec[i].comb_filt_x_sampt,
+                                          ^~~~~~~~~~~~~~~~~
+                                          comb_filt_samples
+../src/sfft.cc:266:42: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘comb_filt_x_sampt’; did you mean ‘comb_filt_samples’?
+                            tldata_vec[i].comb_filt_x_sampt,
+                                          ^~~~~~~~~~~~~~~~~
+                                          comb_filt_samples
+../src/sfft.cc:274:40: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘inner_loop_locate_x_sampt’; did you mean ‘inner_loop_locate_samples’?
+                          tldata_vec[i].inner_loop_locate_x_sampt,
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~
+                                        inner_loop_locate_samples
+../src/sfft.cc:276:57: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘x_samp’
+                          (fftw_complex *) tldata_vec[i].x_samp,
+                                                         ^~~~~~
+../src/sfft.cc:285:40: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘inner_loop_locate_x_sampt’; did you mean ‘inner_loop_locate_samples’?
+                          tldata_vec[i].inner_loop_locate_x_sampt +
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~
+                                        inner_loop_locate_samples
+../src/sfft.cc:288:57: error: ‘struct sfft_v1v2_threadlocal_data’ has no member named ‘x_samp’
+                          (fftw_complex *) tldata_vec[i].x_samp +
+                                                         ^~~~~~
+../src/sfft.cc: In function ‘sfft_v1v2_data* sfft_v1v2_make_plan(unsigned int, unsigned int, int)’:
+../src/sfft.cc:353:3: error: ‘complex_t’ was not declared in this scope
+   complex_t *filtert =
+   ^~~~~~~~~
+../src/sfft.cc:353:3: note: suggested alternative: ‘_Complex_I’
+   complex_t *filtert =
+   ^~~~~~~~~
+   _Complex_I
+../src/sfft.cc:353:14: error: ‘filtert’ was not declared in this scope
+   complex_t *filtert =
+              ^~~~~~~
+../src/sfft.cc:353:14: note: suggested alternative: ‘Filter’
+   complex_t *filtert =
+              ^~~~~~~
+              Filter
+../src/sfft.cc:354:5: error: ‘make_dolphchebyshev_t’ was not declared in this scope
+     make_dolphchebyshev_t(lobefrac_loc, tolerance_loc, w_loc);
+     ^~~~~~~~~~~~~~~~~~~~~
+../src/sfft.cc:358:14: error: ‘filtert_est’ was not declared in this scope
+   complex_t *filtert_est =
+              ^~~~~~~~~~~
+../src/sfft.cc: In function ‘void sfft_v3_plan_ffts(unsigned int, unsigned int, sfft_v3_data*, sfft_v3_threadlocal_data*)’:
+../src/sfft.cc:433:46: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘man_samples’
+                            threaddata_vec[i].man_samples, NULL, 2,
+                                              ^~~~~~~~~~~
+../src/sfft.cc:435:46: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘man_samples’
+                            threaddata_vec[i].man_samples, NULL, 2,
+                                              ^~~~~~~~~~~
+../src/sfft.cc:450:46: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘gauss_samples’
+                            threaddata_vec[i].gauss_samples, NULL, 2,
+                                              ^~~~~~~~~~~~~
+../src/sfft.cc:452:46: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘gauss_samples’
+                            threaddata_vec[i].gauss_samples, NULL, 2,
+                                              ^~~~~~~~~~~~~
+../src/sfft.cc:467:46: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘gauss_perm_samples’
+                            threaddata_vec[i].gauss_perm_samples,
+                                              ^~~~~~~~~~~~~~~~~~
+../src/sfft.cc:469:46: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘gauss_perm_samples’
+                            threaddata_vec[i].gauss_perm_samples,
+                                              ^~~~~~~~~~~~~~~~~~
+../src/sfft.cc: In function ‘void sfft_v3_create_threadlocal_data(unsigned int, unsigned int, sfft_v3_data*, sfft_v3_threadlocal_data*)’:
+../src/sfft.cc:480:15: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘man_samples’
+   threaddata->man_samples =
+               ^~~~~~~~~~~
+../src/sfft.cc:481:6: error: ‘complex_t’ was not declared in this scope
+     (complex_t *) sfft_malloc(data->Man_loops * data->W_Man *
+      ^~~~~~~~~
+../src/sfft.cc:481:6: note: suggested alternative: ‘_Complex_I’
+     (complex_t *) sfft_malloc(data->Man_loops * data->W_Man *
+      ^~~~~~~~~
+      _Complex_I
+../src/sfft.cc:481:17: error: expected primary-expression before ‘)’ token
+     (complex_t *) sfft_malloc(data->Man_loops * data->W_Man *
+                 ^
+../src/sfft.cc:483:15: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘gauss_samples’
+   threaddata->gauss_samples =
+               ^~~~~~~~~~~~~
+../src/sfft.cc:484:17: error: expected primary-expression before ‘)’ token
+     (complex_t *) sfft_malloc(data->Gauss_loops * data->B_g1 *
+                 ^
+../src/sfft.cc:486:15: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘gauss_perm_samples’
+   threaddata->gauss_perm_samples =
+               ^~~~~~~~~~~~~~~~~~
+../src/sfft.cc:487:17: error: expected primary-expression before ‘)’ token
+     (complex_t *) sfft_malloc(data->Gauss2_loops * data->B_g2 *
+                 ^
+../src/sfft.cc:491:15: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘est_values’; did you mean ‘est_freqs’?
+   threaddata->est_values =
+               ^~~~~~~~~~
+               est_freqs
+../src/sfft.cc:492:17: error: expected primary-expression before ‘)’ token
+     (complex_t *) sfft_malloc(5 * k * sizeof(complex_t));
+                 ^
+../src/sfft.cc:493:15: error: ‘struct sfft_v3_threadlocal_data’ has no member named ‘perm_x’
+   threaddata->perm_x =
+               ^~~~~~
+../src/sfft.cc:494:17: error: expected primary-expression before ‘)’ token
+     (complex_t *) sfft_malloc(data->w_g2 * sizeof(complex_t));
+                 ^
+../src/sfft.cc: In function ‘sfft_v3_data* sfft_v3_make_plan(unsigned int, unsigned int, int)’:
+../src/sfft.cc:537:9: error: ‘struct sfft_v3_data’ has no member named ‘filtert1’
+   data->filtert1 =
+         ^~~~~~~~
+../src/sfft.cc:538:5: error: ‘make_dolphchebyshev_t’ was not declared in this scope
+     make_dolphchebyshev_t(lobefrac_g1, tolerance_g1, data->w_g1);
+     ^~~~~~~~~~~~~~~~~~~~~
+../src/sfft.cc:539:9: error: ‘struct sfft_v3_data’ has no member named ‘filterf1’
+   data->filterf1 =
+         ^~~~~~~~
+../src/sfft.cc:540:27: error: ‘struct sfft_v3_data’ has no member named ‘filtert1’
+     make_multiple_t(data->filtert1, data->w_g1, n, b_g1).freq;
+                           ^~~~~~~~
+../src/sfft.cc:553:9: error: ‘struct sfft_v3_data’ has no member named ‘filtert2’
+   data->filtert2 =
+         ^~~~~~~~
+../src/sfft.cc:555:9: error: ‘struct sfft_v3_data’ has no member named ‘filterf2’
+   data->filterf2 =
+         ^~~~~~~~
+../src/sfft.cc:556:27: error: ‘struct sfft_v3_data’ has no member named ‘filtert2’
+     make_multiple_t(data->filtert2, data->w_g2, n, b_g2).freq;
+                           ^~~~~~~~
+../src/sfft.cc: At global scope:
+../src/sfft.cc:579:9: error: ‘complex_t’ has not been declared
+         complex_t * in, sfft_output * out)
+         ^~~~~~~~~
+../src/sfft.cc:589:9: error: ‘complex_t’ has not been declared
+         complex_t * in, sfft_output * out)
+         ^~~~~~~~~
+../src/sfft.cc:603:9: error: ‘complex_t’ has not been declared
+         complex_t * in, sfft_output * out)
+         ^~~~~~~~~
+../src/sfft.cc: In function ‘void sfft_v3(unsigned int, unsigned int, sfft_v3_data*, int*, sfft_output*)’:
+../src/sfft.cc:607:23: error: ‘struct sfft_v3_data’ has no member named ‘filtert1’
+                 data->filtert1, data->filterf1, data->B_g2, data->w_g2,
+                       ^~~~~~~~
+../src/sfft.cc:607:39: error: ‘struct sfft_v3_data’ has no member named ‘filterf1’
+                 data->filtert1, data->filterf1, data->B_g2, data->w_g2,
+                                       ^~~~~~~~
+../src/sfft.cc:608:42: error: ‘struct sfft_v3_data’ has no member named ‘filtert2’
+                 data->Gauss_loops, data->filtert2, data->filterf2);
+                                          ^~~~~~~~
+../src/sfft.cc:608:58: error: ‘struct sfft_v3_data’ has no member named ‘filterf2’
+                 data->Gauss_loops, data->filtert2, data->filterf2);
+                                                          ^~~~~~~~
+Waf: Leaving directory `/home/bixind/projects/disFFT/sfft-0.1.0/build'
+Build failed
+ -> task in 'sfft-objects' failed (exit status 1): 
+	{task 139718418618000: cxx utils.cc -> utils.cc.1.o}
+['/usr/bin/g++', '-O3', '-ffast-math', '-march=native', '-fopenmp', '-Wall', '-I/home/bixind/projects/disFFT/sfft-0.1.0/build/src/flopcount', '-I/home/bixind/projects/disFFT/sfft-0.1.0/src/flopcount', '-DHAVE_VALGRIND=1', '-DHAVE_FFTW3=1', '../src/utils.cc', '-c', '-o', 'src/utils.cc.1.o']
+ -> task in 'sfft-objects' failed (exit status 1): 
+	{task 139718418617360: cxx filters.cc -> filters.cc.1.o}
+['/usr/bin/g++', '-O3', '-ffast-math', '-march=native', '-fopenmp', '-Wall', '-I/home/bixind/projects/disFFT/sfft-0.1.0/build/src/flopcount', '-I/home/bixind/projects/disFFT/sfft-0.1.0/src/flopcount', '-DHAVE_VALGRIND=1', '-DHAVE_FFTW3=1', '../src/filters.cc', '-c', '-o', 'src/filters.cc.1.o']
+ -> task in 'sfft-objects' failed (exit status 1): 
+	{task 139718418617744: cxx simulation.cc -> simulation.cc.1.o}
+['/usr/bin/g++', '-O3', '-ffast-math', '-march=native', '-fopenmp', '-Wall', '-I/home/bixind/projects/disFFT/sfft-0.1.0/build/src/flopcount', '-I/home/bixind/projects/disFFT/sfft-0.1.0/src/flopcount', '-DHAVE_VALGRIND=1', '-DHAVE_FFTW3=1', '../src/simulation.cc', '-c', '-o', 'src/simulation.cc.1.o']
+ -> task in 'sfft-objects' failed (exit status 1): 
+	{task 139718418616976: cxx computefourier-1.0-2.0.cc -> computefourier-1.0-2.0.cc.1.o}
+['/usr/bin/g++', '-O3', '-ffast-math', '-march=native', '-fopenmp', '-Wall', '-I/home/bixind/projects/disFFT/sfft-0.1.0/build/src/flopcount', '-I/home/bixind/projects/disFFT/sfft-0.1.0/src/flopcount', '-DHAVE_VALGRIND=1', '-DHAVE_FFTW3=1', '../src/computefourier-1.0-2.0.cc', '-c', '-o', 'src/computefourier-1.0-2.0.cc.1.o']
+ -> task in 'sfft' failed (exit status 1): 
+	{task 139718418690448: cxx computefourier-1.0-2.0.cc -> computefourier-1.0-2.0.cc.2.o}
+['/usr/bin/g++', '-O3', '-ffast-math', '-march=native', '-fopenmp', '-Wall', '-I/home/bixind/projects/disFFT/sfft-0.1.0/build/src/flopcount', '-I/home/bixind/projects/disFFT/sfft-0.1.0/src/flopcount', '-DHAVE_VALGRIND=1', '-DHAVE_FFTW3=1', '../src/computefourier-1.0-2.0.cc', '-c', '-o', 'src/computefourier-1.0-2.0.cc.2.o']
+ -> task in 'sfft-objects' failed (exit status 1): 
+	{task 139718418617168: cxx computefourier-3.0.cc -> computefourier-3.0.cc.1.o}
+['/usr/bin/g++', '-O3', '-ffast-math', '-march=native', '-fopenmp', '-Wall', '-I/home/bixind/projects/disFFT/sfft-0.1.0/build/src/flopcount', '-I/home/bixind/projects/disFFT/sfft-0.1.0/src/flopcount', '-DHAVE_VALGRIND=1', '-DHAVE_FFTW3=1', '../src/computefourier-3.0.cc', '-c', '-o', 'src/computefourier-3.0.cc.1.o']
+ -> task in 'sfft-objects' failed (exit status 1): 
+	{task 139718418617232: cxx fftw.cc -> fftw.cc.1.o}
+['/usr/bin/g++', '-O3', '-ffast-math', '-march=native', '-fopenmp', '-Wall', '-I/home/bixind/projects/disFFT/sfft-0.1.0/build/src/flopcount', '-I/home/bixind/projects/disFFT/sfft-0.1.0/src/flopcount', '-DHAVE_VALGRIND=1', '-DHAVE_FFTW3=1', '../src/fftw.cc', '-c', '-o', 'src/fftw.cc.1.o']
+ -> task in 'sfft-objects' failed (exit status 1): 
+	{task 139718418617616: cxx sfft.cc -> sfft.cc.1.o}
+['/usr/bin/g++', '-O3', '-ffast-math', '-march=native', '-fopenmp', '-Wall', '-I/home/bixind/projects/disFFT/sfft-0.1.0/build/src/flopcount', '-I/home/bixind/projects/disFFT/sfft-0.1.0/src/flopcount', '-DHAVE_VALGRIND=1', '-DHAVE_FFTW3=1', '../src/sfft.cc', '-c', '-o', 'src/sfft.cc.1.o']
+Makefile:6: recipe for target 'all' failed
+make: *** [all] Error 1
+# GNU Make 4.1
+# Эта программа собрана для x86_64-pc-linux-gnu
+# Copyright (C) 1988-2014 Free Software Foundation, Inc.
+# Лицензия GPLv3+: GNU GPL версии 3 или новее <http://gnu.org/licenses/gpl.html>
+# Это свободное программное обеспечение: вы можете свободно изменять его и
+# распространять. НЕТ НИКАКИХ ГАРАНТИЙ вне пределов, допустимых законом.
+
+# База данных Make, напечатана Mon Aug 12 16:58:24 2019
+
+# Переменные
+
+# автоматическая
+<D = $(patsubst %/,%,$(dir $<))
+# автоматическая
+?F = $(notdir $?)
+# определена в среде
+DESKTOP_SESSION = plasma
+# определена в среде
+KONSOLE_DBUS_WINDOW = /Windows/1
+# по умолчанию
+.SHELLFLAGS := -c
+# определена в среде
+PULSE_PROP_OVERRIDE_application.version = 17.12.3
+# определена в среде
+XDG_SESSION_CLASS = user
+# определена в среде
+XDG_SESSION_TYPE = x11
+# по умолчанию
+CWEAVE = cweave
+# автоматическая
+?D = $(patsubst %/,%,$(dir $?))
+# автоматическая
+@D = $(patsubst %/,%,$(dir $@))
+# определена в среде
+XAUTHORITY = /home/bixind/.Xauthority
+# автоматическая
+@F = $(notdir $@)
+# по умолчанию
+MAKE_VERSION := 4.1
+# make-файл
+CURDIR := /home/bixind/projects/disFFT/sfft-0.1.0
+# make-файл
+SHELL = /bin/sh
+# по умолчанию
+RM = rm -f
+# по умолчанию
+CO = co
+# определена в среде
+_ = /usr/bin/make
+# определена в среде
+QT_AUTO_SCREEN_SCALE_FACTOR = 0
+# по умолчанию
+PREPROCESS.F = $(FC) $(FFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -F
+# по умолчанию
+LINK.m = $(OBJC) $(OBJCFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# определена в среде
+XDG_CONFIG_DIRS = /etc/xdg/xdg-plasma:/etc/xdg:/usr/share/kubuntu-default-settings/kf5-settings
+# определена в среде
+PULSE_PROP_OVERRIDE_application.icon_name = system-file-manager
+# по умолчанию
+OUTPUT_OPTION = -o $@
+# по умолчанию
+COMPILE.cpp = $(COMPILE.cc)
+# make-файл (из «Makefile», строка 1)
+MAKEFILE_LIST :=  Makefile
+# определена в среде
+IM_CONFIG_PHASE = 1
+# Директива «override»
+GNUMAKEFLAGS := 
+# по умолчанию
+LINK.p = $(PC) $(PFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# определена в среде
+MAKELEVEL := 0
+# определена в среде
+MANDATORY_PATH = /usr/share/gconf/plasma.mandatory.path
+# определена в среде
+XDG_DATA_DIRS = /usr/share/plasma:/usr/local/share:/usr/share:/var/lib/snapd/desktop
+# определена в среде
+DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-BaV84ELDML,guid=f9b3a7062fb602cd9729faec5d512b52
+# по умолчанию
+CC = cc
+# по умолчанию
+CHECKOUT,v = +$(if $(wildcard $@),,$(CO) $(COFLAGS) $< $@)
+# определена в среде
+LESSOPEN = | /usr/bin/lesspipe %s
+# определена в среде
+LC_NAME = ru_RU.UTF-8
+# по умолчанию
+CPP = $(CC) -E
+# по умолчанию
+LINK.cc = $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# определена в среде
+PAM_KWALLET5_LOGIN = /run/user/1001/kwallet5.socket
+# определена в среде
+XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session1
+# по умолчанию
+MAKE_HOST := x86_64-pc-linux-gnu
+# определена в среде
+PATH = /usr/bin:/home/bixind/anaconda3/bin:/home/linuxbrew/.linuxbrew/bin:/usr/local/texlive/2018/bin/x86_64-linux:/home/bixind/.local/bin:/home/bixind/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin:/home/bixind/bin
+# по умолчанию
+LD = ld
+# по умолчанию
+TEXI2DVI = texi2dvi
+# определена в среде
+GPG_AGENT_INFO = /run/user/1001/gnupg/S.gpg-agent:0:1
+# определена в среде
+XCURSOR_THEME = breeze_cursors
+# по умолчанию
+COMPILE.mod = $(M2C) $(M2FLAGS) $(MODFLAGS) $(TARGET_ARCH)
+# определена в среде
+XDG_RUNTIME_DIR = /run/user/1001
+# по умолчанию
+ARFLAGS = rv
+# определена в среде
+PULSE_PROP_OVERRIDE_application.name = Dolphin
+# по умолчанию
+LINK.r = $(FC) $(FFLAGS) $(RFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# определена в среде
+WINDOWID = 144703494
+# по умолчанию
+COMPILE.f = $(FC) $(FFLAGS) $(TARGET_ARCH) -c
+# по умолчанию
+LINT.c = $(LINT) $(LINTFLAGS) $(CPPFLAGS) $(TARGET_ARCH)
+# по умолчанию
+YACC.m = $(YACC) $(YFLAGS)
+# по умолчанию
+LINT = lint
+# по умолчанию
+YACC.y = $(YACC) $(YFLAGS)
+# определена в среде
+KONSOLE_PROFILE_NAME = 
+# по умолчанию
+AR = ar
+# определена в среде
+LC_NUMERIC = ru_RU.UTF-8
+# определена в среде
+PROFILEHOME = /home/bixind/projects/disFFT/sfft-0.1.0
+# по умолчанию
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# по умолчанию
+TANGLE = tangle
+# определена в среде
+LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+# определена в среде
+XDG_SESSION_DESKTOP = KDE
+# определена в среде
+SSH_AUTH_SOCK = /tmp/ssh-24sU6aFMnoFZ/agent.2837
+# по умолчанию
+GET = get
+# автоматическая
+%F = $(notdir $%)
+# определена в среде
+DISPLAY = :0
+# по умолчанию
+COMPILE.F = $(FC) $(FFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# по умолчанию
+CTANGLE = ctangle
+# по умолчанию
+.LIBPATTERNS = lib%.so lib%.a
+# по умолчанию
+LINK.C = $(LINK.cc)
+# определена в среде
+PWD = /home/bixind/projects/disFFT/sfft-0.1.0
+# определена в среде
+KDE_SESSION_VERSION = 5
+# по умолчанию
+LINK.S = $(CC) $(ASFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_MACH)
+# определена в среде
+XDG_SEAT = seat0
+# по умолчанию
+PREPROCESS.r = $(FC) $(FFLAGS) $(RFLAGS) $(TARGET_ARCH) -F
+# определена в среде
+SSH_AGENT_PID = 2918
+# по умолчанию
+LINK.c = $(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# по умолчанию
+LINK.s = $(CC) $(ASFLAGS) $(LDFLAGS) $(TARGET_MACH)
+# определена в среде
+HOME = /home/bixind
+# make-файл (из «Makefile», строка 3)
+WAF_HOME = /home/bixind/projects/disFFT/sfft-0.1.0
+# определена в среде
+LESSCLOSE = /usr/bin/lesspipe %s %s
+# по умолчанию
+LEX.l = $(LEX) $(LFLAGS) -t
+# определена в среде
+PAM_KWALLET_LOGIN = /run/user/1001/kwallet.socket
+# определена в среде
+LOGNAME = bixind
+# автоматическая
++F = $(notdir $+)
+# определена в среде
+KDE_FULL_SESSION = true
+# автоматическая
+^D = $(patsubst %/,%,$(dir $^))
+# определена в среде
+XDG_VTNR = 1
+# определена в среде
+LC_TIME = ru_RU.UTF-8
+# по умолчанию
+COMPILE.m = $(OBJC) $(OBJCFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# определена в среде
+COLORTERM = truecolor
+# определена в среде
+KONSOLE_DBUS_SESSION = /Sessions/1
+# по умолчанию
+MAKE = $(MAKE_COMMAND)
+# определена в среде
+SHLVL = 1
+# по умолчанию
+AS = as
+# по умолчанию
+PREPROCESS.S = $(CC) -E $(CPPFLAGS)
+# по умолчанию
+COMPILE.p = $(PC) $(PFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# определена в среде
+XDG_SESSION_ID = 3
+# определена в среде
+USER = bixind
+# по умолчанию
+FC = f77
+# определена в среде
+LC_MONETARY = ru_RU.UTF-8
+# make-файл
+.DEFAULT_GOAL := all
+# определена в среде
+XDG_CURRENT_DESKTOP = KDE
+# автоматическая
+%D = $(patsubst %/,%,$(dir $%))
+# определена в среде
+LC_TELEPHONE = ru_RU.UTF-8
+# по умолчанию
+WEAVE = weave
+# по умолчанию
+MAKE_COMMAND := make
+# по умолчанию
+LINK.cpp = $(LINK.cc)
+# по умолчанию
+F77 = $(FC)
+# определена в среде
+OLDPWD = /home/bixind/projects/disFFT/sfft-0.1.0/build
+# по умолчанию
+.VARIABLES := 
+# по умолчанию
+PC = pc
+# автоматическая
+*F = $(notdir $*)
+# определена в среде
+LANGUAGE = ru:en_US
+# определена в среде
+XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
+# по умолчанию
+COMPILE.def = $(M2C) $(M2FLAGS) $(DEFFLAGS) $(TARGET_ARCH)
+# по умолчанию
+LEX = lex
+# make-файл
+MAKEFLAGS = p
+# определена в среде
+MFLAGS = -p
+# автоматическая
+*D = $(patsubst %/,%,$(dir $*))
+# определена в среде
+SHELL_SESSION_ID = 9669f939e21a4021bbada56b84414ad0
+# по умолчанию
+LEX.m = $(LEX) $(LFLAGS) -t
+# автоматическая
++D = $(patsubst %/,%,$(dir $+))
+# по умолчанию
+COMPILE.r = $(FC) $(FFLAGS) $(RFLAGS) $(TARGET_ARCH) -c
+# определена в среде
+LC_PAPER = ru_RU.UTF-8
+# по умолчанию
+M2C = m2c
+# определена в среде
+QT_ACCESSIBILITY = 1
+# определена в среде
+COLORFGBG = 15;0
+# определена в среде
+DEFAULTS_PATH = /usr/share/gconf/plasma.default.path
+# по умолчанию
+MAKEFILES := 
+# по умолчанию
+YACC = yacc
+# по умолчанию
+COMPILE.cc = $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# автоматическая
+<F = $(notdir $<)
+# по умолчанию
+CXX = g++
+# определена в среде
+LC_MEASUREMENT = ru_RU.UTF-8
+# по умолчанию
+COFLAGS = 
+# определена в среде
+DBUS_STARTER_BUS_TYPE = session
+# по умолчанию
+COMPILE.C = $(COMPILE.cc)
+# автоматическая
+^F = $(notdir $^)
+# по умолчанию
+COMPILE.S = $(CC) $(ASFLAGS) $(CPPFLAGS) $(TARGET_MACH) -c
+# по умолчанию
+LINK.F = $(FC) $(FFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# по умолчанию
+SUFFIXES := .out .a .ln .o .c .cc .C .cpp .p .f .F .m .r .y .l .ym .yl .s .S .mod .sym .def .h .info .dvi .tex .texinfo .texi .txinfo .w .ch .web .sh .elc .el
+# определена в среде
+GS_LIB = /home/bixind/.fonts
+# по умолчанию
+COMPILE.c = $(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# по умолчанию
+COMPILE.s = $(AS) $(ASFLAGS) $(TARGET_MACH)
+# определена в среде
+KONSOLE_DBUS_SERVICE = :1.94
+# по умолчанию
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# определена в среде
+LC_IDENTIFICATION = ru_RU.UTF-8
+# по умолчанию
+.RECIPEPREFIX := 
+# по умолчанию
+MAKEINFO = makeinfo
+# по умолчанию
+OBJC = cc
+# определена в среде
+LC_ADDRESS = ru_RU.UTF-8
+# по умолчанию
+LINK.f = $(FC) $(FFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# по умолчанию
+TEX = tex
+# определена в среде
+LANG = ru_RU.UTF-8
+# определена в среде
+TERM = xterm-256color
+# по умолчанию
+F77FLAGS = $(FFLAGS)
+# по умолчанию
+LINK.o = $(CC) $(LDFLAGS) $(TARGET_ARCH)
+# определена в среде
+DBUS_STARTER_ADDRESS = unix:abstract=/tmp/dbus-BaV84ELDML,guid=f9b3a7062fb602cd9729faec5d512b52
+# определена в среде
+KDE_SESSION_UID = 1001
+# состояние переменных в хеш-таблице:
+# Загружено=165/1024=16%, Переформулировано=0, Противоречий=22/193=11%
+
+# Значения переменных особенные для маски
+
+# Нет значений переменных особенных для маски.
+
+# Каталоги
+
+# SCCS: невозможно получить сведения вызовом stat.
+# . (устройство 2054, inode 1073884): 16 файлов, 19 недостижимых целей.
+# RCS: невозможно получить сведения вызовом stat.
+
+# 16 файлов, 19 недостижимых целей в 3 каталогах.
+
+# Неявные правила
+
+%.out:
+
+%.a:
+
+%.ln:
+
+%.o:
+
+%: %.o
+#  способ, который следует применить (встроенные):
+	$(LINK.o) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.c:
+
+%: %.c
+#  способ, который следует применить (встроенные):
+	$(LINK.c) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.ln: %.c
+#  способ, который следует применить (встроенные):
+	$(LINT.c) -C$* $<
+
+%.o: %.c
+#  способ, который следует применить (встроенные):
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+%.cc:
+
+%: %.cc
+#  способ, который следует применить (встроенные):
+	$(LINK.cc) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.cc
+#  способ, который следует применить (встроенные):
+	$(COMPILE.cc) $(OUTPUT_OPTION) $<
+
+%.C:
+
+%: %.C
+#  способ, который следует применить (встроенные):
+	$(LINK.C) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.C
+#  способ, который следует применить (встроенные):
+	$(COMPILE.C) $(OUTPUT_OPTION) $<
+
+%.cpp:
+
+%: %.cpp
+#  способ, который следует применить (встроенные):
+	$(LINK.cpp) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.cpp
+#  способ, который следует применить (встроенные):
+	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
+
+%.p:
+
+%: %.p
+#  способ, который следует применить (встроенные):
+	$(LINK.p) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.p
+#  способ, который следует применить (встроенные):
+	$(COMPILE.p) $(OUTPUT_OPTION) $<
+
+%.f:
+
+%: %.f
+#  способ, который следует применить (встроенные):
+	$(LINK.f) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.f
+#  способ, который следует применить (встроенные):
+	$(COMPILE.f) $(OUTPUT_OPTION) $<
+
+%.F:
+
+%: %.F
+#  способ, который следует применить (встроенные):
+	$(LINK.F) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.F
+#  способ, который следует применить (встроенные):
+	$(COMPILE.F) $(OUTPUT_OPTION) $<
+
+%.f: %.F
+#  способ, который следует применить (встроенные):
+	$(PREPROCESS.F) $(OUTPUT_OPTION) $<
+
+%.m:
+
+%: %.m
+#  способ, который следует применить (встроенные):
+	$(LINK.m) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.m
+#  способ, который следует применить (встроенные):
+	$(COMPILE.m) $(OUTPUT_OPTION) $<
+
+%.r:
+
+%: %.r
+#  способ, который следует применить (встроенные):
+	$(LINK.r) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.r
+#  способ, который следует применить (встроенные):
+	$(COMPILE.r) $(OUTPUT_OPTION) $<
+
+%.f: %.r
+#  способ, который следует применить (встроенные):
+	$(PREPROCESS.r) $(OUTPUT_OPTION) $<
+
+%.y:
+
+%.ln: %.y
+#  способ, который следует применить (встроенные):
+	$(YACC.y) $< 
+	 $(LINT.c) -C$* y.tab.c 
+	 $(RM) y.tab.c
+
+%.c: %.y
+#  способ, который следует применить (встроенные):
+	$(YACC.y) $< 
+	 mv -f y.tab.c $@
+
+%.l:
+
+%.ln: %.l
+#  способ, который следует применить (встроенные):
+	@$(RM) $*.c
+	 $(LEX.l) $< > $*.c
+	$(LINT.c) -i $*.c -o $@
+	 $(RM) $*.c
+
+%.c: %.l
+#  способ, который следует применить (встроенные):
+	@$(RM) $@ 
+	 $(LEX.l) $< > $@
+
+%.r: %.l
+#  способ, который следует применить (встроенные):
+	$(LEX.l) $< > $@ 
+	 mv -f lex.yy.r $@
+
+%.ym:
+
+%.m: %.ym
+#  способ, который следует применить (встроенные):
+	$(YACC.m) $< 
+	 mv -f y.tab.c $@
+
+%.yl:
+
+%.s:
+
+%: %.s
+#  способ, который следует применить (встроенные):
+	$(LINK.s) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.s
+#  способ, который следует применить (встроенные):
+	$(COMPILE.s) -o $@ $<
+
+%.S:
+
+%: %.S
+#  способ, который следует применить (встроенные):
+	$(LINK.S) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.S
+#  способ, который следует применить (встроенные):
+	$(COMPILE.S) -o $@ $<
+
+%.s: %.S
+#  способ, который следует применить (встроенные):
+	$(PREPROCESS.S) $< > $@
+
+%.mod:
+
+%: %.mod
+#  способ, который следует применить (встроенные):
+	$(COMPILE.mod) -o $@ -e $@ $^
+
+%.o: %.mod
+#  способ, который следует применить (встроенные):
+	$(COMPILE.mod) -o $@ $<
+
+%.sym:
+
+%.def:
+
+%.sym: %.def
+#  способ, который следует применить (встроенные):
+	$(COMPILE.def) -o $@ $<
+
+%.h:
+
+%.info:
+
+%.dvi:
+
+%.tex:
+
+%.dvi: %.tex
+#  способ, который следует применить (встроенные):
+	$(TEX) $<
+
+%.texinfo:
+
+%.info: %.texinfo
+#  способ, который следует применить (встроенные):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+%.dvi: %.texinfo
+#  способ, который следует применить (встроенные):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+%.texi:
+
+%.info: %.texi
+#  способ, который следует применить (встроенные):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+%.dvi: %.texi
+#  способ, который следует применить (встроенные):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+%.txinfo:
+
+%.info: %.txinfo
+#  способ, который следует применить (встроенные):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+%.dvi: %.txinfo
+#  способ, который следует применить (встроенные):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+%.w:
+
+%.c: %.w
+#  способ, который следует применить (встроенные):
+	$(CTANGLE) $< - $@
+
+%.tex: %.w
+#  способ, который следует применить (встроенные):
+	$(CWEAVE) $< - $@
+
+%.ch:
+
+%.web:
+
+%.p: %.web
+#  способ, который следует применить (встроенные):
+	$(TANGLE) $<
+
+%.tex: %.web
+#  способ, который следует применить (встроенные):
+	$(WEAVE) $<
+
+%.sh:
+
+%: %.sh
+#  способ, который следует применить (встроенные):
+	cat $< >$@ 
+	 chmod a+x $@
+
+%.elc:
+
+%.el:
+
+(%): %
+#  способ, который следует применить (встроенные):
+	$(AR) $(ARFLAGS) $@ $<
+
+%.out: %
+#  способ, который следует применить (встроенные):
+	@rm -f $@ 
+	 cp $< $@
+
+%.c: %.w %.ch
+#  способ, который следует применить (встроенные):
+	$(CTANGLE) $^ $@
+
+%.tex: %.w %.ch
+#  способ, который следует применить (встроенные):
+	$(CWEAVE) $^ $@
+
+%:: %,v
+#  способ, который следует применить (встроенные):
+	$(CHECKOUT,v)
+
+%:: RCS/%,v
+#  способ, который следует применить (встроенные):
+	$(CHECKOUT,v)
+
+%:: RCS/%
+#  способ, который следует применить (встроенные):
+	$(CHECKOUT,v)
+
+%:: s.%
+#  способ, который следует применить (встроенные):
+	$(GET) $(GFLAGS) $(SCCS_OUTPUT_OPTION) $<
+
+%:: SCCS/s.%
+#  способ, который следует применить (встроенные):
+	$(GET) $(GFLAGS) $(SCCS_OUTPUT_OPTION) $<
+
+# Неявных правил: 92, терминальных: 5 (5,4%) терминал.
+
+# Файлы
+
+all-debug:
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (из «Makefile», строка 9):
+	@/home/bixind/projects/disFFT/sfft-0.1.0/tools/waf -v build
+
+# Не является целью:
+.web.p:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(TANGLE) $<
+
+# Не является целью:
+.l.r:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(LEX.l) $< > $@ 
+	 mv -f lex.yy.r $@
+
+# Не является целью:
+.dvi:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.ym:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.f.o:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(COMPILE.f) $(OUTPUT_OPTION) $<
+
+# Не является целью:
+.l:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.m:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(LINK.m) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Не является целью:
+.ln:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.o:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(LINK.o) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Не является целью:
+.y:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+all-progress:
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (из «Makefile», строка 12):
+	@/home/bixind/projects/disFFT/sfft-0.1.0/tools/waf -p build
+
+# Не является целью:
+.def.sym:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(COMPILE.def) -o $@ $<
+
+.PHONY: clean dist distclean check uninstall install all
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.p.o:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(COMPILE.p) $(OUTPUT_OPTION) $<
+
+# Не является целью:
+.p:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(LINK.p) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Не является целью:
+.txinfo.dvi:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+# Не является целью:
+.a:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.yl:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.l.ln:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	@$(RM) $*.c
+	 $(LEX.l) $< > $*.c
+	$(LINT.c) -i $*.c -o $@
+	 $(RM) $*.c
+
+# Не является целью:
+.F.o:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(COMPILE.F) $(OUTPUT_OPTION) $<
+
+# Не является целью:
+.texi.info:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+# Не является целью:
+.w.c:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(CTANGLE) $< - $@
+
+# Не является целью:
+.texi.dvi:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+# Не является целью:
+.ch:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+distclean:
+#  Псевдоцель (зависимость от .PHONY).
+#  Поиск неявных правил не производился.
+#  Файл не существует.
+#  Файл не был обновлён.
+#  способ, который следует применить (из «Makefile», строка 24):
+	@/home/bixind/projects/disFFT/sfft-0.1.0/tools/waf distclean
+	@-rm -rf build
+	@-rm -f Makefile
+
+# Не является целью:
+.m.o:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(COMPILE.m) $(OUTPUT_OPTION) $<
+
+# Не является целью:
+.cc:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(LINK.cc) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Не является целью:
+.cc.o:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(COMPILE.cc) $(OUTPUT_OPTION) $<
+
+# Не является целью:
+.def:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.SUFFIXES: .out .a .ln .o .c .cc .C .cpp .p .f .F .m .r .y .l .ym .yl .s .S .mod .sym .def .h .info .dvi .tex .texinfo .texi .txinfo .w .ch .web .sh .elc .el
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+uninstall:
+#  Псевдоцель (зависимость от .PHONY).
+#  Поиск неявных правил не производился.
+#  Файл не существует.
+#  Файл не был обновлён.
+#  способ, который следует применить (из «Makefile», строка 18):
+	/home/bixind/projects/disFFT/sfft-0.1.0/tools/waf uninstall
+
+# Не является целью:
+.c.o:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+# Не является целью:
+Makefile:
+#  Производился поиск неявных правил.
+#  Время последнего изменения 2019-08-12 16:37:46.549496748
+#  Файл был обновлён.
+#  Успешно обновлено.
+
+# Не является целью:
+.r.o:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(COMPILE.r) $(OUTPUT_OPTION) $<
+
+# Не является целью:
+.r:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(LINK.r) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Не является целью:
+.ym.m:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(YACC.m) $< 
+	 mv -f y.tab.c $@
+
+# Не является целью:
+.y.ln:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(YACC.y) $< 
+	 $(LINT.c) -C$* y.tab.c 
+	 $(RM) y.tab.c
+
+# Не является целью:
+.elc:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.l.c:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	@$(RM) $@ 
+	 $(LEX.l) $< > $@
+
+# Не является целью:
+.out:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+all:
+#  Псевдоцель (зависимость от .PHONY).
+#  Поиск неявных правил не производился.
+#  Основа неявного или статического образца: «»
+#  Файл не существует.
+#  Файл был обновлён.
+#  Попытка обновления безуспешна.
+# автоматическая
+# @ := all
+# автоматическая
+# % := 
+# автоматическая
+# * := 
+# автоматическая
+# + := 
+# автоматическая
+# | := 
+# автоматическая
+# < := 
+# автоматическая
+# ^ := 
+# автоматическая
+# ? := 
+# состояние переменных в хеш-таблице:
+# Загружено=8/32=25%, Переформулировано=0, Противоречий=1/11=9%
+#  способ, который следует применить (из «Makefile», строка 6):
+	@/home/bixind/projects/disFFT/sfft-0.1.0/tools/waf build
+
+# Не является целью:
+.C:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(LINK.C) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Не является целью:
+.r.f:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(PREPROCESS.r) $(OUTPUT_OPTION) $<
+
+# Не является целью:
+.S:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(LINK.S) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Не является целью:
+.texinfo.info:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+# Не является целью:
+.c:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(LINK.c) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Не является целью:
+.w.tex:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(CWEAVE) $< - $@
+
+# Не является целью:
+.c.ln:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(LINT.c) -C$* $<
+
+# Не является целью:
+.s.o:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(COMPILE.s) -o $@ $<
+
+# Не является целью:
+.s:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(LINK.s) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Не является целью:
+.texinfo.dvi:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+# Не является целью:
+.el:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.lm.m:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	@$(RM) $@ 
+	 $(LEX.m) $< > $@
+
+# Не является целью:
+.y.c:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(YACC.y) $< 
+	 mv -f y.tab.c $@
+
+# Не является целью:
+.web.tex:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(WEAVE) $<
+
+# Не является целью:
+.texinfo:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.DEFAULT:
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.h:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.tex.dvi:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(TEX) $<
+
+# Не является целью:
+.cpp.o:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
+
+# Не является целью:
+.cpp:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(LINK.cpp) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+clean:
+#  Псевдоцель (зависимость от .PHONY).
+#  Поиск неявных правил не производился.
+#  Файл не существует.
+#  Файл не был обновлён.
+#  способ, который следует применить (из «Makefile», строка 21):
+	@/home/bixind/projects/disFFT/sfft-0.1.0/tools/waf clean
+
+# Не является целью:
+.C.o:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(COMPILE.C) $(OUTPUT_OPTION) $<
+
+# Не является целью:
+.texi:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.txinfo:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.tex:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+dist:
+#  Псевдоцель (зависимость от .PHONY).
+#  Поиск неявных правил не производился.
+#  Файл не существует.
+#  Файл не был обновлён.
+#  способ, который следует применить (из «Makefile», строка 32):
+	@/home/bixind/projects/disFFT/sfft-0.1.0/tools/waf dist
+
+# Не является целью:
+.txinfo.info:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+# Не является целью:
+.sh:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	cat $< >$@ 
+	 chmod a+x $@
+
+# Не является целью:
+.S.s:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(PREPROCESS.S) $< > $@
+
+# Не является целью:
+.mod:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(COMPILE.mod) -o $@ -e $@ $^
+
+# Не является целью:
+.mod.o:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(COMPILE.mod) -o $@ $<
+
+# Не является целью:
+.F.f:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(PREPROCESS.F) $(OUTPUT_OPTION) $<
+
+# Не является целью:
+.w:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.S.o:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(COMPILE.S) -o $@ $<
+
+check:
+#  Псевдоцель (зависимость от .PHONY).
+#  Поиск неявных правил не производился.
+#  Файл не существует.
+#  Файл не был обновлён.
+#  способ, который следует применить (из «Makefile», строка 29):
+	@/home/bixind/projects/disFFT/sfft-0.1.0/tools/waf check
+
+# Не является целью:
+.F:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(LINK.F) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Не является целью:
+.web:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.sym:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+# Не является целью:
+.f:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+#  способ, который следует применить (встроенные):
+	$(LINK.f) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# Не является целью:
+.info:
+# Встроенное правило
+#  Поиск неявных правил не производился.
+#  Время изменения ни разу не проверялось.
+#  Файл не был обновлён.
+
+install:
+#  Псевдоцель (зависимость от .PHONY).
+#  Поиск неявных правил не производился.
+#  Файл не существует.
+#  Файл не был обновлён.
+#  способ, который следует применить (из «Makefile», строка 15):
+	/home/bixind/projects/disFFT/sfft-0.1.0/tools/waf install --yes;
+
+# состояние файлов хеш-таблицы:
+# Загружено=83/1024=8%, Переформулировано=0, Противоречий=436/1496=29%
+# Пути поиска VPATH
+
+# Не определён путь поиска «vpath».
+
+# Не определён общий (переменная «VPATH») путь поиска.
+
+# буферы strcache: 1 (0) / строк = 262 / хранилище = 2664 Б / сред = 10 Б
+# текущий buf: размер = 8162 Б / используется = 2664 Б / кол-во = 262 / сред = 10 Б
+
+# производительность strcache: поисков = 469 / найдено = 44%
+# состояние хеш-таблицы:
+# Загружено=262/8192=3%, Переформулировано=0, Противоречий=177/469=38%
+# Печать базы данных Make завершена Mon Aug 12 16:58:24 2019
+
