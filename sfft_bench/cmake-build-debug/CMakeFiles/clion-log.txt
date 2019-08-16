@@ -1,7 +1,0 @@
-/home/bixind/clion-2018.2.4/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++ -G "CodeBlocks - Unix Makefiles" /home/bixind/projects/disFFT/sfft-0.1.0/sfft_bench
--- Found OpenMP_C: -fopenmp=libomp  
--- Found OpenMP_CXX: -fopenmp=libomp  
--- Found OpenMP: TRUE   
--- Configuring done
--- Generating done
--- Build files have been written to: /home/bixind/projects/disFFT/sfft-0.1.0/sfft_bench/cmake-build-debug

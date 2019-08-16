@@ -1,3 +1,0 @@
-/home/bixind/projects/disFFT/sfft-0.1.0/sfft_bench/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/bixind/projects/disFFT/sfft-0.1.0/sfft_bench/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/bixind/projects/disFFT/sfft-0.1.0/sfft_bench/cmake-build-debug/CMakeFiles/sfft_bench.dir
