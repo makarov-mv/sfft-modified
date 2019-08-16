@@ -1124,46 +1124,50 @@ struct Key {
     int* indices;
 };
 
-complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigma, const Key& b, const sfft_output& out, const FilterCompact& filter) {
-  // complex_t** u = (complex_t**) malloc(sizeof(*u) * d);
-  // for (int i = 0; i < d; ++i) {
-  //   u[i] = malloc(sizeof(**u) * filter.B_g);
-  //   for (int j = 0; j < filter.B_g; ++j) {
-  //     u[i][j] = filter.time[j * (n / filter.B_g)] * in[i][sigma.at(i) * (j * (n / filter.B_g))] * w
-  //   }
-  // }
+complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigma, const Key& b, const Key& a, const sfft_output& out, const FilterCompact& filter) {
+  assert(n % filter.B_g == 0);
   int period = n / filter.B_g;
-  complex_t* u = malloc(sizeof(*u) * Btotal); // add a
+
+  complex_t* u = (complex_t*) fftw_malloc(sizeof(*u_f) * Btotal);
   
   for (int i = 0; i < Btotal; ++i) {
     Key u_index(filter.B_g, d);
     u_index.set_from_flat(i);
     Key in_index(n, d);
     for (int j = 0; j < d; ++j) {
-      u[i] *= filter.time[u_index.at(j) * period];
-      in_index.at(j) = sigma.at(j) * (u_index.at(j) * period /*-a*/) % n;
+      u[i] *= filter.at_time[u_index.at(j) * period];
+      in_index.at(j) = sigma.at(j) * ((u_index.at(j) * period - a.at(j) + n) % n) % n;
       u[i] *= (cos(2 * M_PI / n * ((sigma.at(j) * b.at(j)) % n)) + I * sin(2 * M_PI / n * ((sigma.at(j) * b.at(j)) % n)));
     }
     u[i] *= in[in_index.flatten()];
   }
 
-  complex_t* u_f = fftw_execute(u) // 
+  complex_t* u_f = (complex_t*) fftw_malloc(sizeof(*u_f) * Btotal);
+  int n_s[d];
+  for (int i = 0; i < d; ++i) {
+    n_s[i] = n;
+  }
+
+  fftw_plan p = fftw_plan_dft(d, n_s, reinterpret_cast<fftw_complex*>(u), reinterpret_cast<fftw_complex*>(u_f), FFTW_FORWARD, FFTW_ESTIMATE);
+  fftw_execute(p);
 
   for (__typeof(out.begin()) it = out.begin(); it != out.end(); ++it) {
     Key index(n, d);
     index.set_from_flat(it.first);
-    complex_t value = it.second;
-    value *= w // 
+    complex_t value = it.second; 
     int pos = 0;
     for (int i = d - 1; i > 0; --i) {
       index.at(i) = ((sigma.at(i)) * ((index.at(i) - b.at(i) + n) % n)) % n;
       int j = ((index.at(i) + (n / filter.B_g) / 2) % n) / (n / filter.B_g);
-      value *= filter.freq[j * (n / filter.B_g) - index.at(i)]; // change index
+      value *= filter.freq_at[(j * (n / filter.B_g) - index.at(i) + n) % n];
+      value *= (cos(2 * M_PI / n * ((sigma.at(i) * a.at(i)) % n)) + I * sin(2 * M_PI / n * ((sigma.at(i) * a.at(i)) % n)))
       pos = pos * filter.B_g + j;
     }
     u_f[pos] -= value;
   }
 
+  fftw_destroy_plan(p);
+  fftw_free(u);
   return u_f;
 }
 
@@ -1205,7 +1209,7 @@ void multidim_sfft_inner(sfft_plan_multidim* plan, complex_t* in, sfft_output& o
   }
 
   for (int i = 0; i < d + 1; ++i) {
-    free(u[i]);
+    fftw_free(u[i]);
   }
   free(u);
 }
