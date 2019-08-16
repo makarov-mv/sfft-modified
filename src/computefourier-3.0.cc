@@ -1124,6 +1124,46 @@ struct Key {
     int* indices;
 };
 
+complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigma, const Key& b, const sfft_output& out, const FilterCompact& filter) {
+  // complex_t** u = (complex_t**) malloc(sizeof(*u) * d);
+  // for (int i = 0; i < d; ++i) {
+  //   u[i] = malloc(sizeof(**u) * filter.B_g);
+  //   for (int j = 0; j < filter.B_g; ++j) {
+  //     u[i][j] = filter.time[j * (n / filter.B_g)] * in[i][sigma.at(i) * (j * (n / filter.B_g))] * w
+  //   }
+  // }
+  int period = n / filter.B_g;
+  complex_t* u = malloc(sizeof(*u) * Btotal);
+  
+  for (int i = 0; i < Btotal; ++i) {
+    Key u_index(filter.B_g, d);
+    u_index.set_from_flat(i);
+    Key in_index(n, d);
+    for (int j = 0; j < d; ++j) {
+      u[i] *= filter.time[u_index.at(j) * period];
+      in_index.at(j) = sigma.at(j) * (u_index.at(j) * period /*-a*/) % n;
+      u[i] *= w^(sigma.at(j) * b.at(j));
+    }
+    u[i] *= in[in_index.flatten()];
+  }
+
+  complex_t* u_f = fftw_execute(u) // 
+
+  for (__typeof(out.begin()) it = out.begin(); it != out.end(); ++it) {
+    Key index(n, d);
+    index.set_from_flat(it.first);
+    complex_t value = it.second;
+    value *= w // 
+    for (int i = 0; i < d; ++i) {
+      index.at(i) = ((sigma.at(i)) * ((index.at(i) - b.at(i) + n) % n) + (n / filter.B_g) / 2) % n ;
+      index.at(i) /= (n / filter.B_g);
+    }
+    u_f[index.flatten()] -= value;
+  }
+
+  return u_f;
+}
+
 void multidim_sfft_inner(sfft_plan_multidim* plan, complex_t* in, sfft_output& out, const FilterCompact& filter) {
   int n = plan->n;
   int d = plan->d;
@@ -1141,12 +1181,14 @@ void multidim_sfft_inner(sfft_plan_multidim* plan, complex_t* in, sfft_output& o
 //    int shift = ((ai * b) % n + n) % n;
   }
 
-  complex_t** u; // call HashToBins
-
   int Btotal = 1;
   for (int i = 0; i < d; ++i) {
     Btotal *= filter.B_g;
   }
+
+  complex_t** u; // call HashToBins
+
+  
   Key i(n, d);
   for (int j = 0; j < Btotal; ++j) {
     if (cabs2(u[0][j]) > 1e-6) {
@@ -1158,6 +1200,11 @@ void multidim_sfft_inner(sfft_plan_multidim* plan, complex_t* in, sfft_output& o
       out.insert({i.flatten(), u[0][j]});
     }
   }
+
+  for (int i = 0; i < d + 1; ++i) {
+    free(u[i]);
+  }
+  free(u);
 }
 
 void multidim_sfft(sfft_plan_multidim* plan, complex_t* in, sfft_output& out) {
