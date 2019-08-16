@@ -42,7 +42,7 @@ struct FilterCompact {
       if ((index + sizet / 2) >= sizet) {
         return 0;
       } 
-      return time[index + sizet / 2]
+      return time[index + sizet / 2];
     }
 
     complex_t freq_at(int index) const {

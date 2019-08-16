@@ -1126,16 +1126,17 @@ struct Key {
 
 complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigma, const Key& b, const Key& a, const sfft_output& out, const FilterCompact& filter) {
   assert(n % filter.B_g == 0);
+  
   int period = n / filter.B_g;
 
-  complex_t* u = (complex_t*) fftw_malloc(sizeof(*u_f) * Btotal);
+  complex_t* u = (complex_t*) fftw_malloc(sizeof(*u) * Btotal);
   
   for (int i = 0; i < Btotal; ++i) {
     Key u_index(filter.B_g, d);
     u_index.set_from_flat(i);
     Key in_index(n, d);
     for (int j = 0; j < d; ++j) {
-      u[i] *= filter.at_time[u_index.at(j) * period];
+      u[i] *= filter.time_at(u_index.at(j) * period);
       in_index.at(j) = sigma.at(j) * ((u_index.at(j) * period - a.at(j) + n) % n) % n;
       u[i] *= (cos(2 * M_PI / n * ((sigma.at(j) * b.at(j)) % n)) + I * sin(2 * M_PI / n * ((sigma.at(j) * b.at(j)) % n)));
     }
@@ -1153,14 +1154,14 @@ complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigm
 
   for (__typeof(out.begin()) it = out.begin(); it != out.end(); ++it) {
     Key index(n, d);
-    index.set_from_flat(it.first);
-    complex_t value = it.second; 
+    index.set_from_flat(it->first);
+    complex_t value = it->second; 
     int pos = 0;
     for (int i = d - 1; i > 0; --i) {
       index.at(i) = ((sigma.at(i)) * ((index.at(i) - b.at(i) + n) % n)) % n;
       int j = ((index.at(i) + (n / filter.B_g) / 2) % n) / (n / filter.B_g);
-      value *= filter.freq_at[(j * (n / filter.B_g) - index.at(i) + n) % n];
-      value *= (cos(2 * M_PI / n * ((sigma.at(i) * a.at(i)) % n)) + I * sin(2 * M_PI / n * ((sigma.at(i) * a.at(i)) % n)))
+      value *= filter.freq_at((j * (n / filter.B_g) - index.at(i) + n) % n);
+      value *= (cos(2 * M_PI / n * ((sigma.at(i) * a.at(i)) % n)) + I * sin(2 * M_PI / n * ((sigma.at(i) * a.at(i)) % n)));
       pos = pos * filter.B_g + j;
     }
     u_f[pos] -= value;
@@ -1193,7 +1194,14 @@ void multidim_sfft_inner(sfft_plan_multidim* plan, complex_t* in, sfft_output& o
     Btotal *= filter.B_g;
   }
 
-  complex_t** u; // call HashToBins
+  complex_t** u = (complex_t**) malloc((d + 1) * sizeof(*u));
+  for (int i = 0; i < d + 1; ++i) {
+    Key c(n, d);
+    if (i > 0) {
+      c.at(i - 1) = 1;
+    }
+    u[i] = hash_to_bins(n, d, Btotal, in, a, b, c, out, filter);
+  }
 
   
   Key i(n, d);
