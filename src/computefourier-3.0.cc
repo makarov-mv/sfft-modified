@@ -1133,7 +1133,7 @@ complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigm
   //   }
   // }
   int period = n / filter.B_g;
-  complex_t* u = malloc(sizeof(*u) * Btotal);
+  complex_t* u = malloc(sizeof(*u) * Btotal); // add a
   
   for (int i = 0; i < Btotal; ++i) {
     Key u_index(filter.B_g, d);
@@ -1142,7 +1142,7 @@ complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigm
     for (int j = 0; j < d; ++j) {
       u[i] *= filter.time[u_index.at(j) * period];
       in_index.at(j) = sigma.at(j) * (u_index.at(j) * period /*-a*/) % n;
-      u[i] *= w^(sigma.at(j) * b.at(j));
+      u[i] *= (cos(2 * M_PI / n * ((sigma.at(j) * b.at(j)) % n)) + I * sin(2 * M_PI / n * ((sigma.at(j) * b.at(j)) % n)));
     }
     u[i] *= in[in_index.flatten()];
   }
@@ -1154,11 +1154,14 @@ complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigm
     index.set_from_flat(it.first);
     complex_t value = it.second;
     value *= w // 
-    for (int i = 0; i < d; ++i) {
-      index.at(i) = ((sigma.at(i)) * ((index.at(i) - b.at(i) + n) % n) + (n / filter.B_g) / 2) % n ;
-      index.at(i) /= (n / filter.B_g);
+    int pos = 0;
+    for (int i = d - 1; i > 0; --i) {
+      index.at(i) = ((sigma.at(i)) * ((index.at(i) - b.at(i) + n) % n)) % n;
+      int j = ((index.at(i) + (n / filter.B_g) / 2) % n) / (n / filter.B_g);
+      value *= filter.freq[j * (n / filter.B_g) - index.at(i)]; // change index
+      pos = pos * filter.B_g + j;
     }
-    u_f[index.flatten()] -= value;
+    u_f[pos] -= value;
   }
 
   return u_f;
