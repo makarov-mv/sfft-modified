@@ -1,1 +1,0 @@
-/usr/bin/clang++  -g   CMakeFiles/sfft_bench.dir/main.cpp.o  -o sfft_bench  -L/home/bixind/projects/disFFT/sfft-0.1.0/sfft_bench/../build -Wl,-rpath,/home/bixind/projects/disFFT/sfft-0.1.0/sfft_bench/../build -lfftw3 -lsfft /usr/lib/x86_64-linux-gnu/libomp.so -lpthread 
