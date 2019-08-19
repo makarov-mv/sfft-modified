@@ -1138,7 +1138,8 @@ complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigm
     for (int j = 0; j < d; ++j) {
       u[i] *= filter.time_at(u_index.at(j) * period);
       in_index.at(j) = sigma.at(j) * ((u_index.at(j) * period - a.at(j) + n) % n) % n;
-      u[i] *= (cos(2 * M_PI / n * ((sigma.at(j) * b.at(j)) % n)) + I * sin(2 * M_PI / n * ((sigma.at(j) * b.at(j)) % n)));
+      double phi = 2 * M_PI / n * ((sigma.at(j) * b.at(j) * u_index.at(j) * period) % n);
+      u[i] *= (cos(phi) + I * sin(phi));
     }
     u[i] *= in[in_index.flatten()];
   }
@@ -1158,7 +1159,8 @@ complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigm
     complex_t value = it->second; 
     int pos = 0;
     for (int i = d - 1; i > 0; --i) {
-      value *= (cos(2 * M_PI / n * ((sigma.at(i) * a.at(i) * index.at(i)) % n)) + I * sin(2 * M_PI / n * ((sigma.at(i) * a.at(i) * index.at(i)) % n)));
+      double phi = 2 * M_PI / n * ((sigma.at(i) * a.at(i) * index.at(i)) % n);
+      value *= (cos(phi) + I * sin(phi));
       index.at(i) = ((sigma.at(i)) * ((index.at(i) - b.at(i) + n) % n)) % n;
       int j = ((index.at(i) + (n / filter.B_g) / 2) % n) / (n / filter.B_g);
       value *= filter.freq_at((j * (n / filter.B_g) - index.at(i) + n) % n);
@@ -1216,6 +1218,7 @@ void multidim_sfft_inner(sfft_plan_multidim* plan, complex_t* in, sfft_output& o
           i.at(h) += n;
         }
       }
+      printf("%i: %f\n", i.flatten(), cabs2(u[0][j]));
       out.insert({i.flatten(), u[0][j]});
     }
   }

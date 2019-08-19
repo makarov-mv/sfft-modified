@@ -45,9 +45,9 @@ int main() {
         for (int i = 0; i < k; ++i) {
             int pos = rand() % n;
             out[pos][0] = 1;
-//            printf("%d ", pos);
+            printf("%d ", pos);
         }
-//        printf("\n");
+        printf("\n");
 
         fftw_execute(p);
 
