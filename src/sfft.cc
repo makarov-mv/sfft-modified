@@ -614,6 +614,7 @@ sfft_v3(unsigned int n, unsigned int k, sfft_v3_data * data,
 FilterCompact make_gaussian_filter(int n, double Bcst, int k) {
   real_t BB = (unsigned)(Bcst * ((double)k));
   FilterCompact filter;
+  filter.n = n;
   filter.B_g = floor_to_pow2(BB);
 
   const double tolerance_g = 1e-8;

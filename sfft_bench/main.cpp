@@ -21,8 +21,8 @@ bool CheckAnswer(int n, const sfft_output& res, const fftw_complex* out) {
 
 int main() {
     int n = (1 << 13);
-    int k = 50;
-    srand(345);
+    int k = 1;
+    srand(672);
 
     fftw_complex *in, *out;
     fftw_plan p;
@@ -68,8 +68,7 @@ int main() {
         ok += CheckAnswer(n, output, out);
     }
     printf("%d/%d\n", ok, tries);
-    sfft_free(sin);
-//    sfft_free_plan(plan);
+    sfft_free_plan_multidim(plan);
 
     fftw_destroy_plan(p);
     fftw_free(in); fftw_free(out);

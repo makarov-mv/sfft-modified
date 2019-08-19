@@ -1130,11 +1130,11 @@ complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigm
   int period = n / filter.B_g;
 
   complex_t* u = (complex_t*) fftw_malloc(sizeof(fftw_complex) * Btotal);
-  
+  Key u_index(filter.B_g, d);
+  Key in_index(n, d);
   for (int i = 0; i < Btotal; ++i) {
-    Key u_index(filter.B_g, d);
     u_index.set_from_flat(i);
-    Key in_index(n, d);
+    u[i] = 1;
     for (int j = 0; j < d; ++j) {
       u[i] *= filter.time_at(u_index.at(j) * period);
       in_index.at(j) = sigma.at(j) * ((u_index.at(j) * period - a.at(j) + n) % n) % n;
@@ -1212,6 +1212,9 @@ void multidim_sfft_inner(sfft_plan_multidim* plan, complex_t* in, sfft_output& o
       for (int h = 0; h < d; ++h) {
         complex_t alpha = u[h + 1][j] / u[0][j]; // ???
         i.at(h) = (ai.at(h) * lround(carg(alpha) * n / (2 * M_PI))) % n;
+        if (i.at(h) < 0) {
+          i.at(h) += n;
+        }
       }
       out.insert({i.flatten(), u[0][j]});
     }

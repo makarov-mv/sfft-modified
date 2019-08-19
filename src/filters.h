@@ -37,19 +37,24 @@ struct FilterCompact {
     complex_t *freq;
     int sizef;
     int B_g;
+    int n{0};
 
     complex_t time_at(int index) const {
-      if ((index + sizet / 2) >= sizet) {
+      int pos = index + sizet / 2;
+      pos &= n - 1;
+      if (pos >= sizet) {
         return 0;
       } 
-      return time[index + sizet / 2];
+      return time[pos];
     }
 
     complex_t freq_at(int index) const {
-      if ((index + sizef / 2) >= sizef) {
+      int pos = index + sizef / 2;
+      pos &= n - 1;
+      if (pos >= sizef) {
         return 0;
       }
-      return freq[index + sizef / 2];
+      return freq[pos];
     }
 };
 
