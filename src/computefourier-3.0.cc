@@ -1129,6 +1129,8 @@ complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigm
   
   int period = n / filter.B_g;
 
+  // complex_t* kek = (complex_t*) malloc(sizeof(*kek) * Btotal);
+  
   complex_t* u = (complex_t*) fftw_malloc(sizeof(*u) * Btotal);
   
   for (int i = 0; i < Btotal; ++i) {

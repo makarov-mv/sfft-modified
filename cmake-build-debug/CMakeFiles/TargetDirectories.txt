@@ -1,3 +1,0 @@
-/Users/amir/Desktop/sfft-hikp/sfft-modified/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/amir/Desktop/sfft-hikp/sfft-modified/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/amir/Desktop/sfft-hikp/sfft-modified/cmake-build-debug/CMakeFiles/sfft_modified.dir
