@@ -477,8 +477,8 @@ UPDATE_ALL(int freq, complex_t median_value, int n, int init_offset,
   update_gaussian_loops2(freq, median_value, GAUSS_SAMP, filterf1, n, B1,
                          init_G_offset, 1);
 
-//  update_mansour_loops2(freq, median_value, MAN_SAMP, n, W_Man,
-//                        init_offset);
+  update_mansour_loops2(freq, median_value, MAN_SAMP, n, W_Man,
+                        init_offset);
 }
 
 static int
@@ -819,9 +819,9 @@ alternate_fft(sfft_v3_data * data, sfft_output * out, complex_t * origx,
 
   int offset;
 
-//  PROFILING_START_SECTION("Do Comb Filter");
-//  Mansour_Filt(data, origx, n, W_Man, init_offset, MAN_SAMP);
-//  PROFILING_END_SECTION();
+  PROFILING_START_SECTION("Do Comb Filter");
+  Mansour_Filt(data, origx, n, W_Man, init_offset, MAN_SAMP);
+  PROFILING_END_SECTION();
 
 //=====================================================================================================================================================
 
@@ -836,28 +836,28 @@ alternate_fft(sfft_v3_data * data, sfft_output * out, complex_t * origx,
 
   int *EST_FREQS = tl_data->est_freqs;
   complex_t *EST_VALUES = tl_data->est_values;
-//
-//  PROFILING_START_SECTION("Estimate Frequencies of Comb Filter");
-//
-//  found_now =
-//    estimate_freq_mansour_loops2(data, W_Man, MAN_SAMP, init_offset,
-//                                 Man_loops, n, 1, 0, 1, filterf1,
-//                                 EST_FREQS, EST_VALUES);
-//
-//  for (int i = 0; i < found_now; i++)
-//    {
-//
-//      ans[EST_FREQS[i]] = EST_VALUES[i];
-//      found++;
-//
-//      for (int j = 0; j < Man_loops; j++)
-//        MAN_SAMP[j + 2 * (EST_FREQS[i] % W_Man)] = 0;
-//    }
-//
-//  PROFILING_END_SECTION();
-//
-//  if (found == k)
-//    return;
+
+  PROFILING_START_SECTION("Estimate Frequencies of Comb Filter");
+
+  found_now =
+    estimate_freq_mansour_loops2(data, W_Man, MAN_SAMP, init_offset,
+                                 Man_loops, n, 1, 0, 1, filterf1,
+                                 EST_FREQS, EST_VALUES);
+
+  for (int i = 0; i < found_now; i++)
+    {
+
+      ans[EST_FREQS[i]] = EST_VALUES[i];
+      found++;
+
+      for (int j = 0; j < Man_loops; j++)
+        MAN_SAMP[j + 2 * (EST_FREQS[i] % W_Man)] = 0;
+    }
+
+  PROFILING_END_SECTION();
+
+  if (found == k)
+    return;
 
 //=====================================================================================================================================================
 
@@ -914,8 +914,8 @@ alternate_fft(sfft_v3_data * data, sfft_output * out, complex_t * origx,
 
       update_gaussian_loops2(EST_FREQS[i], EST_VALUES[i], GAUSS_SAMP,
                              filterf1, n, B1, init_G_offset, 1);
-//      update_mansour_loops2(EST_FREQS[i], EST_VALUES[i], MAN_SAMP, n,
-//                            W_Man, init_offset);
+      update_mansour_loops2(EST_FREQS[i], EST_VALUES[i], MAN_SAMP, n,
+                            W_Man, init_offset);
       /*
          UPDATE_ALL(EST_FREQS[i], EST_VALUES[i], n, init_offset, W_Man, Man_loops, MAN_SAMP,
          init_G_offset, jump,  B1, filterf1, GAUSS_SAMP, Gauss_loops1,
@@ -997,12 +997,12 @@ alternate_fft(sfft_v3_data * data, sfft_output * out, complex_t * origx,
   while (true)
     {
 
-      if (nana % 3 == 0) { found_now = 0; }
-//        found_now =
-//          estimate_freq_mansour_loops2(data, W_Man, MAN_SAMP,
-//                                       init_offset, Man_loops,
-//                                       n, 1, 0, 1, filterf1,
-//                                       EST_FREQS, EST_VALUES);
+      if (nana % 3 == 0)
+        found_now =
+          estimate_freq_mansour_loops2(data, W_Man, MAN_SAMP,
+                                       init_offset, Man_loops,
+                                       n, 1, 0, 1, filterf1,
+                                       EST_FREQS, EST_VALUES);
       else if (nana % 3 == 1)
         found_now =
           estimate_freq_gauss_loops2(data, 0, B1, GAUSS_SAMP,
@@ -1056,12 +1056,12 @@ alternate_fft(sfft_v3_data * data, sfft_output * out, complex_t * origx,
                 count_gauss2++;
               FLOPCOUNT_INCREMENT(2 + 1);
             }
-//          for (int j = 0; j < W_Man; j++)
-//            {
-//              if (cabs2(MAN_SAMP[2 * j] / W_Man) > 1e-6)
-//                count_man++;
-//              FLOPCOUNT_INCREMENT(2 + 1);
-//            }
+          for (int j = 0; j < W_Man; j++)
+            {
+              if (cabs2(MAN_SAMP[2 * j] / W_Man) > 1e-6)
+                count_man++;
+              FLOPCOUNT_INCREMENT(2 + 1);
+            }
 
           if (prev_count_man == count_man
               && prev_count_gauss1 == count_gauss1
