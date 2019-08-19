@@ -1129,7 +1129,7 @@ complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigm
   
   int period = n / filter.B_g;
 
-  complex_t* u = (complex_t*) fftw_malloc(sizeof(*u) * Btotal);
+  complex_t* u = (complex_t*) fftw_malloc(sizeof(fftw_complex) * Btotal);
   
   for (int i = 0; i < Btotal; ++i) {
     Key u_index(filter.B_g, d);
@@ -1143,13 +1143,13 @@ complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigm
     u[i] *= in[in_index.flatten()];
   }
 
-  complex_t* u_f = (complex_t*) fftw_malloc(sizeof(*u_f) * Btotal);
-  int n_s[d];
+  complex_t* u_f = (complex_t*) fftw_malloc(sizeof(fftw_complex) * Btotal);
+  int* B_gs = (int*) malloc(sizeof(*B_gs) * d);
   for (int i = 0; i < d; ++i) {
-    n_s[i] = n;
+      B_gs[i] = filter.B_g;
   }
 
-  fftw_plan p = fftw_plan_dft(d, n_s, reinterpret_cast<fftw_complex*>(u), reinterpret_cast<fftw_complex*>(u_f), FFTW_FORWARD, FFTW_ESTIMATE);
+  fftw_plan p = fftw_plan_dft(d, B_gs, reinterpret_cast<fftw_complex*>(u), reinterpret_cast<fftw_complex*>(u_f), FFTW_FORWARD, FFTW_ESTIMATE);
   fftw_execute(p);
 
   for (__typeof(out.begin()) it = out.begin(); it != out.end(); ++it) {
@@ -1168,6 +1168,7 @@ complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigm
   }
 
   fftw_destroy_plan(p);
+  free(B_gs);
   fftw_free(u);
   return u_f;
 }
