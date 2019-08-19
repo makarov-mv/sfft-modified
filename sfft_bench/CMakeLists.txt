@@ -3,6 +3,8 @@ project(sfft_bench)
 
 set(CMAKE_CXX_STANDARD 14)
 
+#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address")
+
 find_package(OpenMP REQUIRED)
 
 add_executable(sfft_bench main.cpp)
