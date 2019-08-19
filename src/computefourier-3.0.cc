@@ -1158,10 +1158,10 @@ complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigm
     complex_t value = it->second; 
     int pos = 0;
     for (int i = d - 1; i > 0; --i) {
+      value *= (cos(2 * M_PI / n * ((sigma.at(i) * a.at(i) * index.at(i)) % n)) + I * sin(2 * M_PI / n * ((sigma.at(i) * a.at(i) * index.at(i)) % n)));
       index.at(i) = ((sigma.at(i)) * ((index.at(i) - b.at(i) + n) % n)) % n;
       int j = ((index.at(i) + (n / filter.B_g) / 2) % n) / (n / filter.B_g);
       value *= filter.freq_at((j * (n / filter.B_g) - index.at(i) + n) % n);
-      value *= (cos(2 * M_PI / n * ((sigma.at(i) * a.at(i)) % n)) + I * sin(2 * M_PI / n * ((sigma.at(i) * a.at(i)) % n)));
       pos = pos * filter.B_g + j;
     }
     u_f[pos] -= value;
