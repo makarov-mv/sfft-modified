@@ -1212,13 +1212,12 @@ void multidim_sfft_inner(sfft_plan_multidim* plan, complex_t* in, sfft_output& o
     if (cabs2(u[0][j]) > 1e-6) {
       i.set_zero();
       for (int h = 0; h < d; ++h) {
-        complex_t alpha = u[h + 1][j] / u[0][j]; // ???
+        complex_t alpha = u[0][j] / u[h + 1][j]; // ???
         i.at(h) = (ai.at(h) * lround(carg(alpha) * n / (2 * M_PI))) % n;
         if (i.at(h) < 0) {
           i.at(h) += n;
         }
       }
-      printf("%i: %f\n", i.flatten(), cabs2(u[0][j]));
       out.insert({i.flatten(), u[0][j]});
     }
   }

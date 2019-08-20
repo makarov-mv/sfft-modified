@@ -627,13 +627,13 @@ FilterCompact make_gaussian_filter(int n, double Bcst, int k) {
   complex_t* freq =
       make_multiple_t(filter.time, filter.sizet, n, b_g1).freq;
   int pos = 0;
-  while (cabs2(freq[pos]) > tolerance_g) {
+  while (cabs2(freq[pos]) > 2 * tolerance_g) {
     ++pos;
   }
   assert(pos > 0);
   filter.sizef = 2 * pos - 1;
   filter.freq = (complex_t*) sfft_malloc(filter.sizef * sizeof(complex_t));
-  memcpy(filter.freq, freq + n - pos - 1, (pos - 1) * sizeof(*freq));
+  memcpy(filter.freq, freq + n - pos + 1, (pos - 1) * sizeof(*freq));
   memcpy(filter.freq + pos - 1, freq, pos * sizeof(*freq));
   sfft_free(freq);
   return filter;
