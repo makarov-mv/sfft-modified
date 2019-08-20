@@ -1124,25 +1124,45 @@ struct Key {
     int* indices;
 };
 
+void compute_bucketed_signal(int n, int d, int lvl, const Key& sigma, const Key& b, const Key& a, const FilterCompact& filter, Key& u_index, Key& in_index, complex_t value, const complex_t* in, complex_t* u) {
+    if (lvl < d) {
+        for (int h = 0; h < filter.sizet; ++h) {
+            complex_t cur_value = value;
+            cur_value *= filter.time[h];
+            int cur_ind = (h + n - filter.sizet / 2) & (n - 1);
+            u_index.at(lvl) = cur_ind & (filter.B_g - 1);
+            in_index.at(lvl) = (sigma.at(lvl) * ((cur_ind - a.at(lvl) + n) & (n - 1))) & (n - 1);
+            double phi = 2 * M_PI / n * ((sigma.at(lvl) * b.at(lvl) * cur_ind) % n);
+            cur_value *= (cos(phi) + I * sin(phi));
+            compute_bucketed_signal(n, d, lvl + 1, sigma, b, a, filter, u_index, in_index, cur_value, in, u);
+        }
+    } else {
+        u[u_index.flatten()] += value * in[in_index.flatten()];
+    }
+}
+
 complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigma, const Key& b, const Key& a, const sfft_output& out, const FilterCompact& filter) {
   assert(n % filter.B_g == 0);
   
-  int period = n / filter.B_g;
+//  int period = n / filter.B_g;
 
   complex_t* u = (complex_t*) fftw_malloc(sizeof(fftw_complex) * Btotal);
   Key u_index(filter.B_g, d);
   Key in_index(n, d);
-  for (int i = 0; i < Btotal; ++i) {
-    u_index.set_from_flat(i);
-    u[i] = 1;
-    for (int j = 0; j < d; ++j) {
-      u[i] *= filter.time_at(u_index.at(j) * period);
-      in_index.at(j) = sigma.at(j) * ((u_index.at(j) * period - a.at(j) + n) % n) % n;
-      double phi = 2 * M_PI / n * ((sigma.at(j) * b.at(j) * u_index.at(j) * period) % n);
-      u[i] *= (cos(phi) + I * sin(phi));
-    }
-    u[i] *= in[in_index.flatten()];
-  }
+
+  compute_bucketed_signal(n, d, 0, sigma, b, a, filter, u_index, in_index, 1, in, u);
+
+//  for (int i = 0; i < Btotal; ++i) {
+//    u_index.set_from_flat(i);
+//    u[i] = 1;
+//    for (int j = 0; j < d; ++j) {
+//      u[i] *= filter.time_at(u_index.at(j) * period);
+//      in_index.at(j) = sigma.at(j) * ((u_index.at(j) * period - a.at(j) + n) % n) % n;
+//      double phi = 2 * M_PI / n * ((sigma.at(j) * b.at(j) * u_index.at(j) * period) % n);
+//      u[i] *= (cos(phi) + I * sin(phi));
+//    }
+//    u[i] *= in[in_index.flatten()];
+//  }
 
   complex_t* u_f = (complex_t*) fftw_malloc(sizeof(fftw_complex) * Btotal);
   int* B_gs = (int*) malloc(sizeof(*B_gs) * d);
@@ -1158,7 +1178,7 @@ complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigm
     index.set_from_flat(it->first);
     complex_t value = it->second; 
     int pos = 0;
-    for (int i = d - 1; i > 0; --i) {
+    for (int i = d - 1; i >= 0; --i) {
       double phi = 2 * M_PI / n * ((sigma.at(i) * a.at(i) * index.at(i)) % n);
       value *= (cos(phi) + I * sin(phi));
       index.at(i) = ((sigma.at(i)) * ((index.at(i) - b.at(i) + n) % n)) % n;
@@ -1212,12 +1232,13 @@ void multidim_sfft_inner(sfft_plan_multidim* plan, complex_t* in, sfft_output& o
     if (cabs2(u[0][j]) > 1e-6) {
       i.set_zero();
       for (int h = 0; h < d; ++h) {
-        complex_t alpha = u[0][j] / u[h + 1][j]; // ???
+        complex_t alpha = u[0][j] / u[h + 1][j];
         i.at(h) = (ai.at(h) * lround(carg(alpha) * n / (2 * M_PI))) % n;
         if (i.at(h) < 0) {
           i.at(h) += n;
         }
       }
+      printf("%i: %f %f\n", i.flatten(), creal(u[0][j]), cimag(u[0][j]));
       out.insert({i.flatten(), u[0][j]});
     }
   }

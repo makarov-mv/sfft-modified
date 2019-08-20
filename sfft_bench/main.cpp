@@ -35,46 +35,46 @@ int main() {
 
 //    printf("%d\n", plan->data.filters[0].B_g);
 //    printf("%d\n", plan->data.filters[0].sizef);
-    printf("%d\n", n);
-    for (int i = 0; i < n; ++i) {
-        printf("%f %f\n", creal(plan->data.filters[0].freq_at(i)), cimag(plan->data.filters[0].freq_at(i)));
-    }
-
-//    int tries = 1;
-//    int ok = 0;
-//    for (int iter = 0; iter < tries; ++iter) {
-//
-//        for (int i = 0; i < n; ++i) {
-//            out[i][0] = 0;
-//            out[i][1] = 0;
-//        }
-//
-//        for (int i = 0; i < k; ++i) {
-//            int pos = 234; //rand() % n;
-//            out[pos][0] = 1;
-//            printf("%d ", pos);
-//        }
-//        printf("\n");
-//
-//        fftw_execute(p);
-//
-//
-//
-//        for (int i = 0; i < n; ++i) {
-//            sin[i] = in[i][0] + in[i][1] * I;
-//        }
-//
-//
-//        sfft_output output;
-//
-//        sfft_exec_multidim(plan, sin, &output);
-////        printf("%ld\n", output.size());
-////        for (auto w : output) {
-////            printf("%d: %f %f\n", w.first, creal(w.second), cimag(w.second));
-////        }
-//        ok += CheckAnswer(n, output, out);
+//    printf("%d\n", n);
+//    for (int i = 0; i < n; ++i) {
+//        printf("%f %f\n", creal(plan->data.filters[0].freq_at(i)), cimag(plan->data.filters[0].freq_at(i)));
 //    }
-//    printf("%d/%d\n", ok, tries);
+
+    int tries = 1;
+    int ok = 0;
+    for (int iter = 0; iter < tries; ++iter) {
+
+        for (int i = 0; i < n; ++i) {
+            out[i][0] = 0;
+            out[i][1] = 0;
+        }
+
+        for (int i = 0; i < k; ++i) {
+            int pos = 234; //rand() % n;
+            out[pos][0] = 1;
+            printf("%d ", pos);
+        }
+        printf("\n");
+
+        fftw_execute(p);
+
+
+
+        for (int i = 0; i < n; ++i) {
+            sin[i] = in[i][0] + in[i][1] * I;
+        }
+
+
+        sfft_output output;
+
+        sfft_exec_multidim(plan, sin, &output);
+//        printf("%ld\n", output.size());
+//        for (auto w : output) {
+//            printf("%d: %f %f\n", w.first, creal(w.second), cimag(w.second));
+//        }
+        ok += CheckAnswer(n, output, out);
+    }
+    printf("%d/%d\n", ok, tries);
     sfft_free_plan_multidim(plan);
 
     fftw_destroy_plan(p);
