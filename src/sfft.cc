@@ -618,9 +618,9 @@ FilterCompact make_gaussian_filter(int n, double Bcst, int k) {
   filter.B_g = floor_to_pow2(BB);
 
   const double tolerance_g = 1e-8;
-  double lobefrac_g = 0.5 / (BB);
+  double lobefrac_g = 1.0 / (filter.B_g) / log2(n);
 
-  int b_g1 = int (1.00 * ((double)n / filter.B_g));
+  int b_g1 = int (1.0 * ((double)n / filter.B_g));
 
   filter.time =
       make_dolphchebyshev_t(lobefrac_g, tolerance_g, filter.sizet);
@@ -647,7 +647,7 @@ sfft_plan_multidim* sfft_make_plan_multidim(int n, int d, int k, int iters) {
   plan->data.iter_num = iters;
   int k_root = int(ceil(pow(k, 1.0 / d)));
   plan->data.filters = (FilterCompact*) malloc(sizeof(*plan->data.filters) * iters);
-  double Bcst = 10;
+  double Bcst = 16;
   for (int i = 0; i < iters; ++i) {
     plan->data.filters[i] = make_gaussian_filter(n, Bcst, k_root);
     Bcst /= 2;

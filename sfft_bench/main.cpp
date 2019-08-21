@@ -21,8 +21,8 @@ bool CheckAnswer(int n, const sfft_output& res, const fftw_complex* out) {
 }
 
 int main() {
-    int n = (1 << 10);
-    int k = 1;
+    int n = (1 << 18);
+    int k = 50;
     srand(7835);
 
     fftw_complex *in, *out;
@@ -36,7 +36,14 @@ int main() {
 
 //    printf("%d\n", plan->data.filters[0].B_g);
 //    printf("%d\n", plan->data.filters[0].sizef);
-//    printf("%d\n", n);
+//    printf("%d\n", plan->data.filters[0].sizet);
+//    printf("%d %d\n", n / plan->data.filters[0].B_g, n);
+//    int pos = 0;
+//    while (cabs2(plan->data.filters[0].freq_at(pos) - 1) < 1e-3) {
+//        ++pos;
+//    }
+//    printf("%d\n", pos * 2);
+
 //    complex_t* x = (complex_t*) fftw_malloc(n * sizeof(complex_t));
 //    for (int i = 0; i < n; ++i) {
 //        printf("%f %f\n", creal(plan->data.filters[0].freq_at(i)), cimag(plan->data.filters[0].freq_at(i)));
@@ -53,7 +60,7 @@ int main() {
 //    printf("%d/%d\n", cnt, n);
 //    fftw_free(x);
 
-    int tries = 10;
+    int tries = 100;
     int ok = 0;
     for (int iter = 0; iter < tries; ++iter) {
 
@@ -65,9 +72,9 @@ int main() {
         for (int i = 0; i < k; ++i) {
             int pos = rand() % n;
             out[pos][0] = 1;
-            printf("%d ", pos);
+//            printf("%d ", pos);
         }
-        printf("\n");
+//        printf("\n");
 
         fftw_execute(p);
 
@@ -114,13 +121,14 @@ int main() {
         sfft_output output;
 
         sfft_exec_multidim(plan, input, &output);
-        printf("%ld\n", output.size());
-        for (auto w : output) {
-            printf("%d: %f %f\n", w.first, creal(w.second), cimag(w.second));
-        }
+//        printf("%ld\n", output.size());
+//        for (auto w : output) {
+//            printf("%d: %f %f\n", w.first, creal(w.second), cimag(w.second));
+//        }
         ok += CheckAnswer(n, output, out);
     }
     printf("%d/%d\n", ok, tries);
+    sfft_free(input);
     sfft_free_plan_multidim(plan);
 
     fftw_destroy_plan(p);

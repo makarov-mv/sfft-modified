@@ -1131,8 +1131,8 @@ void compute_bucketed_signal(int n, int d, int lvl, const Key& sigma, const Key&
             cur_value *= filter.time[h];
             int cur_ind = (h + n - filter.sizet / 2) & (n - 1);
             u_index.at(lvl) = cur_ind & (filter.B_g - 1);
-            in_index.at(lvl) = (sigma.at(lvl) * ((cur_ind - a.at(lvl) + n) & (n - 1))) & (n - 1);
-            double phi = -2 * M_PI / n * ((sigma.at(lvl) * b.at(lvl) * cur_ind) % n);
+            in_index.at(lvl) = (((int64_t) sigma.at(lvl)) * ((cur_ind - a.at(lvl) + n) & (n - 1))) & (n - 1);
+            double phi = -2 * M_PI / n * (((((int64_t) sigma.at(lvl)) * b.at(lvl)) * cur_ind) % n);
             cur_value *= (cos(phi) + I * sin(phi));
             compute_bucketed_signal(n, d, lvl + 1, sigma, b, a, filter, u_index, in_index, cur_value, in, u);
         }
@@ -1146,13 +1146,13 @@ complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigm
   
 //  int period = n / filter.B_g;
 
-  complex_t* u = (complex_t*) fftw_malloc(sizeof(fftw_complex) * Btotal);
+  complex_t* u = (complex_t*) sfft_malloc(sizeof(fftw_complex) * Btotal);
   Key u_index(filter.B_g, d);
   Key in_index(n, d);
 
   compute_bucketed_signal(n, d, 0, sigma, b, a, filter, u_index, in_index, 1, in, u);
 
-  complex_t* u_f = (complex_t*) fftw_malloc(sizeof(fftw_complex) * Btotal);
+  complex_t* u_f = (complex_t*) sfft_malloc(sizeof(fftw_complex) * Btotal);
   int* B_gs = (int*) malloc(sizeof(*B_gs) * d);
   for (int i = 0; i < d; ++i) {
       B_gs[i] = filter.B_g;
@@ -1167,10 +1167,10 @@ complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigm
     complex_t value = it->second; 
     int pos = 0;
     for (int i = d - 1; i >= 0; --i) {
-      double phi = -2 * M_PI / n * ((sigma.at(i) * a.at(i) * index.at(i)) % n);
+      double phi = -2 * M_PI / n * ((((int64_t) sigma.at(i)) * a.at(i) * index.at(i)) % n);
       value *= (cos(phi) + I * sin(phi));
-      index.at(i) = ((sigma.at(i)) * ((index.at(i) - b.at(i) + n) % n)) % n;
-      int j = ((index.at(i) + (n / filter.B_g) / 2) % n) / (n / filter.B_g);
+      index.at(i) = (((int64_t) sigma.at(i)) * ((index.at(i) - b.at(i) + n) % n)) % n;
+      int64_t j = ((index.at(i) + (n / filter.B_g) / 2) % n) / (n / filter.B_g);
       value *= filter.freq_at((j * (n / filter.B_g) - index.at(i) + n) % n);
       pos = pos * filter.B_g + j;
     }
@@ -1221,7 +1221,7 @@ void multidim_sfft_inner(sfft_plan_multidim* plan, complex_t* in, sfft_output& o
       i.set_zero();
       for (int h = 0; h < d; ++h) {
         complex_t alpha = u[0][j] / u[h + 1][j];
-        i.at(h) = (ai.at(h) * lround(carg(alpha) * n / (2 * M_PI))) % n;
+        i.at(h) = (((int64_t) ai.at(h)) * lround(carg(alpha) * n / (2 * M_PI))) % n;
         if (i.at(h) < 0) {
           i.at(h) += n;
         }
