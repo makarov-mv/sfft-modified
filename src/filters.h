@@ -79,5 +79,6 @@ complex_t *make_kaiserbessel_t(double lobefrac, double tolerance, int &w);
  */
 
 Filter make_multiple_t(complex_t * x, int w, int n, int b);
+Filter make_multiple_t_fixed(complex_t * x, int w, int n, int b);
 
 #endif

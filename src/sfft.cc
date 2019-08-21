@@ -625,7 +625,7 @@ FilterCompact make_gaussian_filter(int n, double Bcst, int k) {
   filter.time =
       make_dolphchebyshev_t(lobefrac_g, tolerance_g, filter.sizet);
   complex_t* freq =
-      make_multiple_t(filter.time, filter.sizet, n, b_g1).freq;
+      make_multiple_t_fixed(filter.time, filter.sizet, n, b_g1).freq;
   int pos = 0;
   while (cabs2(freq[pos]) > 2 * tolerance_g) {
     ++pos;

@@ -158,3 +158,50 @@ Filter make_multiple_t(complex_t * x, int w, int n, int b)
   answer.freq = h;
   return answer;
 }
+
+Filter make_multiple_t_fixed(complex_t * x, int w, int n, int b)
+{
+    assert(b <= n);
+    assert(w <= n);
+    complex_t *g = (complex_t *) calloc(n, sizeof(*g));
+    complex_t *h = (complex_t *) sfft_malloc(n * sizeof(*h));
+    memcpy(g, x + w / 2, (w - (w / 2)) * sizeof(*g));
+    memcpy(g + n - w / 2, x, (w / 2) * sizeof(*g));
+    fftw_dft(g, n, g);
+    complex_t s = 0;
+    for (int i = 0; i < b; i++)
+    {
+        s += g[i];
+    }
+    real_t max = 0;
+    int offset = b / 2;
+    for (int i = 0; i < n; i++)
+    {
+        h[(i + n + offset) % n] = s;
+        max = std::max(max, cabs(s));
+        s = s + (g[(i + b) % n] - g[i]);
+    }
+    for (int i = 0; i < n; i++)
+        h[i] /= max;
+
+    fftw_dft(g, n, h, 1);
+    memmove(x + w / 2, g, (w - (w / 2)) * sizeof(*x));
+    memmove(x, g + n - w / 2, (w / 2) * sizeof(*x));
+
+    /* Figure out exactly the image of the filter?
+       memset(g+w, 0, (n-w)*sizeof(*g));
+       fftw_dft(h, n, g);
+       for(int i = 0; i < n; i++)
+       h[i] /= n;
+     */
+
+    free(g);
+    for (int i = 0; i < w; i++)
+        x[i] /= n;
+
+    Filter answer;
+    answer.time = x;
+    answer.sizet = w;
+    answer.freq = h;
+    return answer;
+}

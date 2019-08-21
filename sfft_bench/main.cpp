@@ -2,6 +2,7 @@
 #include <utils.h>
 #include "fftw3.h"
 #include "sfft.h"
+#include "fftw.h"
 
 bool CheckAnswer(int n, const sfft_output& res, const fftw_complex* out) {
     const double EPS = 1e-3;
@@ -22,7 +23,7 @@ bool CheckAnswer(int n, const sfft_output& res, const fftw_complex* out) {
 int main() {
     int n = (1 << 10);
     int k = 1;
-    srand(672);
+    srand(7835);
 
     fftw_complex *in, *out;
     fftw_plan p;
@@ -31,16 +32,28 @@ int main() {
     p = fftw_plan_dft_1d(n, out, in, FFTW_BACKWARD, FFTW_ESTIMATE);
 
     sfft_plan_multidim* plan = sfft_make_plan_multidim(n, 1, k, 2);
-    complex_t* sin = (complex_t*) sfft_malloc(sizeof(complex_t) * n);
+    complex_t* input = (complex_t*) sfft_malloc(sizeof(complex_t) * n);
 
 //    printf("%d\n", plan->data.filters[0].B_g);
 //    printf("%d\n", plan->data.filters[0].sizef);
 //    printf("%d\n", n);
+//    complex_t* x = (complex_t*) fftw_malloc(n * sizeof(complex_t));
 //    for (int i = 0; i < n; ++i) {
 //        printf("%f %f\n", creal(plan->data.filters[0].freq_at(i)), cimag(plan->data.filters[0].freq_at(i)));
+//        x[i] = plan->data.filters[0].time_at(i);
 //    }
 
-    int tries = 1;
+//    fftw_dft(x, n, x);
+//    int cnt = 0;
+//    for (int i = 0; i < n; ++i) {
+//        cnt += (cabs2(x[i] - plan->data.filters[0].freq_at(i)) < 1e-6);
+//        printf("%f %f | ", creal(x[i]), cimag(x[i]));
+//        printf("%f %f\n", creal(plan->data.filters[0].freq_at(i)), cimag(plan->data.filters[0].freq_at(i)));
+//    }
+//    printf("%d/%d\n", cnt, n);
+//    fftw_free(x);
+
+    int tries = 10;
     int ok = 0;
     for (int iter = 0; iter < tries; ++iter) {
 
@@ -50,7 +63,7 @@ int main() {
         }
 
         for (int i = 0; i < k; ++i) {
-            int pos = 234; //rand() % n;
+            int pos = rand() % n;
             out[pos][0] = 1;
             printf("%d ", pos);
         }
@@ -61,17 +74,50 @@ int main() {
 
 
         for (int i = 0; i < n; ++i) {
-            sin[i] = in[i][0] + in[i][1] * I;
+            input[i] = in[i][0] + in[i][1] * I;
         }
 
+//        {
+//            complex_t* y = (complex_t*) fftw_malloc(n * sizeof(*y));
+//            complex_t* v = (complex_t*) fftw_malloc(plan->data.filters[1].B_g * sizeof(*v));
+//
+//            int sigma = 839;
+//            int si = mod_inverse(sigma, n);
+//            int b = 250;
+//            int a = 0;
+//            for (int i = 0; i < n; ++i) {
+//                double phi = -((2 * M_PI) / n) * ((sigma * b * i) % n);
+//                complex_t value = (cos(phi) + I * sin(phi));
+//                y[i] = input[(sigma * (i - a + n)) % n] * value;
+//            }
+////            for (int i = 0; i < plan->data.filters[1].B_g; ++i) {
+////                v[i] = 0;
+////                for (int j = 0; j < n / plan->data.filters[1].B_g; ++j) {
+////                    v[i] += y[i + plan->data.filters[1].B_g * j];
+////                }
+////            }
+//
+////            fftw_dft(v, plan->data.filters[1].B_g, v);
+//            fftw_dft(y, n, y);
+////            for (int i = 0; i < plan->data.filters[1].B_g; ++i) {
+////                printf("%f %f\n", creal(v[i]), cimag(v[i]));
+////            }
+//            for (int i = 0; i < n; ++i) {
+//                if (cabs2(y[i]) > 1e-2) {
+//                    printf("%i: %f %f\n", i, creal(y[i]), cimag(y[i]));
+//                }
+//            }
+//            fftw_free(y);
+//            fftw_free(v);
+//        }
 
         sfft_output output;
 
-        sfft_exec_multidim(plan, sin, &output);
-//        printf("%ld\n", output.size());
-//        for (auto w : output) {
-//            printf("%d: %f %f\n", w.first, creal(w.second), cimag(w.second));
-//        }
+        sfft_exec_multidim(plan, input, &output);
+        printf("%ld\n", output.size());
+        for (auto w : output) {
+            printf("%d: %f %f\n", w.first, creal(w.second), cimag(w.second));
+        }
         ok += CheckAnswer(n, output, out);
     }
     printf("%d/%d\n", ok, tries);

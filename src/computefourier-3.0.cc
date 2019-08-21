@@ -1132,7 +1132,7 @@ void compute_bucketed_signal(int n, int d, int lvl, const Key& sigma, const Key&
             int cur_ind = (h + n - filter.sizet / 2) & (n - 1);
             u_index.at(lvl) = cur_ind & (filter.B_g - 1);
             in_index.at(lvl) = (sigma.at(lvl) * ((cur_ind - a.at(lvl) + n) & (n - 1))) & (n - 1);
-            double phi = 2 * M_PI / n * ((sigma.at(lvl) * b.at(lvl) * cur_ind) % n);
+            double phi = -2 * M_PI / n * ((sigma.at(lvl) * b.at(lvl) * cur_ind) % n);
             cur_value *= (cos(phi) + I * sin(phi));
             compute_bucketed_signal(n, d, lvl + 1, sigma, b, a, filter, u_index, in_index, cur_value, in, u);
         }
@@ -1152,18 +1152,6 @@ complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigm
 
   compute_bucketed_signal(n, d, 0, sigma, b, a, filter, u_index, in_index, 1, in, u);
 
-//  for (int i = 0; i < Btotal; ++i) {
-//    u_index.set_from_flat(i);
-//    u[i] = 1;
-//    for (int j = 0; j < d; ++j) {
-//      u[i] *= filter.time_at(u_index.at(j) * period);
-//      in_index.at(j) = sigma.at(j) * ((u_index.at(j) * period - a.at(j) + n) % n) % n;
-//      double phi = 2 * M_PI / n * ((sigma.at(j) * b.at(j) * u_index.at(j) * period) % n);
-//      u[i] *= (cos(phi) + I * sin(phi));
-//    }
-//    u[i] *= in[in_index.flatten()];
-//  }
-
   complex_t* u_f = (complex_t*) fftw_malloc(sizeof(fftw_complex) * Btotal);
   int* B_gs = (int*) malloc(sizeof(*B_gs) * d);
   for (int i = 0; i < d; ++i) {
@@ -1179,7 +1167,7 @@ complex_t* hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigm
     complex_t value = it->second; 
     int pos = 0;
     for (int i = d - 1; i >= 0; --i) {
-      double phi = 2 * M_PI / n * ((sigma.at(i) * a.at(i) * index.at(i)) % n);
+      double phi = -2 * M_PI / n * ((sigma.at(i) * a.at(i) * index.at(i)) % n);
       value *= (cos(phi) + I * sin(phi));
       index.at(i) = ((sigma.at(i)) * ((index.at(i) - b.at(i) + n) % n)) % n;
       int j = ((index.at(i) + (n / filter.B_g) / 2) % n) / (n / filter.B_g);
@@ -1238,7 +1226,7 @@ void multidim_sfft_inner(sfft_plan_multidim* plan, complex_t* in, sfft_output& o
           i.at(h) += n;
         }
       }
-      printf("%i: %f %f\n", i.flatten(), creal(u[0][j]), cimag(u[0][j]));
+//      printf("%i: %f %f\n", i.flatten(), creal(u[0][j]), cimag(u[0][j]));
       out.insert({i.flatten(), u[0][j]});
     }
   }
