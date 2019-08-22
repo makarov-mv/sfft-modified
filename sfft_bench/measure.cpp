@@ -70,7 +70,7 @@ int main() {
     std::vector<int64_t> npow;
     std::vector<std::chrono::nanoseconds> dur1;
 
-    for (int64_t pw = 7; pw <= 8; ++pw) {
+    for (int64_t pw = 6; pw <= 8; ++pw) {
         int64_t n = 1 << pw;
         int d = 3;
         int N = 1;
@@ -95,7 +95,7 @@ int main() {
 
         npow.push_back(pw);
         std::cout << "p = " << pw << ", ";
-        RunBenchmark("sfft", 3, [&](int){return sfft_exec_multidim(plan, in, &output), output.clear(); }, dur1);
+        RunBenchmark("sfft", 5, [&](int){return sfft_exec_multidim(plan, in, &output), output.clear(); }, dur1);
         std::cout << std::endl;
 
 //        sfft_free(input);
@@ -109,7 +109,7 @@ int main() {
         std::cout << pw << ",\n";
     }
     std::cout << "]\n";
-    PrintArr("rank1", dur1);
+    PrintArr("sfft", dur1);
 
     return 0;
 }

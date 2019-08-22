@@ -27,6 +27,7 @@
 #include<cstring>
 #include<cstdlib>
 #include "fftw.h"
+#include "fftw3.h"
 
 #include "sfft.h"
 

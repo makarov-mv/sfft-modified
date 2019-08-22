@@ -23,6 +23,7 @@
 #define GAUSSFILTER_H
 
 #include "fft.h"
+#include "fftw3.h"
 
 struct Filter
 {
@@ -38,6 +39,10 @@ struct FilterCompact {
     int sizef;
     int B_g;
     int n{0};
+
+    complex_t** u;
+    fftw_plan* plans;
+    int* B_gs;
 
     complex_t time_at(int index) const {
       int pos = index + sizet / 2;

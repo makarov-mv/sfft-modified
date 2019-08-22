@@ -651,6 +651,20 @@ sfft_plan_multidim* sfft_make_plan_multidim(int n, int d, int k, int iters) {
   double Bcst = int(ceil(pow(8, 1.0 / d)));
   for (int i = 0; i < iters; ++i) {
     plan->data.filters[i] = make_gaussian_filter(n, Bcst, k_root);
+    plan->data.filters[i].plans = (fftw_plan*) malloc((d + 1) * sizeof(fftw_plan));
+    plan->data.filters[i].u = (complex_t**) malloc((d + 1) * sizeof(complex_t*));
+    complex_t** u = plan->data.filters[i].u;
+    plan->data.filters[i].B_gs = (int*) malloc(d * sizeof(int));
+    int Btotal = 1;
+    for (int j = 0; j < d; ++j) {
+      Btotal *= plan->data.filters[i].B_g;
+      plan->data.filters[i].B_gs[j] = plan->data.filters[i].B_g;
+    }
+
+    for (int j = 0; j < d + 1; ++j) {
+      u[j] = (complex_t*) fftw_malloc(Btotal * sizeof(complex_t));
+      plan->data.filters[i].plans[j] = fftw_plan_dft(d, plan->data.filters[i].B_gs, reinterpret_cast<fftw_complex*>(u[j]), reinterpret_cast<fftw_complex*>(u[j]), FFTW_FORWARD, FFTW_ESTIMATE);
+    }
     Bcst /= 2;
   }
 
@@ -665,6 +679,13 @@ sfft_free_plan_multidim(sfft_plan_multidim* plan) {
   for (int i = 0; i < plan->data.iter_num; ++i) {
     free(plan->data.filters[i].freq);
     free(plan->data.filters[i].time);
+    free(plan->data.filters[i].B_gs);
+    for (int j = 0; j < plan->d + 1; ++j) {
+      free(plan->data.filters[i].u[j]);
+      fftw_destroy_plan(plan->data.filters[i].plans[j]);
+    }
+    fftw_free(plan->data.filters[i].u);
+    free(plan->data.filters[i].plans);
   }
   free(plan->data.filters);
 
