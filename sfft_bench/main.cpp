@@ -3,6 +3,7 @@
 #include "fftw3.h"
 #include "sfft.h"
 #include "fftw.h"
+#include "vector"
 
 bool CheckAnswer(int n, const sfft_output& res, const fftw_complex* out) {
     const double EPS = 1e-3;
@@ -21,18 +22,23 @@ bool CheckAnswer(int n, const sfft_output& res, const fftw_complex* out) {
 }
 
 int main() {
-    int n = (1 << 18);
-    int k = 50;
-    srand(7835);
-
+    const int n = (1 << 7);
+    const int d = 3;
+    int N = 1;
+    for (int i = 0; i < d; ++i) {
+        N *= n;
+    }
+    int k = 27;
+    srand(8947);
     fftw_complex *in, *out;
     fftw_plan p;
-    in = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * n);
-    out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * n);
-    p = fftw_plan_dft_1d(n, out, in, FFTW_BACKWARD, FFTW_ESTIMATE);
+    in = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * N);
+    out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * N);
+    std::vector<int> ranks(d, n);
+    p = fftw_plan_dft(d, ranks.data(), out, in, FFTW_BACKWARD, FFTW_ESTIMATE);
 
-    sfft_plan_multidim* plan = sfft_make_plan_multidim(n, 1, k, 2);
-    complex_t* input = (complex_t*) sfft_malloc(sizeof(complex_t) * n);
+    sfft_plan_multidim* plan = sfft_make_plan_multidim(n, d, k, 1);
+    complex_t* input = (complex_t*) sfft_malloc(sizeof(complex_t) * N);
 
 //    printf("%d\n", plan->data.filters[0].B_g);
 //    printf("%d\n", plan->data.filters[0].sizef);
@@ -60,17 +66,17 @@ int main() {
 //    printf("%d/%d\n", cnt, n);
 //    fftw_free(x);
 
-    int tries = 100;
+    int tries = 10;
     int ok = 0;
     for (int iter = 0; iter < tries; ++iter) {
 
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < N; ++i) {
             out[i][0] = 0;
             out[i][1] = 0;
         }
 
         for (int i = 0; i < k; ++i) {
-            int pos = rand() % n;
+            int pos = rand() % (N);
             out[pos][0] = 1;
 //            printf("%d ", pos);
         }
@@ -78,9 +84,7 @@ int main() {
 
         fftw_execute(p);
 
-
-
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < N; ++i) {
             input[i] = in[i][0] + in[i][1] * I;
         }
 
@@ -121,11 +125,11 @@ int main() {
         sfft_output output;
 
         sfft_exec_multidim(plan, input, &output);
-//        printf("%ld\n", output.size());
+        printf("%ld\n", output.size());
 //        for (auto w : output) {
 //            printf("%d: %f %f\n", w.first, creal(w.second), cimag(w.second));
 //        }
-        ok += CheckAnswer(n, output, out);
+        ok += CheckAnswer(N, output, out);
     }
     printf("%d/%d\n", ok, tries);
     sfft_free(input);

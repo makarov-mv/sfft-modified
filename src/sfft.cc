@@ -617,8 +617,8 @@ FilterCompact make_gaussian_filter(int n, double Bcst, int k) {
   filter.n = n;
   filter.B_g = floor_to_pow2(BB);
 
-  const double tolerance_g = 1e-8;
-  double lobefrac_g = 1.0 / (filter.B_g) / log2(n);
+  const double tolerance_g = 1e-6;
+  double lobefrac_g = 2.0 / (filter.B_g) / log2(n);
 
   int b_g1 = int (1.0 * ((double)n / filter.B_g));
 
@@ -627,8 +627,9 @@ FilterCompact make_gaussian_filter(int n, double Bcst, int k) {
   complex_t* freq =
       make_multiple_t_fixed(filter.time, filter.sizet, n, b_g1).freq;
   int pos = 0;
-  while (cabs2(freq[pos]) > 2 * tolerance_g) {
+  while (cabs2(freq[pos]) > tolerance_g) {
     ++pos;
+    assert(pos < n);
   }
   assert(pos > 0);
   filter.sizef = 2 * pos - 1;
@@ -647,7 +648,7 @@ sfft_plan_multidim* sfft_make_plan_multidim(int n, int d, int k, int iters) {
   plan->data.iter_num = iters;
   int k_root = int(ceil(pow(k, 1.0 / d)));
   plan->data.filters = (FilterCompact*) malloc(sizeof(*plan->data.filters) * iters);
-  double Bcst = 16;
+  double Bcst = int(ceil(pow(8, 1.0 / d)));
   for (int i = 0; i < iters; ++i) {
     plan->data.filters[i] = make_gaussian_filter(n, Bcst, k_root);
     Bcst /= 2;

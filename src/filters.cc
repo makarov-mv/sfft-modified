@@ -159,8 +159,16 @@ Filter make_multiple_t(complex_t * x, int w, int n, int b)
   return answer;
 }
 
-Filter make_multiple_t_fixed(complex_t * x, int w, int n, int b)
+Filter make_multiple_t_fixed(complex_t * x, int &w, int n, int b)
 {
+//    {
+//        int pos = w / 2;
+//        while (pos > 0 && sqrt(cabs2(x[pos])) > 1e-8) {
+//            --pos;
+//        }
+//        w = w - 2 * pos;
+//        memmove(x, x + pos, w);
+//    }
     assert(b <= n);
     assert(w <= n);
     complex_t *g = (complex_t *) calloc(n, sizeof(*g));
