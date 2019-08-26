@@ -28,7 +28,7 @@ int main() {
     for (int i = 0; i < d; ++i) {
         N *= n;
     }
-    int k = 10;
+    int k = 27;
     srand(672364);
     fftw_complex *in, *out;
     fftw_plan p;
@@ -37,7 +37,7 @@ int main() {
     std::vector<int> ranks(d, n);
     p = fftw_plan_dft(d, ranks.data(), out, in, FFTW_BACKWARD, FFTW_ESTIMATE);
 
-    sfft_plan_multidim* plan = sfft_make_plan_multidim(n, d, k, 1);
+    sfft_plan_multidim* plan = sfft_make_plan_multidim(n, d, k, 2);
     complex_t* input = (complex_t*) sfft_malloc(sizeof(complex_t) * N);
 
 //    printf("%d\n", plan->data.filters[0].B_g);
@@ -64,7 +64,7 @@ int main() {
 //    printf("%d/%d\n", cnt, n);
 //    fftw_free(x);
 
-    int tries = 1000;
+    int tries = 10;
     int ok = 0;
     for (int iter = 0; iter < tries; ++iter) {
 

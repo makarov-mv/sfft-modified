@@ -611,16 +611,16 @@ sfft_v3(unsigned int n, unsigned int k, sfft_v3_data * data,
 
 }
 
-FilterCompact make_gaussian_filter(int n, double Bcst, int k) {
+FilterCompact make_gaussian_filter(int n, double Bcst, int k, double alpha) {
   real_t BB = (unsigned)(Bcst * ((double)k));
   FilterCompact filter;
   filter.n = n;
   filter.B_g = floor_to_pow2(BB);
 
-  const double tolerance_g = 1e-6;
-  double lobefrac_g = 2.0 / (filter.B_g) / log2(n);
+  const double tolerance_g = 1e-6; //1e-8
+  double lobefrac_g = alpha * 0.5 / (filter.B_g); // 0.25
 
-  int b_g1 = int (1.0 * ((double)n / filter.B_g));
+  int b_g1 = int ((1.0 - alpha / 2) * ((double)n / filter.B_g)); // ???
 
   filter.time =
       make_dolphchebyshev_t(lobefrac_g, tolerance_g, filter.sizet);
@@ -646,11 +646,13 @@ sfft_plan_multidim* sfft_make_plan_multidim(int n, int d, int k, int iters) {
   plan->d = d;
   plan->k = k;
   plan->data.iter_num = iters;
-  int k_root = int(ceil(pow(k, 1.0 / d)));
+  double k_root = ceil(pow(k, 1.0 / d));
   plan->data.filters = (FilterCompact*) malloc(sizeof(*plan->data.filters) * iters);
   double Bcst = int(ceil(pow(8, 1.0 / d)));
+  double alpha = 0.3; // 0.1
   for (int i = 0; i < iters; ++i) {
-    plan->data.filters[i] = make_gaussian_filter(n, Bcst, k_root);
+    assert(k_root >= 1);
+    plan->data.filters[i] = make_gaussian_filter(n, Bcst, int(k_root), alpha);
     plan->data.filters[i].plans = (fftw_plan*) malloc((d + 1) * sizeof(fftw_plan));
     plan->data.filters[i].u = (complex_t**) malloc((d + 1) * sizeof(complex_t*));
     complex_t** u = plan->data.filters[i].u;
@@ -665,7 +667,8 @@ sfft_plan_multidim* sfft_make_plan_multidim(int n, int d, int k, int iters) {
       u[j] = (complex_t*) fftw_malloc(Btotal * sizeof(complex_t));
       plan->data.filters[i].plans[j] = fftw_plan_dft(d, plan->data.filters[i].B_gs, reinterpret_cast<fftw_complex*>(u[j]), reinterpret_cast<fftw_complex*>(u[j]), FFTW_FORWARD, FFTW_ESTIMATE);
     }
-    Bcst /= 2;
+    alpha /= 2;
+    k_root /= 2;
   }
 
   return plan;
