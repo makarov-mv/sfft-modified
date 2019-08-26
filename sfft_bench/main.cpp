@@ -22,14 +22,14 @@ bool CheckAnswer(int n, const sfft_output& res, const fftw_complex* out) {
 }
 
 int main() {
-    const int n = (1 << 7);
-    const int d = 3;
+    const int n = (1 << 13);
+    const int d = 1;
     int N = 1;
     for (int i = 0; i < d; ++i) {
         N *= n;
     }
-    int k = 27;
-    srand(8947);
+    int k = 10;
+    srand(672364);
     fftw_complex *in, *out;
     fftw_plan p;
     in = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * N);
@@ -41,19 +41,17 @@ int main() {
     complex_t* input = (complex_t*) sfft_malloc(sizeof(complex_t) * N);
 
 //    printf("%d\n", plan->data.filters[0].B_g);
-//    printf("%d\n", plan->data.filters[0].sizef);
+//    printf("%d\n", plan->data.filters[0].sizef / 2);
 //    printf("%d\n", plan->data.filters[0].sizet);
-//    printf("%d %d\n", n / plan->data.filters[0].B_g, n);
+//    printf("%d %d\n", n / (2 * plan->data.filters[0].B_g), n);
 //    int pos = 0;
-//    while (cabs2(plan->data.filters[0].freq_at(pos) - 1) < 1e-3) {
+//    while (sqrt(cabs2(plan->data.filters[0].freq_at(pos) - 1)) < 1e-1) {
 //        ++pos;
 //    }
-//    printf("%d\n", pos * 2);
+//    printf("%d\n", pos);
 
-//    complex_t* x = (complex_t*) fftw_malloc(n * sizeof(complex_t));
 //    for (int i = 0; i < n; ++i) {
 //        printf("%f %f\n", creal(plan->data.filters[0].freq_at(i)), cimag(plan->data.filters[0].freq_at(i)));
-//        x[i] = plan->data.filters[0].time_at(i);
 //    }
 
 //    fftw_dft(x, n, x);
@@ -66,7 +64,7 @@ int main() {
 //    printf("%d/%d\n", cnt, n);
 //    fftw_free(x);
 
-    int tries = 10;
+    int tries = 1000;
     int ok = 0;
     for (int iter = 0; iter < tries; ++iter) {
 
@@ -125,7 +123,7 @@ int main() {
         sfft_output output;
 
         sfft_exec_multidim(plan, input, &output);
-        printf("%ld\n", output.size());
+//        printf("%ld\n", output.size());
 //        for (auto w : output) {
 //            printf("%d: %f %f\n", w.first, creal(w.second), cimag(w.second));
 //        }

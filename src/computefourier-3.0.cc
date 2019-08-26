@@ -1221,7 +1221,7 @@ void multidim_sfft_inner(sfft_plan_multidim* plan, complex_t* in, sfft_output& o
         }
       }
 //      printf("%i: %f %f\n", i.flatten(), creal(u[0][j]), cimag(u[0][j]));
-      out.insert({i.flatten(), u[0][j]});
+      out[i.flatten()] += u[0][j];
     }
   }
 }
