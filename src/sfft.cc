@@ -611,7 +611,7 @@ sfft_v3(unsigned int n, unsigned int k, sfft_v3_data * data,
 
 }
 
-FilterCompact make_gaussian_filter(int n, double Bcst, int k, double alpha) {
+FilterCompact make_gaussian_filter(int n, double Bcst, int k, double alpha, const sfft_multidim_params& params) {
   real_t BB = (unsigned)(Bcst * ((double)k));
   FilterCompact filter;
   filter.n = n;
@@ -620,7 +620,7 @@ FilterCompact make_gaussian_filter(int n, double Bcst, int k, double alpha) {
   const double tolerance_g = 1e-6; //1e-8
   double lobefrac_g = alpha * 0.5 / (filter.B_g); // 0.25
 
-  int b_g1 = int ((1.0 - alpha / 2) * ((double)n / filter.B_g)); // ???
+  int b_g1 = int ((1.0 - alpha) * ((double)n / filter.B_g)); // ???
 
   filter.time =
       make_dolphchebyshev_t(lobefrac_g, tolerance_g, filter.sizet);
@@ -640,19 +640,48 @@ FilterCompact make_gaussian_filter(int n, double Bcst, int k, double alpha) {
   return filter;
 }
 
-sfft_plan_multidim* sfft_make_plan_multidim(int n, int d, int k, int iters) {
+void prepare_comb_sizes(int n, int d, int k, int* W_Combs) {
+  const double Comb_cst = 10;
+  int total_log = floor(std::min(d * log2(n), log2(Comb_cst * k)));
+  int base = total_log / d;
+  for (int i = 0; i < total_log % d; ++i) {
+    W_Combs[i] = 1 << (base + 1);
+  }
+  for (int i = total_log % d; i < d; ++i) {
+    W_Combs[i] = 1 << base;
+  }
+}
+
+sfft_plan_multidim* sfft_make_plan_multidim(int n, int d, int k, int iters, sfft_multidim_params params) {
   sfft_plan_multidim *plan = (sfft_plan_multidim *) malloc(sizeof(sfft_plan_multidim));
   plan->n = n;
   plan->d = d;
   plan->k = k;
+
+  plan->data.use_comb = params.use_comb;
+  plan->data.u_comb = (complex_t**) malloc((d + 1) * sizeof(complex_t*));
+  plan->data.comb_plans = (fftw_plan*) malloc((d + 1) * sizeof(fftw_plan));
+  plan->data.W_Combs = (int*) malloc(d * sizeof(int));
+
+  prepare_comb_sizes(n, d, k, plan->data.W_Combs);
+
+  plan->data.W_Comb_total = 1;
+  for (int j = 0; j < d; ++j) {
+    plan->data.W_Comb_total *= plan->data.W_Combs[j];
+  }
+  for (int j = 0; j < d + 1; ++j) {
+    plan->data.u_comb[j] = (complex_t*) fftw_malloc(plan->data.W_Comb_total * sizeof(complex_t));
+    plan->data.comb_plans[j] = fftw_plan_dft(d, plan->data.W_Combs, reinterpret_cast<fftw_complex*>(plan->data.u_comb[j]), reinterpret_cast<fftw_complex*>(plan->data.u_comb[j]), FFTW_FORWARD, FFTW_ESTIMATE);
+  }
+
   plan->data.iter_num = iters;
   double k_root = ceil(pow(k, 1.0 / d));
   plan->data.filters = (FilterCompact*) malloc(sizeof(*plan->data.filters) * iters);
-  double Bcst = int(ceil(pow(8, 1.0 / d)));
-  double alpha = 0.3; // 0.1
+  double Bcst = int(ceil(pow(params.Bcst, 1.0 / d)));
+  double alpha = params.alpha; // 0.1
   for (int i = 0; i < iters; ++i) {
     assert(k_root >= 1);
-    plan->data.filters[i] = make_gaussian_filter(n, Bcst, int(k_root), alpha);
+    plan->data.filters[i] = make_gaussian_filter(n, Bcst, int(k_root), alpha, params);
     plan->data.filters[i].plans = (fftw_plan*) malloc((d + 1) * sizeof(fftw_plan));
     plan->data.filters[i].u = (complex_t**) malloc((d + 1) * sizeof(complex_t*));
     complex_t** u = plan->data.filters[i].u;
@@ -679,6 +708,13 @@ sfft_free_plan_multidim(sfft_plan_multidim* plan) {
   if (plan == nullptr) {
     return;
   }
+  for (int j = 0; j < plan->d + 1; ++j) {
+    free(plan->data.u_comb[j]);
+    fftw_destroy_plan(plan->data.comb_plans[j]);
+  }
+  fftw_free(plan->data.u_comb);
+  free(plan->data.comb_plans);
+  free(plan->data.W_Combs);
   for (int i = 0; i < plan->data.iter_num; ++i) {
     free(plan->data.filters[i].freq);
     free(plan->data.filters[i].time);

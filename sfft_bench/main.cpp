@@ -22,8 +22,8 @@ bool CheckAnswer(int n, const sfft_output& res, const fftw_complex* out) {
 }
 
 int main() {
-    const int n = (1 << 13);
-    const int d = 1;
+    const int n = (1 << 6);
+    const int d = 3;
     int N = 1;
     for (int i = 0; i < d; ++i) {
         N *= n;
@@ -37,7 +37,7 @@ int main() {
     std::vector<int> ranks(d, n);
     p = fftw_plan_dft(d, ranks.data(), out, in, FFTW_BACKWARD, FFTW_ESTIMATE);
 
-    sfft_plan_multidim* plan = sfft_make_plan_multidim(n, d, k, 2);
+    sfft_plan_multidim* plan = sfft_make_plan_multidim(n, d, k, 2, {false, 1, 0.3});
     complex_t* input = (complex_t*) sfft_malloc(sizeof(complex_t) * N);
 
 //    printf("%d\n", plan->data.filters[0].B_g);
@@ -64,7 +64,7 @@ int main() {
 //    printf("%d/%d\n", cnt, n);
 //    fftw_free(x);
 
-    int tries = 10;
+    int tries = 30;
     int ok = 0;
     for (int iter = 0; iter < tries; ++iter) {
 

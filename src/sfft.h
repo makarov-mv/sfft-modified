@@ -153,9 +153,20 @@ struct sfft_v3_data
   sfft_v3_threadlocal_data *threadlocal_data;
 };
 
+struct sfft_multidim_params {
+    bool use_comb{true};
+    double Bcst{8};
+    double alpha{0.3};
+};
+
 struct sfft_multidim_data {
     int iter_num;
     FilterCompact* filters;
+    bool use_comb;
+    int W_Comb_total;
+    int* W_Combs;
+    complex_t** u_comb;
+    fftw_plan* comb_plans;
 };
 
 struct sfft_plan_multidim {
@@ -177,7 +188,7 @@ void sfft_exec(sfft_plan * plan, complex_t * in, sfft_output * out);
 void
 sfft_exec_many(sfft_plan * plan, int num, complex_t ** in, sfft_output * out);
 
-sfft_plan_multidim* sfft_make_plan_multidim(int n, int d, int k, int iters);
+sfft_plan_multidim* sfft_make_plan_multidim(int n, int d, int k, int iters, sfft_multidim_params params = {});
 void sfft_free_plan_multidim(sfft_plan_multidim* plan);
 void sfft_exec_multidim(sfft_plan_multidim* plan, complex_t * in, sfft_output * out);
 #endif

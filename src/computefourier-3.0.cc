@@ -1154,11 +1154,6 @@ void hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigma, con
   }
   compute_bucketed_signal(n, d, 0, sigma, b, a, filter, u_index, in_index, 1, in, u);
 
-  int* B_gs = (int*) malloc(sizeof(*B_gs) * d);
-  for (int i = 0; i < d; ++i) {
-      B_gs[i] = filter.B_g;
-  }
-
   fftw_execute(p);
 
   for (__typeof(out.begin()) it = out.begin(); it != out.end(); ++it) {
@@ -1178,7 +1173,60 @@ void hash_to_bins(int n, int d, int Btotal, complex_t* in, const Key& sigma, con
   }
 }
 
-void multidim_sfft_inner(sfft_plan_multidim* plan, complex_t* in, sfft_output& out, const FilterCompact& filter) {
+void compute_comb_bucketed_signal(int n, int d, int lvl, const Key& a, int* W_Combs, int* u_index, Key& in_index, const complex_t* in, complex_t* u) {
+  if (lvl < d) {
+    int step = n / W_Combs[lvl];
+    for (int h = 0; h < W_Combs[lvl]; ++h) {
+      u_index[lvl] = h;
+      in_index.at(lvl) = (h * step + a.at(lvl)) & (n - 1);
+      compute_comb_bucketed_signal(n, d, lvl + 1, a, W_Combs, u_index, in_index, in, u);
+    }
+  } else {
+    int flatten = 0;
+    // fftw needs row major order
+    for (int i = 0; i < d; ++i) {
+      flatten = flatten * W_Combs[i] + u_index[i];
+    }
+    u[flatten] += in[in_index.flatten()];
+  }
+}
+
+void hash_to_bins_comb(int n, int d, complex_t *in, const Key& a, int W_total, int* W_Combs, complex_t* u, const fftw_plan& p) {
+  int* u_index = (int*) malloc(d * sizeof(int));
+  Key in_index(n, d);
+  for (int i = 0; i < W_total; ++i) {
+    u[i] = 0;
+  }
+  compute_comb_bucketed_signal(n, d, 0, a, W_Combs, u_index, in_index, in, u);
+  fftw_execute(p);
+  for (int i = 0; i < W_total; ++i) {
+    u[i] /= W_total;
+  }
+  free(u_index);
+}
+
+int restore_frequencies(int n, int d, int Btotal, const Key& ai, complex_t** u, sfft_output& out) {
+    Key i(n, d);
+    int cnt = 0;
+    for (int j = 0; j < Btotal; ++j) {
+        if (cabs2(u[0][j]) > 1e-6) {
+            ++cnt;
+            i.set_zero();
+            for (int h = 0; h < d; ++h) {
+                complex_t alpha = u[0][j] / u[h + 1][j];
+                i.at(h) = (((int64_t) ai.at(h)) * lround(carg(alpha) * n / (2 * M_PI))) & (n - 1);
+                if (i.at(h) < 0) {
+                    i.at(h) += n;
+                }
+            }
+//      printf("%i: %f %f\n", i.flatten(), creal(u[0][j]), cimag(u[0][j]));
+            out[i.flatten()] += u[0][j];
+        }
+    }
+    return cnt;
+}
+
+int multidim_sfft_inner(sfft_plan_multidim* plan, complex_t* in, sfft_output& out, const FilterCompact& filter) {
   int n = plan->n;
   int d = plan->d;
   Key a(n, d);
@@ -1206,28 +1254,46 @@ void multidim_sfft_inner(sfft_plan_multidim* plan, complex_t* in, sfft_output& o
       c.at(i - 1) = 1;
     }
     hash_to_bins(n, d, Btotal, in, a, b, c, out, filter, filter.u[i], filter.plans[i]);
-  }
-
-  complex_t** u = filter.u;
-  Key i(n, d);
-  for (int j = 0; j < Btotal; ++j) {
-    if (cabs2(u[0][j]) > 1e-6) {
-      i.set_zero();
-      for (int h = 0; h < d; ++h) {
-        complex_t alpha = u[0][j] / u[h + 1][j];
-        i.at(h) = (((int64_t) ai.at(h)) * lround(carg(alpha) * n / (2 * M_PI))) & (n - 1);
-        if (i.at(h) < 0) {
-          i.at(h) += n;
-        }
-      }
-//      printf("%i: %f %f\n", i.flatten(), creal(u[0][j]), cimag(u[0][j]));
-      out[i.flatten()] += u[0][j];
+    if (i > 0) {
+      c.at(i - 1) = 0;
     }
   }
+
+  return restore_frequencies(n, d, Btotal, ai, filter.u, out);
+}
+
+int multidim_sfft_comb(sfft_plan_multidim* plan, complex_t* in, sfft_output& out) {
+  int n = plan->n;
+  int d = plan->d;
+  Key c(n, d);
+  for (int i = 0; i < d + 1; ++i) {
+    if (i > 0) {
+      c.at(i - 1) = n - 1;
+    }
+    hash_to_bins_comb(n, d, in, c, plan->data.W_Comb_total, plan->data.W_Combs, plan->data.u_comb[i], plan->data.comb_plans[i]);
+    if (i > 0) {
+      c.at(i - 1) = 0;
+    }
+  }
+  Key ai(n, d);
+  for (int i = 0; i < d; ++i) {
+    ai.at(i) = 1;
+  }
+  return restore_frequencies(n, d, plan->data.W_Comb_total, ai, plan->data.u_comb, out);
 }
 
 void multidim_sfft(sfft_plan_multidim* plan, complex_t* in, sfft_output& out) {
-  for (int i = 0; i < plan->data.iter_num; ++i) {
-    multidim_sfft_inner(plan, in, out, plan->data.filters[i]);
+  int cnt;
+  if (plan->data.use_comb) {
+    cnt = multidim_sfft_comb(plan, in, out);
+    printf("%d | ", cnt);
   }
+  for (int i = 0; i < plan->data.iter_num; ++i) {
+    cnt = multidim_sfft_inner(plan, in, out, plan->data.filters[i]);
+    printf("%d ", cnt);
+    if (cnt == 0) {
+      break;
+    }
+  }
+  printf("\n");
 }
