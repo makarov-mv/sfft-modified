@@ -1,4 +1,5 @@
 #include <random>
+#include <cstring>
 #include "iostream"
 #include "chrono"
 #include "fftw3.h"
@@ -51,12 +52,12 @@ void PrintArr(const std::string& name, const std::vector<std::chrono::nanosecond
 }
 
 template <class Func>
-auto RunBenchmark(const std::string& name, int iters, Func function, std::vector<std::chrono::nanoseconds>& res) {
+auto RunBenchmark(const std::string& name, int iters, complex_t** input, Func function, std::vector<std::chrono::nanoseconds>& res) {
     using clock = std::chrono::system_clock;
     std::cout << name << ": ";
     auto start = clock::now();
     for (int i = 0; i < iters; ++i) {
-        (void) function(i);
+        (void) function(input[i], i);
     }
     auto dur = clock::now() - start;
     dur /= iters;
@@ -66,11 +67,11 @@ auto RunBenchmark(const std::string& name, int iters, Func function, std::vector
 }
 
 int main() {
-    std::mt19937_64 gen(687654);
+    std::mt19937_64 gen(123423);
     std::vector<int64_t> npow;
     std::vector<std::chrono::nanoseconds> dur1;
 
-    for (int64_t pw = 6; pw <= 8; ++pw) {
+    for (int64_t pw = 6; pw <= 7; ++pw) {
         int64_t n = 1 << pw;
         int d = 3;
         int N = 1;
@@ -78,31 +79,42 @@ int main() {
             N *= n;
         }
         const int64_t k = 27;
+        const int iters = 5;
+        sfft_multidim_params params{false, 1, 0.3};
 
-        complex_t *in, *out;
+        complex_t **in, *out, *in1;
         fftw_plan p;
         out = (complex_t*) fftw_malloc(sizeof(complex_t) * N);
-        in = (complex_t*) fftw_malloc(sizeof(complex_t) * N);
-        GenRandomSupport(n, d, k, gen, out);
+        in1 = (complex_t*) fftw_malloc(sizeof(complex_t) * N);
+        in = (complex_t**) malloc(sizeof(complex_t*) * iters);
         std::vector<int> ranks(d, n);
-        p = fftw_plan_dft(d, ranks.data(), reinterpret_cast<fftw_complex*>(out), reinterpret_cast<fftw_complex*>(in), FFTW_BACKWARD, FFTW_ESTIMATE);
+        p = fftw_plan_dft(d, ranks.data(), reinterpret_cast<fftw_complex*>(out), reinterpret_cast<fftw_complex*>(in1), FFTW_BACKWARD, FFTW_ESTIMATE);
+        for (int j = 0; j < iters; ++j) {
+            GenRandomSupport(n, d, k, gen, out);
+            fftw_execute(p);
+            in[j] = (complex_t*) fftw_malloc(sizeof(complex_t) * N);
+            memcpy(in[j], in1, sizeof(complex_t) * N);
+        }
 
-        fftw_execute(p);
-
-        sfft_plan_multidim* plan = sfft_make_plan_multidim(n, d, k, 1);
+        sfft_plan_multidim* plan = sfft_make_plan_multidim(n, d, k, 1, params);
 
         sfft_output output;
 
         npow.push_back(pw);
         std::cout << "p = " << pw << ", ";
-        RunBenchmark("sfft", 5, [&](int){return sfft_exec_multidim(plan, in, &output), output.clear(); }, dur1);
+        RunBenchmark("sfft", iters, in, [&](complex_t* x, int){return sfft_exec_multidim(plan, x, &output), output.clear(); }, dur1);
         std::cout << std::endl;
 
 //        sfft_free(input);
         sfft_free_plan_multidim(plan);
 
         fftw_destroy_plan(p);
-        fftw_free(in); fftw_free(out);
+        for (int j = 0; j < iters; ++j) {
+            fftw_free(in[j]);
+        }
+        free(in);
+        fftw_free(in1);
+        fftw_free(out);
     }
     std::cout << "p = [\n";
     for (auto pw: npow) {

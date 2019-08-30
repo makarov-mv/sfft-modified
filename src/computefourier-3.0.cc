@@ -1286,14 +1286,14 @@ void multidim_sfft(sfft_plan_multidim* plan, complex_t* in, sfft_output& out) {
   int cnt;
   if (plan->data.use_comb) {
     cnt = multidim_sfft_comb(plan, in, out);
-    printf("%d | ", cnt);
+//    printf("%d | ", cnt);
   }
   for (int i = 0; i < plan->data.iter_num; ++i) {
     cnt = multidim_sfft_inner(plan, in, out, plan->data.filters[i]);
-    printf("%d ", cnt);
+//    printf("%d ", cnt);
     if (cnt == 0) {
       break;
     }
   }
-  printf("\n");
+//  printf("\n");
 }

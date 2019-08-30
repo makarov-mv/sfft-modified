@@ -7,7 +7,7 @@ import os
 VERSION='0.1.0'
 APPNAME='sfft'
 
-OPTIMIZATION_FLAGS = ['-march=native', '-fopenmp']#, '-O3', '-ffast-math', '-march=native', '-fopenmp']
+OPTIMIZATION_FLAGS = ['-march=native', '-fopenmp', '-O3', '-ffast-math', '-march=native', '-fopenmp']
 OPENMP_FLAGS = '-fopenmp'
 WARNING_FLAGS = ['-Wall']
 DEBUG_FLAGS = ['-g'] #, '-fsanitize=address']
